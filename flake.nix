@@ -17,13 +17,15 @@
     in
     {
     
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      nixosConfigurations = {
+        abend = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [ 
-            ./configuration.nix
+            ./hosts/abend/configuration.nix
             # inputs.home-manager.nixosModules.default
           ];
         };
+      };
 
     };
 }
