@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../modules/nixos/keyd/keyd.nix
     ];
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -55,7 +56,7 @@
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
-    xkbVariant = "";
+    xkbVariant = "altgr-intl";
   };
 
   # Enable CUPS to print documents.
