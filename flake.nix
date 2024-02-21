@@ -4,10 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
 
-    # home-manager = {
-    #   url = "github:nix-community/home-manager";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    home-manager = {
+      # Important: Specify branch following same release as nixpkgs.
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -16,13 +17,13 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-    
+
       nixosConfigurations = {
         abend = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
-          modules = [ 
+          modules = [
             ./hosts/abend/configuration.nix
-            # inputs.home-manager.nixosModules.default
+            inputs.home-manager.nixosModules.default
           ];
         };
       };
