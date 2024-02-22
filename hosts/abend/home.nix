@@ -55,25 +55,25 @@
     # '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
-  # Manager then you have to manually source 'hm-session-vars.sh' located at
-  # either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/bipolarlisp/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  
+  # ╔══════════════════════════════════════════════════════════════════════════╗
+  # ║ Session variables                                                        ║
+  # ╠══════════════════════════════════════════════════════════════════════════╣
+  # ║                                                                          ║
+  # ║ Note that for Linux hosts a new session is required for changes to take  ║
+  # ║ effect. This means that the user will have to log out, then log back     ║
+  # ║ in to see the changes.                                                   ║
+  # ║                                                                          ║
+  # ╚══════════════════════════════════════════════════════════════════════════╝
+
+  home.sessionVariables = {};
+
+  # Populate `sessionVariables` with default values for the XDG base directory
+  # environment variables.
+  xdg.enable = true;
+
+  # This makes bash inherit `home.sessionVariables`.
+  programs.bash.enable = true;
 }
