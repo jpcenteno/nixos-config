@@ -1,6 +1,11 @@
 { config, ... }:
 
 {
+  programs.bash = {
+    enable = true;
+    initExtra = builtins.readFile ../../dotfiles/bash/bashrc;
+  };
+
   # Prompt editing mode configuration. Mainly to enable vi editing mode.
   xdg.configFile."readline/inputrc".source = ../../dotfiles/readline/inputrc;
   # Keep the home directory clean by moving `inputrc` to `XDG_CONFIG_HOME`.
