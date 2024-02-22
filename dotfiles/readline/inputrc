@@ -1,0 +1,13 @@
+set completion-ignore-case On
+
+set keymap vi-command
+"k": history-search-backward
+"j": history-search-forward
+
+set keymap vi-insert
+"\C-e": end-of-line
+"\C-a": beginning-of-line
+"\C-u": unix-line-discard
+
+set editing-mode vi
+

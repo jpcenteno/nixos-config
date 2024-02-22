@@ -3,6 +3,7 @@
 {
 
   imports = [
+    ../../modules/home-manager/bash.nix
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/shell-extras.nix
   ];
