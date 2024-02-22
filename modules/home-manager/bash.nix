@@ -1,6 +1,10 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
+  home.packages = [
+    pkgs.curl
+  ];
+
   programs.bash = {
     enable = true;
     initExtra = builtins.readFile ../../dotfiles/bash/bashrc;

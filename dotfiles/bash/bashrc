@@ -1,1 +1,5 @@
+#! /usr/bin/env bash
+
 alias g=git
+
+cheat() { curl -s "https://cheat.sh/${1}" | less -R; }
