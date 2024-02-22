@@ -8,6 +8,7 @@
     pkgs.fzf
     pkgs.jq
     pkgs.ripgrep
+    pkgs.shellcheck
   ];
 
   programs.starship = {
