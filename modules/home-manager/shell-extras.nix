@@ -2,7 +2,6 @@
 
 {
   home.packages = [
-    pkgs.bat
     pkgs.eza
     pkgs.fd
     pkgs.fzf
@@ -15,6 +14,11 @@
     enable = true;
     # This requires `programs.bash.enable` to be set to `true`.
     enableBashIntegration = true;
+  };
+
+  programs.bat = {
+    enable = true;
+    config = { theme = "base16"; };
   };
 
   programs.bash = {
