@@ -95,7 +95,7 @@
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs; inherit pkgs; };
     users."bipolarlisp" = import ./home.nix;
   };
 
