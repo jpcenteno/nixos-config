@@ -1,14 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 
   imports = [
+    ../../modules/home-manager/alacritty.nix
     ../../modules/home-manager/bash.nix
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/shell-extras.nix
     ../../modules/home-manager/ssh.nix
     ../../modules/home-manager/tmux.nix
+
+    inputs.nix-colors.homeManagerModules.default
   ];
+
+  # Global colorscheme.
+  colorScheme = inputs.nix-colors.colorSchemes.rose-pine;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
