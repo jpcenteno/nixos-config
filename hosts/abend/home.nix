@@ -33,9 +33,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # FIXME. Added this to ensure that home-manager works.
-    pkgs.hello
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
