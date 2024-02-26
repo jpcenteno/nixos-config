@@ -10,6 +10,14 @@
     pkgs.shellcheck
   ];
 
+  programs.direnv = {
+    enable = true;
+    # Caches the nix-shell environment reducing the waiting time after first run
+    # and prevents garbage collection of build dependencies.
+    nix-direnv.enable = true;
+    enableBashIntegration = true;
+  };
+
   programs.starship = {
     enable = true;
     # This requires `programs.bash.enable` to be set to `true`.
