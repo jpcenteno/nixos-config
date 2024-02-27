@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, unstablePkgs, inputs, ... }:
 
 {
 
@@ -33,6 +33,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    unstablePkgs.obsidian
+
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
