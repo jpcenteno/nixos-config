@@ -5,6 +5,21 @@
 { config, pkgs, unstablePkgs, inputs, ... }:
 
 {
+  nix.settings = {
+    # Package build caches. This is well documented at the "NixOS & Flakes
+    # Book":
+    # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers#what-is-nix-cache-server
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      # Note that there is no need to add the trusted key for `cache.nixos.org`.
+      # nix community's cache server public key:
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
