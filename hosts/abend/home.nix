@@ -8,6 +8,7 @@
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/shell-extras.nix
     ../../modules/home-manager/ssh.nix
+    ../../modules/home-manager/sway.nix
     ../../modules/home-manager/tmux.nix
 
     inputs.nix-colors.homeManagerModules.default
@@ -34,8 +35,6 @@
   # environment.
   home.packages = [
     unstablePkgs.obsidian
-
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
