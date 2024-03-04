@@ -108,6 +108,7 @@ in
           "memory"
           "temperature"
           "cpu"
+          "bluetooth"
           "pulseaudio"
           "battery"
           "clock"
@@ -122,7 +123,7 @@ in
         };
         pulseaudio = {
           format = "{icon}  {volume}%";
-          format-bluetooth = "{icon}    {volume}%";
+          format-bluetooth = "{icon}  {volume}%";
           format-muted = "󰝟";
           format-icons = {
               default = ["󰕿" "󰖀" "󰕾"];
@@ -135,6 +136,14 @@ in
         };
         memory = { format = "  {}%"; };
         disk = { format = "  {percentage_used}%"; };
+        bluetooth = {
+          format-connected = " {num_connections}";
+          on-click = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.bluetuith}/bin/bluetuith";
+          tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+        };
       };
     };
     style = with config.colorScheme.palette; ''
