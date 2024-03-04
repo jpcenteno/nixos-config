@@ -24,6 +24,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/nixos/keyd/keyd.nix
+      ../../modules/nixos/fonts.nix
     ];
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -61,25 +62,6 @@
     LC_PAPER = "es_AR.UTF-8";
     LC_TELEPHONE = "es_AR.UTF-8";
     LC_TIME = "es_AR.UTF-8";
-  };
-
-  fonts = {
-    packages = [
-      pkgs.ibm-plex
-      (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      pkgs.noto-fonts-monochrome-emoji
-    ];
-    # AFAIK, `home-manager` does not provide this feature, which would be
-    # awesome.
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        emoji = ["Noto Emoji"];
-        sansSerif = [ "IBM Plex Sans" ];
-        serif = [ "IBM Plex Serif" ];
-        monospace = [ "JetBrainsMono NerdFont" ];
-      };
-    };
   };
 
   # Enable CUPS to print documents.
