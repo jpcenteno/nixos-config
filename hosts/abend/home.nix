@@ -5,6 +5,7 @@
   imports = [
     ../../modules/home-manager/alacritty.nix
     ../../modules/home-manager/bash.nix
+    ../../modules/home-manager/bluetooth.nix
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/shell-extras.nix
     ../../modules/home-manager/ssh.nix
