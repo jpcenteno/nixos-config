@@ -23,6 +23,13 @@
 
       font = {
         size = 16;
+        # Use the system's default monospace font, which can be set on
+        # `~/.config/fontconfig/fonts.confs`.
+        # See: https://wiki.archlinux.org/title/Font_configuration/Examples#The_standard_names
+        bold = { family = "monospace"; style = "Bold"; };
+        bold_italic = { family = "monospace"; style = "Bold Italic"; };
+        italic = { family = "monospace"; style = "Italic"; };
+        normal = { family = "monospace"; style = "Regular"; };
       };
 
       colors = with config.colorScheme.colors; {

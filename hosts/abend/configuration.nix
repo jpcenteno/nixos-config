@@ -24,10 +24,12 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/nixos/keyd/keyd.nix
-      ../../modules/nixos/desktop.nix
+      # ../../modules/nixos/desktop.nix
     ];
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  security.polkit.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -62,17 +64,23 @@
     LC_TIME = "es_AR.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  fonts = {
+    packages = [
+      pkgs.ibm-plex
+      (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      pkgs.noto-fonts-monochrome-emoji
+    ];
+    # AFAIK, `home-manager` does not provide this feature, which would be
+    # awesome.
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        emoji = ["Noto Emoji"];
+        sansSerif = [ "IBM Plex Sans" ];
+        serif = [ "IBM Plex Serif" ];
+        monospace = [ "JetBrainsMono NerdFont" ];
+      };
+    };
   };
 
   # Enable CUPS to print documents.
@@ -95,8 +103,8 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # Enable opengl. Required for `sway` (managed via home-manager).
+  hardware.opengl.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bipolarlisp = {
