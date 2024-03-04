@@ -84,6 +84,8 @@
     #media-session.enable = true;
   };
 
+  hardware.bluetooth.enable = true;
+
   # Enable opengl. Required for `sway` (managed via home-manager).
   hardware.opengl.enable = true;
 
