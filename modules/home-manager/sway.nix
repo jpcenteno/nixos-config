@@ -79,7 +79,22 @@ in
           text = "#${palette.base00}";
         };
       };
+      input = {
+        "type:pointer".natural_scroll = "enabled";
+        "type:touchpad" = {
+          dwt = "enabled"; # Disable while typing.
+          tap = "enabled"; # Tap to click.
+          accel_profile = "adaptive";
+          pointer_accel = "0.5";
+          natural_scroll = "enabled";
+        };
+      };
     };
+    extraConfig = ''
+    # Enable touchpad gestures.
+    bindgesture swipe:right workspace prev
+    bindgesture swipe:left workspace next
+    '';
   };
 
   programs.waybar = {
