@@ -1,12 +1,14 @@
 { lib, config, pkgs, ... }:
 
 let
+  swaySessionSystemdTarget = "sway-session.target";
   palette = config.colorScheme.palette;
 in
 {
   home.packages = with pkgs; [
     bemenu
     brightnessctl
+    waylock
   ];
 
   wayland.windowManager.sway = {
@@ -41,8 +43,9 @@ in
       };
       bars = []; # Hide default bar. Use `waybar` instead.
       startup = [
-        { command = "systemctl --user restart sway-session.target"; always = true; }
+        { command = "systemctl --user restart ${swaySessionSystemdTarget}"; always = true; }
         { command = "systemctl --user restart waybar"; always = true; }
+        { command = "systemctl --user restart swayidle"; always = true; }
       ];
       gaps = { inner = 16; };
       fonts = {
@@ -157,7 +160,36 @@ in
     }
     '';
     systemd.enable = true;
-    systemd.target = "sway-session.target";
+    systemd.target = swaySessionSystemdTarget;
+  };
+
+  services.swayidle = 
+  let
+    lockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock";
+    setDisplayStatusCommand = status: "${pkgs.sway}/bin/swaymsg output \"*\" dpms ${status}";
+    lockTimeout = 120;
+    displayOffTimeout = lockTimeout + 30;
+  in
+  {
+    enable = true;
+    systemdTarget = swaySessionSystemdTarget;
+    timeouts = [
+      # FIXME set to 120 and 150 respectively
+      { timeout = lockTimeout; command = lockCommand; }
+      { 
+        timeout = displayOffTimeout;
+        command = "${setDisplayStatusCommand "off"}";
+        resumeCommand = "${setDisplayStatusCommand "on"}";
+      }
+    ];
+    events = [
+      { event = "before-sleep"; command = lockCommand; }
+      { event = "lock"; command = lockCommand; }
+    ];
+
+    # FIXME:To make sure swayidle waits for swaylock to lock the screen before
+    # it releases the inhibition lock, the -w options is used in swayidle, and
+    # -f in swaylock. 
   };
 
   fonts.fontconfig.enable = true;
