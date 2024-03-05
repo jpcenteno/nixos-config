@@ -30,6 +30,10 @@
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   security.polkit.enable = true;
+  # Necessary for `waylock` to work. Removing the following line will cause the
+  # program to reject the correct password. FIXME is there a way to move this to
+  # home-manager where I have my desktop configuration?
+  security.pam.services.waylock = {};
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
