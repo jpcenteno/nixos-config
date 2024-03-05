@@ -3,6 +3,7 @@
 let
   swaySessionSystemdTarget = "sway-session.target";
   palette = config.colorScheme.palette;
+  waylockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock -init-color 0x${palette.base00} -input-color 0x${palette.base0B} -fail-color 0x${palette.base0A}";
 in
 {
   home.packages = with pkgs; [
@@ -165,7 +166,6 @@ in
 
   services.swayidle = 
   let
-    lockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock";
     setDisplayStatusCommand = status: "${pkgs.sway}/bin/swaymsg output \"*\" dpms ${status}";
     lockTimeout = 120;
     displayOffTimeout = lockTimeout + 30;
@@ -174,8 +174,7 @@ in
     enable = true;
     systemdTarget = swaySessionSystemdTarget;
     timeouts = [
-      # FIXME set to 120 and 150 respectively
-      { timeout = lockTimeout; command = lockCommand; }
+      { timeout = lockTimeout; command = waylockCommand; }
       { 
         timeout = displayOffTimeout;
         command = "${setDisplayStatusCommand "off"}";
@@ -183,13 +182,18 @@ in
       }
     ];
     events = [
-      { event = "before-sleep"; command = lockCommand; }
-      { event = "lock"; command = lockCommand; }
+      { event = "before-sleep"; command = waylockCommand; }
+      { event = "lock"; command = waylockCommand; }
     ];
 
     # FIXME:To make sure swayidle waits for swaylock to lock the screen before
     # it releases the inhibition lock, the -w options is used in swayidle, and
     # -f in swaylock. 
+  };
+
+  programs.bash = {
+    enable = true;
+    shellAliases.waylock = waylockCommand;
   };
 
   fonts.fontconfig.enable = true;
