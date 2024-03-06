@@ -73,7 +73,17 @@
   # ║                                                                          ║
   # ╚══════════════════════════════════════════════════════════════════════════╝
 
-  home.sessionVariables = {};
+  home.sessionVariables = {
+    # Use the user's runtime directory to prevent other users from accessing
+    # temporary files and guarantee data erasure on shutdown.
+    #
+    # Note that `$XDG_RUNTIME_DIR` was not set by any NixOS or Home Manager
+    # configuration. It is set by `pam_systemd`, on user login, so it is safe
+    # and it should should be sourced from the environment.
+    #
+    # FIXME create a subdirectory.
+    TMPDIR = "\${XDG_RUNTIME_DIR}";
+  };
 
   # Populate `sessionVariables` with default values for the XDG base directory
   # environment variables.
