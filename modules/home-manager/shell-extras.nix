@@ -36,9 +36,10 @@
     # belong in `home.nix` or it's own module.
     enable = true;
     shellAliases = {
-      # Standard programs replacements.
+      # Standard program replacements.
       cat = "bat";
       ls = "eza";
+      cdtmp = ''cd "$(${pkgs.coreutils}/bin/mktemp -d)"'';
     };
   };
 }
