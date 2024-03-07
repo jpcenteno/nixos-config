@@ -12,6 +12,7 @@
     ../../modules/home-manager/sway.nix
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/librewolf.nix
+    ../../modules/home-manager/taskwarrior.nix
 
     inputs.nix-colors.homeManagerModules.default
   ];
