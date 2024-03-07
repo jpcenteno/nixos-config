@@ -81,14 +81,24 @@
     # configuration. It is set by `pam_systemd`, on user login, so it is safe
     # and it should should be sourced from the environment.
     #
-    # FIXME create a subdirectory.
-    TMPDIR = "\${XDG_RUNTIME_DIR}";
+    # A `mkdir -p` command was added to `programs.bash.profileExtra` to ensure
+    # that this directory exists upon login.
+    TMPDIR = "\${XDG_RUNTIME_DIR}/tmp";
   };
 
   # Populate `sessionVariables` with default values for the XDG base directory
   # environment variables.
   xdg.enable = true;
 
-  # This makes bash inherit `home.sessionVariables`.
-  programs.bash.enable = true;
+  programs.bash = {
+    # Bash inherits all the values set at `home.sessionVariables` and `xdg.*`
+    # when enabled.
+    enable = true;
+
+    profileExtra = ''
+      # Ensure $TMPDIR exists.
+      mkdir -p "''${TMPDIR}"
+    '';
+  };
+
 }
