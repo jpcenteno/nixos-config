@@ -11,6 +11,7 @@
     ../../modules/home-manager/ssh.nix
     ../../modules/home-manager/sway.nix
     ../../modules/home-manager/tmux.nix
+    ../../modules/home-manager/librewolf.nix
 
     inputs.nix-colors.homeManagerModules.default
   ];
