@@ -2,6 +2,9 @@
 {
   programs.librewolf = {
     enable = true;
+    settings = {
+      "browser.toolbars.bookmarks.visibility" = "never";
+    };
   };
 
   # Taken from [1].
