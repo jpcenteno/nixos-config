@@ -101,10 +101,7 @@
     isNormalUser = true;
     description = "bipolarlisp";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-    #  thunderbird
-    ];
+    packages = [];
   };
 
   home-manager = {
