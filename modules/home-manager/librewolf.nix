@@ -13,7 +13,11 @@
   programs.librewolf = {
     enable = true;
     settings = {
+      # Hide the bookmarks toolbar.
       "browser.toolbars.bookmarks.visibility" = "never";
+      # Disable the translations feature.
+      "browser.translations.automaticallyPopup" = false;
+      "browser.translations.enable" = false;
     };
   };
 
