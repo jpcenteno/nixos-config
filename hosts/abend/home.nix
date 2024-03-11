@@ -9,6 +9,7 @@
     ../../modules/home-manager/brave.nix
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/neovim.nix
+    ../../modules/home-manager/lf.nix
     ../../modules/home-manager/shell-extras.nix
     ../../modules/home-manager/ssh.nix
     ../../modules/home-manager/sway.nix
