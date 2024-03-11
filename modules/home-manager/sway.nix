@@ -10,6 +10,9 @@ in
     bemenu
     brightnessctl
     waylock
+    zathura
+    imv
+    mpv
   ];
 
   wayland.windowManager.sway = {
@@ -197,4 +200,8 @@ in
   };
 
   fonts.fontconfig.enable = true;
+
+  xdg.mimeApps.defaultApplications = {
+    "application/pdf" = "zathura.desktop";
+  };
 }
