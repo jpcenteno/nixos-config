@@ -10,7 +10,6 @@ in
     bemenu
     brightnessctl
     waylock
-    zathura
     imv
     mpv
   ];
@@ -200,8 +199,4 @@ in
   };
 
   fonts.fontconfig.enable = true;
-
-  xdg.mimeApps.defaultApplications = {
-    "application/pdf" = "zathura.desktop";
-  };
 }
