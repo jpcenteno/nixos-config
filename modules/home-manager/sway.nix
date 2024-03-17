@@ -10,7 +10,6 @@ in
     bemenu
     brightnessctl
     waylock
-    imv
     mpv
   ];
 
