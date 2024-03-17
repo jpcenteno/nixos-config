@@ -8,6 +8,7 @@
     ../../modules/home-manager/bluetooth.nix
     ../../modules/home-manager/brave.nix
     ../../modules/home-manager/git.nix
+    ../../modules/home-manager/imv.nix
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/lf.nix
     ../../modules/home-manager/shell-extras.nix
