@@ -4,6 +4,7 @@
 
   imports = [
     ../../modules/home-manager/alacritty.nix
+    ../../modules/home-manager/anki.nix
     ../../modules/home-manager/bash.nix
     ../../modules/home-manager/bluetooth.nix
     ../../modules/home-manager/brave.nix
