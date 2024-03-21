@@ -192,6 +192,15 @@ in
     # -f in swaylock. 
   };
 
+  services.wlsunset = {
+    enable = true;
+    systemdTarget = swaySessionSystemdTarget;
+    temperature.day = 5500;
+    temperature.night = 3500;
+    latitude = "-34.6";
+    longitude = "-58.3";
+  };
+
   programs.bash = {
     enable = true;
     shellAliases.waylock = waylockCommand;
