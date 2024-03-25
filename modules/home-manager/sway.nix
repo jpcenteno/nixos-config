@@ -4,6 +4,7 @@ let
   swaySessionSystemdTarget = "sway-session.target";
   palette = config.colorScheme.palette;
   waylockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock -init-color 0x${palette.base00} -input-color 0x${palette.base0B} -fail-color 0x${palette.base0A}";
+  gapSizeInPixels = 16;
 in
 {
   home.packages = with pkgs; [
@@ -49,7 +50,7 @@ in
         { command = "systemctl --user restart waybar"; always = true; }
         { command = "systemctl --user restart swayidle"; always = true; }
       ];
-      gaps = { inner = 16; };
+      gaps = { inner = gapSizeInPixels; };
       fonts = {
         names = [ "monospace" ];
         size = 12.0;
@@ -152,13 +153,40 @@ in
       };
     };
     style = with config.colorScheme.palette; ''
-    * { font-family: monospace; font-size: 16px; }
-    window#waybar { background-color: #${base00}; color: #${base07}; }
-    .modules-right label {
+    * {
+      font-family: monospace;
+      font-size: 16px;
+    }
+
+    window#waybar {
+    }
+
+    window#waybar {
       background-color: #${base07};
+      color: #${base04};
+    }
+
+    /* Horizontally align waybar with window gaps. */
+    .modules-right { margin-right: ${toString gapSizeInPixels}px; }
+    #workspaces { margin-left: ${toString gapSizeInPixels}px; }
+
+    .modules-right label,
+    #workspaces button
+    {
+      background-color: #${base01};
+      color: #${base04};
+      padding: 4px 16px;
+      margin-right: 8px;
+      border-radius: 0 0 8px 8px;
+    }
+
+    #workspaces button.focused {
+      background-color: #${base09};
       color: #${base00};
-      padding: 0 16px;
-      margin-right: 16px;
+    }
+
+    #workspaces button.urgent {
+      background-color: #${base08};
     }
     '';
     systemd.enable = true;
