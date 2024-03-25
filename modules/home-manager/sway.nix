@@ -187,6 +187,7 @@ in
 
     #workspaces button.urgent {
       background-color: #${base08};
+      color: #${base00};
     }
     '';
     systemd.enable = true;
