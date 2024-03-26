@@ -23,7 +23,7 @@
   ];
 
   # Global colorscheme.
-  colorScheme = inputs.nix-colors.colorSchemes.rose-pine-moon;
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
