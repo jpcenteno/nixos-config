@@ -5,6 +5,7 @@ let
   palette = config.colorScheme.palette;
   waylockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock -init-color 0x${palette.base00} -input-color 0x${palette.base0B} -fail-color 0x${palette.base0A}";
   gapSizeInPixels = 16;
+  desktopBackground = palette.base03;
 in
 {
   home.packages = with pkgs; [
@@ -37,7 +38,7 @@ in
       window.titlebar = false;
       output = {
         "*" = {
-          background = "#${palette.base07} solid_color";
+          background = "#${desktopBackground} solid_color";
         };
         "eDP-1" = {
           scale = "1";
@@ -162,7 +163,7 @@ in
     }
 
     window#waybar {
-      background-color: #${base07};
+      background-color: #${desktopBackground};
       color: #${base04};
     }
 
