@@ -236,5 +236,28 @@ in
     shellAliases.waylock = waylockCommand;
   };
 
+  home.sessionVariables = with palette; {
+    BEMENU_OPTS = lib.cli.toGNUCommandLineShell { } {
+      ignorecase = true; # match items case insensitively.
+      center = true; # Mimic a floating alert window.
+
+      list = 10; # list items vertically with the given number of lines.
+      width-factor = 0.33; # defines the relative width factor of the menu (from 0 to 1). (wx)
+      fn = "monospace 16"; # defines the font to be used ('name [size]'). (wx)
+      border = 2;         # border size in pixels.
+      bdr = "#${base09}"; # defines the border color. (wx)
+      nb = "#${base00}";  # defines the normal background color. (wx)
+      nf = "#${base05}" ; # defines the normal foreground color. (wx)
+      ab = "#${base00}";  # defines the alternating background color. (wx)
+      af = "#${base05}" ; # defines the alternating foreground color. (wx)
+      tb = "#${base09}";  # defines the title background color. (wx)
+      tf = "#${base00}" ; # defines the title foreground color. (wx)
+      fb = "#${base09}";  # defines the filter background color. (wx)
+      ff = "#${base00}" ; # defines the filter foreground color. (wx)
+      hb = "#${base09}";  # defines the highlighted background color. (wx)
+      hf = "#${base00}";  # defines the highlighted foreground color. (wx)
+    };
+  };
+
   fonts.fontconfig.enable = true;
 }
