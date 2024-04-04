@@ -44,6 +44,9 @@ in
           scale = "1";
           mode = "1920x1080";
         };
+        "Samsung Electric Company U32R59x H1AK500000" = {
+          scale = "1.2";
+        };
       };
       bars = []; # Hide default bar. Use `waybar` instead.
       startup = [
