@@ -23,6 +23,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../modules/nixos/asus.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/keyd/keyd.nix
     ];
@@ -167,4 +168,6 @@
   };
 
   services.supergfxd.enable = true;
+
+  asus-linux.enable = true;
 }
