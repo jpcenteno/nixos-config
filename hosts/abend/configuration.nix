@@ -161,13 +161,5 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
-
-  services.asusd = {
-    enable = true;
-    enableUserService = true;
-  };
-
-  services.supergfxd.enable = true;
-
   asus-linux.enable = true;
 }

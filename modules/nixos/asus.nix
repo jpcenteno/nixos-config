@@ -17,5 +17,12 @@ in
         message = "Trying to use the asus-linux module outside the x86_64-linux platform";
       }
     ];
+
+    services.asusd = {
+      enable = true;
+      enableUserService = true;
+    };
+
+    services.supergfxd.enable = true;
   };
 }
