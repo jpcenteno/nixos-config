@@ -18,6 +18,15 @@
           labels = "ID,Description,Tags,Age";
           filter = "status:pending project:INBOX";
         };
+
+        someday = {
+          description = "Tasks saved for some day in the future";
+          columns = "id,entry.age,depends,project,tags,description";
+          labels = "ID,Age,Deps,Project,Tag,Description";
+          filter = "+WAITING wait.after:7000years";
+        };
+
+        waiting.filter = "+WAITING wait.before:7000years";
       };
     };
   };
