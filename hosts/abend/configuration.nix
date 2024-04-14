@@ -26,6 +26,7 @@
       ../../modules/nixos/asus.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/keyd/keyd.nix
+      ../../modules/nixos/trezor.nix
     ];
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -16,6 +16,7 @@
     ../../modules/home-manager/ssh.nix
     ../../modules/home-manager/sway.nix
     ../../modules/home-manager/tmux.nix
+    ../../modules/home-manager/trezor.nix
     ../../modules/home-manager/taskwarrior.nix
     ../../modules/home-manager/zathura.nix
 
