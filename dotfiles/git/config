@@ -26,6 +26,8 @@
     a   = add
     ap  = add -p
     b   = branch
+    bd  = branch --delete
+    bdi = "! ~/.config/git/scripts/delete-branches-interactively"
     co  = checkout
     cob = checkout -b
     df  = diff

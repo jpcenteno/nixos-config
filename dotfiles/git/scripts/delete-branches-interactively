@@ -1,0 +1,39 @@
+#! /bin/sh
+set -eu
+
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ Temporary file used for the interactive prompt                         ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+list_branches() { git branch --merged | grep -vE '^(  main|  master|\*.*)$' | sed 's/^  /#/'; }
+
+write_temp_file() {
+    temp_file="$( mktemp )"
+
+    echo '# Uncomment the branches that you would like to delete:' > "${temp_file}"
+    echo >> "${temp_file}"
+    list_branches >> "${temp_file}"
+}
+
+remove_comments_and_empty_lines() { sed 's/#.*$//; /^[[:space:]]*$/d'; }
+
+read_temp_file() {
+    # shellcheck disable=SC2002
+    cat "${temp_file}" | remove_comments_and_empty_lines
+}
+
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ Main function:                                                         ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+main() {
+    write_temp_file
+
+    "${EDITOR}" "${temp_file}"
+
+    read_temp_file | while read -r branch_name; do
+        xargs git branch --delete "${branch_name}"
+    done
+}
+
+main
