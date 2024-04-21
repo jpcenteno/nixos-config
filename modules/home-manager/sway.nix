@@ -36,6 +36,10 @@ in
         followMouse = false;
       };
       window.titlebar = false;
+      input."*" = {
+        xkb_layout = "us";
+        xkb_variant = "altgr-intl";
+      };
       output = {
         "*" = {
           background = "#${desktopBackground} solid_color";
