@@ -20,6 +20,10 @@
     ];
   };
 
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.registry.nixpkgs-unstable.flake = inputs.unstable-nixpkgs;
+  nix.registry.home-manager.flake = inputs.home-manager;
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
