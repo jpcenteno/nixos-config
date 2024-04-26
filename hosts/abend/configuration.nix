@@ -9,10 +9,8 @@
     # Package build caches. This is well documented at the "NixOS & Flakes
     # Book":
     # https://nixos-and-flakes.thiscute.world/nixos-with-flakes/add-custom-cache-servers#what-is-nix-cache-server
-    substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-    ];
+    substituters =
+      [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
     trusted-public-keys = [
       # Note that there is no need to add the trusted key for `cache.nixos.org`.
       # nix community's cache server public key:
@@ -20,29 +18,29 @@
     ];
   };
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../modules/nixos/asus.nix
-      ../../modules/nixos/fonts.nix
-      ../../modules/nixos/keyd/keyd.nix
-      ../../modules/nixos/pin-system-registry-flakes.nix
-      ../../modules/nixos/trezor.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../modules/nixos/asus.nix
+    ../../modules/nixos/fonts.nix
+    ../../modules/nixos/keyd/keyd.nix
+    ../../modules/nixos/pin-system-registry-flakes.nix
+    ../../modules/nixos/trezor.nix
+  ];
 
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   security.polkit.enable = true;
   # Necessary for `waylock` to work. Removing the following line will cause the
   # program to reject the correct password. FIXME is there a way to move this to
   # home-manager where I have my desktop configuration?
-  security.pam.services.waylock = {};
+  security.pam.services.waylock = { };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-9089a98b-7e40-478b-8d0d-14ecba68dab1".device = "/dev/disk/by-uuid/9089a98b-7e40-478b-8d0d-14ecba68dab1";
+  boot.initrd.luks.devices."luks-9089a98b-7e40-478b-8d0d-14ecba68dab1".device =
+    "/dev/disk/by-uuid/9089a98b-7e40-478b-8d0d-14ecba68dab1";
   networking.hostName = "abend"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -118,11 +116,15 @@
     isNormalUser = true;
     description = "bipolarlisp";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = [];
+    packages = [ ];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; inherit pkgs; inherit pkgs-unstable; };
+    extraSpecialArgs = {
+      inherit inputs;
+      inherit pkgs;
+      inherit pkgs-unstable;
+    };
     users."bipolarlisp" = import ./home.nix;
   };
 
@@ -131,10 +133,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim
-    git
-  ];
+  environment.systemPackages = with pkgs; [ neovim git ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

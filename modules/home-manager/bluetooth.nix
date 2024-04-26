@@ -1,5 +1,1 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    bluetuith
-  ];
-}
+{ pkgs, ... }: { home.packages = with pkgs; [ bluetuith ]; }
