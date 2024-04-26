@@ -1,4 +1,4 @@
-/*
+/**
 
 This module configures the system registry to pin the flake names to the
 versions specified in the flake.lock file. This ensures that the registry
@@ -28,6 +28,39 @@ due to cache misses.
 with lib;
 let
   cfg = config.pin-input-flakes-to-system-registry;
+
+  /**
+    Reshapes a flake inputs attrset into an attrset assignable to `nix.registry`.
+
+    # Inputs
+
+    `inputs :: { name :: String, value :: flake }`
+
+    : An attribute set of flakes.
+
+    # Type
+
+    ```
+    inputsToRegistry :: { name :: String, value :: Flake } -> { name :: string, value :: { name :: "flake", value:: Flake }}
+    ```
+
+    ## Example
+
+    ```nix
+    inputs = {
+      nixpkgs = <nixpkgs flake>;
+      nixpkgs-unstable = <nixpkgs-unstable flake>;
+    };
+
+    inputsToRegistry inputs
+    => {
+      nixpkgs.flake = <nixpkgs flake>;
+      nixpkgs-unstable.flake = <nixpkgs-unstable flake>;
+    }
+    ```
+
+  */
+  inputsToRegistry = lib.attrsets.mapAttrs (_name: flake: { flake: flake; });
 in
 {
 
@@ -45,10 +78,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    nix.registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-      nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
-      home-manager.flake = inputs.home-manager;
-    };
+    # Pin each one of the input flakes to the system registry.
+    nix.registry =
+      lib.attrsets.mapAttrs (_name: flake: { flake: flake; }) inputs;
   };
 }
