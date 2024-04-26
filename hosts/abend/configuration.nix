@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, unstablePkgs, inputs, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 {
   nix.settings = {
@@ -122,7 +122,7 @@
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; inherit pkgs; inherit unstablePkgs; };
+    extraSpecialArgs = { inherit inputs; inherit pkgs; inherit pkgs-unstable; };
     users."bipolarlisp" = import ./home.nix;
   };
 

@@ -1,4 +1,4 @@
-{ config, pkgs, unstablePkgs, inputs, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 {
 
@@ -42,7 +42,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    unstablePkgs.obsidian
+    pkgs-unstable.obsidian
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
