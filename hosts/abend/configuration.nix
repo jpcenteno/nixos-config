@@ -20,16 +20,13 @@
     ];
   };
 
-  nix.registry.nixpkgs.flake = inputs.nixpkgs;
-  nix.registry.nixpkgs-unstable.flake = inputs.unstable-nixpkgs;
-  nix.registry.home-manager.flake = inputs.home-manager;
-
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/nixos/asus.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/keyd/keyd.nix
+      ../../modules/nixos/pin-system-registry-flakes.nix
       ../../modules/nixos/trezor.nix
     ];
 
