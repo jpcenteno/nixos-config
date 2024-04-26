@@ -1,9 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.keyd
-  ];
+  environment.systemPackages = [ pkgs.keyd ];
 
   services.keyd = {
     enable = true;
@@ -15,6 +13,6 @@
   # happening the first time `keyd` is activated.
   system.activationScripts.keyd.text = ''
     ${pkgs.systemd}/bin/systemctl try-restart keyd.service
-    '';
-    #${pkgs.xorg.setxkbmap}/bin/setxkbmap -option compose:menu
+  '';
+  #${pkgs.xorg.setxkbmap}/bin/setxkbmap -option compose:menu
 }

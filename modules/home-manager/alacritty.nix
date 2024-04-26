@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   programs.alacritty = {
     enable = true;
 
@@ -9,15 +8,16 @@
       # Reload after rebuild.
       live_config_reload = true;
 
-      env = {
-        "TERM" = "xterm";
-      };
+      env = { "TERM" = "xterm"; };
 
       window = {
         columns = 110;
         rows = 50;
         decorations = "none";
-        padding = { y = 24; x = 8; };
+        padding = {
+          y = 24;
+          x = 8;
+        };
         dynamic_padding = true;
       };
 
@@ -26,10 +26,22 @@
         # Use the system's default monospace font, which can be set on
         # `~/.config/fontconfig/fonts.confs`.
         # See: https://wiki.archlinux.org/title/Font_configuration/Examples#The_standard_names
-        bold = { family = "monospace"; style = "Bold"; };
-        bold_italic = { family = "monospace"; style = "Bold Italic"; };
-        italic = { family = "monospace"; style = "Italic"; };
-        normal = { family = "monospace"; style = "Regular"; };
+        bold = {
+          family = "monospace";
+          style = "Bold";
+        };
+        bold_italic = {
+          family = "monospace";
+          style = "Bold Italic";
+        };
+        italic = {
+          family = "monospace";
+          style = "Italic";
+        };
+        normal = {
+          family = "monospace";
+          style = "Regular";
+        };
       };
 
       colors = with config.colorScheme.colors; {

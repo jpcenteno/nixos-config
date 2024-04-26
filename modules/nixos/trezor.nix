@@ -3,14 +3,9 @@
 
   config = {
     services = {
-      trezord = {
-        enable = true;
-      };
+      trezord = { enable = true; };
       udev.packages = with pkgs; [ trezor-udev-rules ];
     };
-    environment.systemPackages = with pkgs; [
-      trezor-suite
-      trezorctl
-    ];
+    environment.systemPackages = with pkgs; [ trezor-suite trezorctl ];
   };
 }

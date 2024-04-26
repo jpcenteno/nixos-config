@@ -5,8 +5,7 @@
 #
 # A nice thing about Nixos is that it allows me to install the only 3 fonts I
 # want.
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   fonts = {
     packages = [
       pkgs.ibm-plex
@@ -18,7 +17,7 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        emoji = ["Noto Emoji"];
+        emoji = [ "Noto Emoji" ];
         sansSerif = [ "IBM Plex Sans" ];
         serif = [ "IBM Plex Serif" ];
         monospace = [ "JetBrainsMono NerdFont" ];

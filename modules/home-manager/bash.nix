@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.curl
-  ];
+  home.packages = [ pkgs.curl ];
 
   programs.bash = {
     enable = true;

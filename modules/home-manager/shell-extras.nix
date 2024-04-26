@@ -1,14 +1,8 @@
 { config, pkgs, inputs, ... }:
 
 {
-  home.packages = [
-    pkgs.eza
-    pkgs.fd
-    pkgs.fzf
-    pkgs.jq
-    pkgs.ripgrep
-    pkgs.shellcheck
-  ];
+  home.packages =
+    [ pkgs.eza pkgs.fd pkgs.fzf pkgs.jq pkgs.ripgrep pkgs.shellcheck ];
 
   programs.direnv = {
     enable = true;

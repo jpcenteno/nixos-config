@@ -18,13 +18,23 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-unstable = import nixpkgs-unstable { system = "${system}"; config = { allowUnfree = true; }; };
-    in
-    {
+      pkgs-unstable = import nixpkgs-unstable {
+        system = "${system}";
+        config = { allowUnfree = true; };
+      };
+    in {
+      formatter.x86_64-darwin = pkgs.nixfmt;
+      formatter.i686-linux = pkgs.nixfmt;
+      formatter.aarch64-darwin = pkgs.nixfmt;
+      formatter.x86_64-linux = pkgs.nixfmt;
+      formatter.aarch64-linux = pkgs.nixfmt;
 
       nixosConfigurations = {
         abend = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; inherit pkgs-unstable; };
+          specialArgs = {
+            inherit inputs;
+            inherit pkgs-unstable;
+          };
           modules = [
             ./hosts/abend/configuration.nix
             inputs.home-manager.nixosModules.default
