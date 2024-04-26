@@ -8,6 +8,7 @@
     ../../modules/home-manager/bash.nix
     ../../modules/home-manager/bluetooth.nix
     ../../modules/home-manager/brave.nix
+    ../../modules/home-manager/development/nix-lsp.nix
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/imv.nix
     ../../modules/home-manager/neovim.nix
@@ -109,4 +110,6 @@
   };
 
   xdg.mimeApps.enable = true;
+
+  development.nil.enable = true;
 }
