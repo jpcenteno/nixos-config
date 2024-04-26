@@ -26,6 +26,7 @@
       ../../modules/nixos/asus.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/keyd/keyd.nix
+      ../../modules/nixos/pin-system-registry-flakes.nix
       ../../modules/nixos/trezor.nix
     ];
 
