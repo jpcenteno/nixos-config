@@ -60,7 +60,12 @@ let
     ```
 
   */
-  inputsToRegistry = lib.attrsets.mapAttrs (_name: flake: { flake: flake; });
+  inputsToRegistry = lib.attrsets.mapAttrs (_name: flake: { flake = flake; });
+
+  /**
+    Filters out the value associated with the key "self" from an attrset.
+  */
+  ignoreSelf = lib.attrsets.filterAttrs (name: _value: name != "self");
 in
 {
 
@@ -79,7 +84,6 @@ in
 
   config = mkIf cfg.enable {
     # Pin each one of the input flakes to the system registry.
-    nix.registry =
-      lib.attrsets.mapAttrs (_name: flake: { flake: flake; }) inputs;
+    nix.registry = inputsToRegistry (ignoreSelf inputs);
   };
 }
