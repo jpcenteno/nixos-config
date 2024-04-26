@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    unstable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       # Important: Specify branch following same release as nixpkgs.
@@ -14,11 +14,11 @@
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, unstable-nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      unstablePkgs = import unstable-nixpkgs { system = "${system}"; config = { allowUnfree = true; }; };
+      unstablePkgs = import nixpkgs-unstable { system = "${system}"; config = { allowUnfree = true; }; };
     in
     {
 

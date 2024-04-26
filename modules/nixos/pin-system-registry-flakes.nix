@@ -47,7 +47,7 @@ in
   config = mkIf cfg.enable {
     nix.registry = {
       nixpkgs.flake = inputs.nixpkgs;
-      nixpkgs-unstable.flake = inputs.unstable-nixpkgs;
+      nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
       home-manager.flake = inputs.home-manager;
     };
   };
