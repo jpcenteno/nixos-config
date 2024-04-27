@@ -112,4 +112,5 @@
   xdg.mimeApps.enable = true;
 
   development.nil.enable = true;
+  self.shell-enhancements.enable = true;
 }
