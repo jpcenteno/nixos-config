@@ -33,12 +33,5 @@ in {
       (lib.mkIf cfg.ripgrep.enable pkgs.ripgrep)
       (lib.mkIf cfg.shellcheck.enable pkgs.shellcheck)
     ];
-
-    programs.bash = {
-      shellAliases = {
-        # Standard program replacements.
-        cdtmp = ''cd "$(${pkgs.coreutils}/bin/mktemp -d)"'';
-      };
-    };
   };
 }
