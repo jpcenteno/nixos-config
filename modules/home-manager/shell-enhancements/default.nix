@@ -35,11 +35,6 @@ in {
     ];
 
     programs.bash = {
-      # FIXME does this belong here?
-      # This is required by `program.starship.enableBashIntegration`, but also
-      # required more generally to inherit `home.sessionVariables`, so it might
-      # belong in `home.nix` or it's own module.
-      enable = true;
       shellAliases = {
         # Standard program replacements.
         cdtmp = ''cd "$(${pkgs.coreutils}/bin/mktemp -d)"'';
