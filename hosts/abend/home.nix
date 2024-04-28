@@ -13,7 +13,7 @@
     ../../modules/home-manager/imv.nix
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/lf.nix
-    ../../modules/home-manager/shell-extras.nix
+    ../../modules/home-manager/shell-enhancements/default.nix
     ../../modules/home-manager/ssh.nix
     ../../modules/home-manager/sway.nix
     ../../modules/home-manager/tmux.nix
@@ -112,4 +112,5 @@
   xdg.mimeApps.enable = true;
 
   development.nil.enable = true;
+  self.shell-enhancements.enable = true;
 }

@@ -2,6 +2,7 @@
 
 alias g=git
 
+alias cdtmp='cd "$(mktemp -d)"'
 cheat() { curl -s "https://cheat.sh/${1}" | less -R; }
 
 # shellcheck disable=SC2164
