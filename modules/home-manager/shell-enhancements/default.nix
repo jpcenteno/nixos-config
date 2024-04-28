@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let cfg = config.self.shell-enhancements;
 in {
-  imports = [ ./eza.nix ];
+  imports = [ ./eza.nix ./direnv.nix ];
 
   options.self.shell-enhancements = {
     enable = lib.mkEnableOption "shell-enhancements";
@@ -9,16 +9,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     self.shell-enhancements.eza.enable = lib.mkDefault true;
+    self.shell-enhancements.direnv.enable = lib.mkDefault true;
 
     home.packages = [ pkgs.fd pkgs.fzf pkgs.jq pkgs.ripgrep pkgs.shellcheck ];
-
-    programs.direnv = {
-      enable = true;
-      # Caches the nix-shell environment reducing the waiting time after first run
-      # and prevents garbage collection of build dependencies.
-      nix-direnv.enable = true;
-      enableBashIntegration = true;
-    };
 
     programs.starship = {
       enable = true;
