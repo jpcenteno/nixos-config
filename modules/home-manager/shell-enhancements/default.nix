@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let cfg = config.self.shell-enhancements;
 in {
-  imports = [ ./eza.nix ./direnv.nix ./starship.nix ];
+  imports = [ ./eza.nix ./direnv.nix ./starship.nix ./bat.nix ];
 
   options.self.shell-enhancements = {
     enable = lib.mkEnableOption "shell-enhancements";
@@ -11,13 +11,9 @@ in {
     self.shell-enhancements.eza.enable = lib.mkDefault true;
     self.shell-enhancements.direnv.enable = lib.mkDefault true;
     self.shell-enhancements.starship.enable = lib.mkDefault true;
+    self.shell-enhancements.bat.enable = lib.mkDefault true;
 
     home.packages = [ pkgs.fd pkgs.fzf pkgs.jq pkgs.ripgrep pkgs.shellcheck ];
-
-    programs.bat = {
-      enable = true;
-      config = { theme = "base16"; };
-    };
 
     programs.bash = {
       # FIXME does this belong here?
@@ -27,7 +23,6 @@ in {
       enable = true;
       shellAliases = {
         # Standard program replacements.
-        cat = "bat";
         cdtmp = ''cd "$(${pkgs.coreutils}/bin/mktemp -d)"'';
       };
     };
