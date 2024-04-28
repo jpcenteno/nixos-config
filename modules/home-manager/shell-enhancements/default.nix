@@ -1,5 +1,11 @@
 { config, lib, pkgs, ... }:
-let cfg = config.self.shell-enhancements;
+let
+  cfg = config.self.shell-enhancements;
+
+  mkEnabledByDefaultOption = name:
+    lib.mkEnableOption name // {
+      default = true;
+    };
 in {
   imports = [ ./eza.nix ./direnv.nix ./starship.nix ./bat.nix ];
 
@@ -7,11 +13,11 @@ in {
     enable = lib.mkEnableOption "shell-enhancements";
 
     # Enable options for packages that don't merit their own module.
-    fd.enable = lib.mkEnableOption "fd" // { default = true; };
-    fzf.enable = lib.mkEnableOption "fzf" // { default = true; };
-    jq.enable = lib.mkEnableOption "jq" // { default = true; };
-    ripgrep.enable = lib.mkEnableOption "ripgrep" // { default = true; };
-    shellcheck.enable = lib.mkEnableOption "shellcheck" // { default = true; };
+    fd.enable = mkEnabledByDefaultOption "fd";
+    fzf.enable = mkEnabledByDefaultOption "fzf";
+    jq.enable = mkEnabledByDefaultOption "jq";
+    ripgrep.enable = mkEnabledByDefaultOption "ripgrep";
+    shellcheck.enable = mkEnabledByDefaultOption "shellcheck";
   };
 
   config = lib.mkIf cfg.enable {
