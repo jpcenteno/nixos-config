@@ -1,13 +1,16 @@
 { config, lib, pkgs, ... }:
 let cfg = config.self.shell-enhancements;
 in {
+  imports = [ ./eza.nix ];
+
   options.self.shell-enhancements = {
     enable = lib.mkEnableOption "shell-enhancements";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages =
-      [ pkgs.eza pkgs.fd pkgs.fzf pkgs.jq pkgs.ripgrep pkgs.shellcheck ];
+    self.shell-enhancements.eza.enable = lib.mkDefault true;
+
+    home.packages = [ pkgs.fd pkgs.fzf pkgs.jq pkgs.ripgrep pkgs.shellcheck ];
 
     programs.direnv = {
       enable = true;
@@ -37,7 +40,6 @@ in {
       shellAliases = {
         # Standard program replacements.
         cat = "bat";
-        ls = "eza";
         cdtmp = ''cd "$(${pkgs.coreutils}/bin/mktemp -d)"'';
       };
     };
