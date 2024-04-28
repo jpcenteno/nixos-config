@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let cfg = config.self.shell-enhancements;
 in {
-  imports = [ ./eza.nix ./direnv.nix ];
+  imports = [ ./eza.nix ./direnv.nix ./starship.nix ];
 
   options.self.shell-enhancements = {
     enable = lib.mkEnableOption "shell-enhancements";
@@ -10,14 +10,9 @@ in {
   config = lib.mkIf cfg.enable {
     self.shell-enhancements.eza.enable = lib.mkDefault true;
     self.shell-enhancements.direnv.enable = lib.mkDefault true;
+    self.shell-enhancements.starship.enable = lib.mkDefault true;
 
     home.packages = [ pkgs.fd pkgs.fzf pkgs.jq pkgs.ripgrep pkgs.shellcheck ];
-
-    programs.starship = {
-      enable = true;
-      # This requires `programs.bash.enable` to be set to `true`.
-      enableBashIntegration = true;
-    };
 
     programs.bat = {
       enable = true;
