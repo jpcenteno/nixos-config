@@ -32,4 +32,5 @@
   };
 
   programs.bash.shellAliases.t = "task";
+  programs.bash.shellAliases.ttui = "taskwarrior-tui";
 }
