@@ -113,4 +113,5 @@
 
   development.nil.enable = true;
   self.shell-enhancements.enable = true;
+  self.taskwarrior.enable = true;
 }
