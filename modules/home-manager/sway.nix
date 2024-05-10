@@ -129,6 +129,7 @@ in {
         ];
         clock = { format = "  {:%H:%M}"; };
         battery = {
+          interval = 15;
           states = {
             "good" = 95;
             "warning" = 30;
@@ -136,6 +137,7 @@ in {
           };
           format = "{icon}  {capacity}%";
           format-icons = [ "" "" "" "" "" ];
+          format-charging = "󰂄 {capacity}%";
         };
         pulseaudio = {
           format = "{icon}  {volume}%";
@@ -205,6 +207,11 @@ in {
       }
 
       #workspaces button.urgent {
+        background-color: #${base08};
+        color: #${base00};
+      }
+
+      #battery.warning, #battery.critical, #battery.discharging {
         background-color: #${base08};
         color: #${base00};
       }
