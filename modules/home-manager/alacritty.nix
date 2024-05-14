@@ -8,7 +8,11 @@
       # Reload after rebuild.
       live_config_reload = true;
 
-      env = { "TERM" = "xterm"; };
+      # Point to the right terminfo entry.
+      #
+      # As a sidenote, this is required so that Base16 colorschemes don't break
+      # under TMUX.
+      env = { "TERM" = "alacritty"; };
 
       window = {
         columns = 110;
