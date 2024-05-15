@@ -24,7 +24,7 @@
   ];
 
   # Global colorscheme.
-  colorScheme = inputs.nix-colors.colorSchemes.brushtrees-dark;
+  colorScheme = inputs.nix-colors.colorSchemes.rose-pine-dawn;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
