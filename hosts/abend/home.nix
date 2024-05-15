@@ -24,7 +24,7 @@
   ];
 
   # Global colorscheme.
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
+  colorScheme = inputs.nix-colors.colorSchemes.brushtrees-dark;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
