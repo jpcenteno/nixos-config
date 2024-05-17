@@ -13,8 +13,9 @@ in {
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
-    config = {
-      modifier = "Mod4";
+    config = let modifier = "Mod4";
+    in {
+      inherit modifier;
       keybindings = let
         wpctl = "${pkgs.wireplumber}/bin/wpctl";
         brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -26,6 +27,11 @@ in {
           "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         "XF86MonBrightnessUp" = "exec ${brightnessctl} set +5%";
         "XF86MonBrightnessDown" = "exec ${brightnessctl} set 5%-";
+
+        "${modifier}+Control+Shift+l" = "move workspace to output right";
+        "${modifier}+Control+Shift+h" = "move workspace to output left";
+        "${modifier}+Control+Shift+j" = "move workspace to output down";
+        "${modifier}+Control+Shift+k" = "move workspace to output up";
       };
       terminal = "alacritty";
       menu = "bemenu-run";
