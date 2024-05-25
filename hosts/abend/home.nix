@@ -19,6 +19,7 @@
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/taskwarrior.nix
     ../../modules/home-manager/zathura.nix
+    ../../modules/home-manager/libreoffice.nix
 
     inputs.nix-colors.homeManagerModules.default
   ];
@@ -114,4 +115,5 @@
   development.nil.enable = true;
   self.shell-enhancements.enable = true;
   self.taskwarrior.enable = true;
+  self.libreoffice.enable = true;
 }
