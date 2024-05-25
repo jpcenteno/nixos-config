@@ -19,6 +19,7 @@
     ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/taskwarrior.nix
     ../../modules/home-manager/zathura.nix
+    ../../modules/home-manager/libreoffice.nix
 
     inputs.nix-colors.homeManagerModules.default
   ];
@@ -45,7 +46,6 @@
   home.packages = [
     pkgs-unstable.obsidian
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    pkgs.libreoffice
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -116,4 +116,5 @@
   development.nil.enable = true;
   self.shell-enhancements.enable = true;
   self.taskwarrior.enable = true;
+  self.libreoffice.enable = true;
 }
