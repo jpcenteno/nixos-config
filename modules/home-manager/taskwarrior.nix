@@ -13,6 +13,17 @@ in {
         # Set INBOX as the default project to capture new tasks.
         default.project = "INBOX";
 
+        # Not  actually  a  coefficient. When enabled, blocking tasks inherit the
+        # highest urgency value found in the tasks they block. This is done
+        # recursively.  It is recommended to set urgency.blocking.coefficient and
+        # urgency.blocked.coefficient to 0.0 in order for this setting to be the
+        # most useful
+        urgency."inherit" = 1;
+        # Urgency coefficient for blocking tasks:
+        urgency.blocking.coefficient = 0.0;
+        # Urgency coefficient for blocked tasks:
+        urgency.blocked.coefficient = 0.0;
+
         report = {
           # Exclude tasks in the inbox (project:INBOX) from the `next` report.
           next.filter = "status:pending -WAITING limit:page project.not:INBOX";
