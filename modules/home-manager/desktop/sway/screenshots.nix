@@ -10,7 +10,7 @@ in {
     home.packages = let
       name = "take-screenshot";
       src = builtins.readFile ../../../../dotfiles/sway/take-screenshot;
-      buildInputs = with pkgs; [ grim slurp bemenu sway jq ];
+      buildInputs = with pkgs; [ bemenu grim jq libnotify slurp sway ];
       script = (pkgs.writeScriptBin name src).overrideAttrs (old: {
         buildCommand = ''
           ${old.buildCommand}
