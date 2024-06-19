@@ -31,6 +31,7 @@ in {
           "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         "XF86MonBrightnessUp" = "exec ${brightnessctl} set +5%";
         "XF86MonBrightnessDown" = "exec ${brightnessctl} set 5%-";
+        "Print" = "exec take-screenshot";
 
         "${modifier}+Control+Shift+l" = "move workspace to output right";
         "${modifier}+Control+Shift+h" = "move workspace to output left";
