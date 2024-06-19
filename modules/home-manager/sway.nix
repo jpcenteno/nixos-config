@@ -8,6 +8,12 @@ let
   gapSizeInPixels = 16;
   desktopBackground = palette.base03;
 in {
+  imports = [ ./desktop/sway/screenshots.nix ];
+
+  services.dunst.enable = true;
+
+  self.desktop.sway.screenshots.enable = true;
+
   home.packages = with pkgs; [ bemenu brightnessctl waylock mpv ];
 
   wayland.windowManager.sway = {
@@ -27,6 +33,7 @@ in {
           "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         "XF86MonBrightnessUp" = "exec ${brightnessctl} set +5%";
         "XF86MonBrightnessDown" = "exec ${brightnessctl} set 5%-";
+        "Print" = "exec take-screenshot";
 
         "${modifier}+Control+Shift+l" = "move workspace to output right";
         "${modifier}+Control+Shift+h" = "move workspace to output left";
