@@ -8,6 +8,10 @@ let
   gapSizeInPixels = 16;
   desktopBackground = palette.base03;
 in {
+  imports = [ ./desktop/sway/screenshots.nix ];
+
+  self.desktop.sway.screenshots.enable = true;
+
   home.packages = with pkgs; [ bemenu brightnessctl waylock mpv ];
 
   wayland.windowManager.sway = {

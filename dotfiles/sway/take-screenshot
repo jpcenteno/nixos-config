@@ -1,0 +1,113 @@
+#! /bin/sh
+set -eu
+
+# FIXME default to `xdg-user-dir PICTURES` or download dir.
+SCREENSHOTS_DIRECTORY="${SCREENSHOTS_DIRECTORY:-${HOME}/Downloads}"
+
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ Assertion helpers                                                      ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+log() {
+    echo "[take-screenshot] ${*}"
+    if has_command 'notify-send'; then
+        # The command `notify-send` will fail silently if no notification daemon
+        # is found. I added the `|| true` to prevent this from crashing the
+        # script since I don't find this to be a fatal error.
+        notify-send 'take-screenshot' "${*}" || true
+    fi
+}
+
+die() {
+    log "FATAL:" "${1}"
+    exit 1
+}
+
+has_command() { command -v "${1}" >/dev/null; }
+
+assert_has_command() {
+    has_command "${1}" || die "Command ${1} not found. ${2}";
+}
+
+
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ Screenshot functions                                                   ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+format_filename() {
+    _dir="${1}"
+    _date="${2}"
+    _i="${3}"
+    echo "${_dir}/${_date}-screenshot-${_i}.png"
+}
+
+gen_filename() {
+    _current_date="$( date '+%Y-%m-%d-%H:%M' )"
+    _i=0
+    while true; do
+        _filename="$(format_filename "${SCREENSHOTS_DIRECTORY}" "${_current_date}" "${_i}")"
+        if [ -f "${_filename}" ]; then
+            _i="$(( _i + 1 ))"
+        else
+            break
+        fi
+    done
+    echo "${_filename}"
+}
+
+screenshot_focused_monitor() {
+    grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" "${_output_filename}"
+}
+
+screenshot_focused_window() {
+    grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" "${_output_filename}"
+}
+
+# FIXME for some reason, this is not saving any file.
+# screenshot_selected_window() {
+#     swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | "\(.rect.x+.window_rect.x),\(.rect.y+.window_rect.y) \(.window_rect.width)x\(.window_rect.height)"' | slurp
+# }
+
+screenshot_region() {
+    grim -g "$( slurp )" "${_output_filename}"
+}
+
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ User interface                                                         ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+prompt_user_to_select_screenshot_mode() {
+    cat <<EOF | bemenu -p "Select screenshot mode" | cut -d ' ' -f 2-
+👆 Select region
+🪟 Focused window
+📺 Current monitor
+EOF
+}
+
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ Main                                                                   ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+assert_has_command 'grim'    'Required for taking screenshots'
+assert_has_command 'slurp'   'Required to select desktop regions'
+assert_has_command 'bemenu'  'Required for interactive menues'
+assert_has_command 'swaymsg' 'Required to get window and monitor information'
+assert_has_command 'jq'      'Required to parse window and monitor information'
+
+_selected_mode="$( prompt_user_to_select_screenshot_mode )"
+_output_filename="$( gen_filename )"
+case "${_selected_mode}" in
+    "Select region")
+        screenshot_region "${_output_filename}"
+        ;;
+    "Focused window")
+        screenshot_focused_window "${_output_filename}"
+        ;;
+    "Current monitor")
+        screenshot_focused_monitor "${_output_filename}"
+        ;;
+    *)
+        die "Invalid option"
+        ;;
+esac
+log "Saved screenshot to ${_output_filename}"
