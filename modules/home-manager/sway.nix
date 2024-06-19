@@ -10,6 +10,8 @@ let
 in {
   imports = [ ./desktop/sway/screenshots.nix ];
 
+  services.dunst.enable = true;
+
   self.desktop.sway.screenshots.enable = true;
 
   home.packages = with pkgs; [ bemenu brightnessctl waylock mpv ];
