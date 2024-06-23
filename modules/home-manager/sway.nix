@@ -259,7 +259,7 @@ in {
     lockTimeout = 120;
     displayOffTimeout = lockTimeout + 30;
   in {
-    enable = true;
+    enable = false;
     systemdTarget = swaySessionSystemdTarget;
     timeouts = [
       {

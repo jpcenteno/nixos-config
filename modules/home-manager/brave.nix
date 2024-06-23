@@ -4,6 +4,8 @@
     package = pkgs.brave;
   };
 
+  home.packages = [ pkgs.widevine-cdm ];
+
   # Taken from [1].
   # [1]:  https://github.com/ngkz/dotfiles/blob/941fcbc7f30dab2254e744e187476648423ca922/home/workstation/librewolf/default.nix#L17
   xdg.mimeApps.defaultApplications = {
