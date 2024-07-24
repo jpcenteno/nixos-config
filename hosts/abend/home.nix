@@ -20,6 +20,7 @@
     ../../modules/home-manager/taskwarrior.nix
     ../../modules/home-manager/zathura.nix
     ../../modules/home-manager/libreoffice.nix
+    ../../modules/home-manager/sc-im.nix
 
     inputs.nix-colors.homeManagerModules.default
   ];
@@ -116,4 +117,5 @@
   self.shell-enhancements.enable = true;
   self.taskwarrior.enable = true;
   self.libreoffice.enable = true;
+  self.sc-im.enable = true;
 }
