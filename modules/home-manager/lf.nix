@@ -19,6 +19,7 @@
             application/zip)   "${pkgs.unzip}/bin/unzip" -l "$1" ;;
             application/x-rar) "${pkgs.unrar}/bin/unrar" l "$1"  ;;
             application/x-tar) "${pkgs.gnutar}/bin/tar" -tf "$1" ;;
+            application/json)  "${pkgs.jq}/bin/jq" --color-output . "$1" ;;
             *)                 "${pkgs.bat}/bin/bat" "$1"        ;;
           esac
         '';
