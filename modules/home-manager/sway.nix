@@ -135,6 +135,7 @@ in {
           "memory"
           "temperature"
           "cpu"
+          "network"
           "bluetooth"
           "pulseaudio"
           "battery"
@@ -162,6 +163,25 @@ in {
         temperature = {
           format = "{icon} {temperatureC}°C";
           format-icons = [ "" "" "" "" "" ];
+        };
+        network = {
+          interval = 10;
+          format-wifi = " ";
+          format-ethernet = "󰈀";
+          tooltip-format-wifi = ''
+             {essid}
+            󱑻 {frequency} GHz
+            󱄙 {signaldBm} ({signalStrength}%)
+
+             {ifname}
+
+            ↓ {bandwidthDownBytes}
+            ↑ {bandwidthUpBytes}'';
+          tooltip-format-ethernet = ''
+             {ifname}
+
+            ↓ {bandwidthDownBytes}
+            ↑ {bandwidthUpBytes}'';
         };
         memory = { format = "  {}%"; };
         disk = { format = "  {percentage_used}%"; };
