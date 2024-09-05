@@ -8,6 +8,7 @@
     ../../modules/home-manager/bash.nix
     ../../modules/home-manager/bluetooth.nix
     ../../modules/home-manager/brave.nix
+    ../../modules/home-manager/desktop/applications/virtualbox.nix
     ../../modules/home-manager/development/nix-lsp.nix
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/imv.nix
@@ -118,4 +119,5 @@
   self.taskwarrior.enable = true;
   self.libreoffice.enable = true;
   self.sc-im.enable = true;
+  jpcenteno.home-manager.desktop.applications.virtualbox.enable = true;
 }
