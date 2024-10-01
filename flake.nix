@@ -38,5 +38,9 @@
         };
       };
 
+      nixosModules = {
+        hello = import ./modules/nixos/hello.nix;
+      };
+
     };
 }
