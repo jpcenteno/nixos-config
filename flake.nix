@@ -42,5 +42,9 @@
         hello = import ./modules/nixos/hello.nix;
       };
 
+      homeManagerModules = {
+        hello = import ./modules/home-manager/hello.nix;
+      };
+
     };
 }
