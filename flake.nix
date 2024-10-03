@@ -44,6 +44,7 @@
 
       homeManagerModules = {
         hello = import ./modules/home-manager/hello.nix;
+        alacritty = import ./modules/home-manager/alacritty.nix;
       };
 
     };
