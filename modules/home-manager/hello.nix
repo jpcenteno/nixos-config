@@ -8,9 +8,9 @@
  */
 { pkgs, lib, config, ... }:
 let
-  cfg = config.hello;
+  cfg = config.jpcenteno-home.hello;
 in {
-  options.hello = {
+  options.jpcenteno-home.hello = {
     enable = lib.mkEnableOption "Enables `hello` at a system level for testing purposes.";
   };
 
