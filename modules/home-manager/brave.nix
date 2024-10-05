@@ -1,17 +1,33 @@
-{ pkgs, ... }: {
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.jpcenteno-home.brave-browser;
+in
+{
+  options.jpcenteno-home.brave-browser = {
+    enable = lib.mkEnableOption "Enable Brave browser";
+
+    setAsDefaultBrowser = lib.mkOption {
+      type = lib.types.bool;
+      description = "Set Brave as the default browser";
+      default = false;
+    };
   };
 
-  # Taken from [1].
-  # [1]:  https://github.com/ngkz/dotfiles/blob/941fcbc7f30dab2254e744e187476648423ca922/home/workstation/librewolf/default.nix#L17
-  xdg.mimeApps.defaultApplications = {
-    "text/html" = "brave.desktop";
-    "text/xml" = "brave.desktop";
-    "application/xhtml+xml" = "brave.desktop";
-    "application/vnd.mozilla.xul+xml" = "brave.desktop";
-    "x-scheme-handler/http" = "brave.desktop";
-    "x-scheme-handler/https" = "brave.desktop";
-  };
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    {
+      programs.chromium = {
+        enable = true;
+        package = pkgs.brave;
+      };
+    }
+
+    (lib.mkIf cfg.setAsDefaultBrowser {
+      xdg.mimeApps.defaultApplications = {
+       "text/html" = "brave.desktop";
+       "application/xhtml+xml" = "brave.desktop";
+       "x-scheme-handler/http" = "brave.desktop";
+       "x-scheme-handler/https" = "brave.desktop";
+      };
+    })
+  ]);
 }
