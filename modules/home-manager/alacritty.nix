@@ -24,8 +24,6 @@ in
         env = { "TERM" = "alacritty"; };
 
         window = {
-          columns = 110;
-          rows = 50;
           decorations = "none";
           padding = {
             y = 24;
