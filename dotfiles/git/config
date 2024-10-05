@@ -6,14 +6,6 @@
     excludesfile = "~/.config/git/gitignore"
 
 # ╔════════════════════════════════════════════════════════════════════════╗
-# ║ User config                                                            ║
-# ╚════════════════════════════════════════════════════════════════════════╝
-
-[user] 
-  name = "Joaquín P. Centeno"
-  email = "jpcenteno@users.noreply.github.com"
-
-# ╔════════════════════════════════════════════════════════════════════════╗
 # ║ Shortcuts                                                              ║
 # ╚════════════════════════════════════════════════════════════════════════╝
 
@@ -36,7 +28,7 @@
     pur = pull --rebase
 
     initial-commit = "! git log &>/dev/null || git reset && git commit --allow-empty -m 'Initial commit'"
-    
+
     current-branch = rev-parse --abbrev-ref HEAD
     current-commit = rev-parse --verify HEAD
 

@@ -46,6 +46,7 @@
         hello = import ./modules/home-manager/hello.nix;
         alacritty = import ./modules/home-manager/alacritty.nix;
         brave-browser = import ./modules/home-manager/brave.nix;
+        git = import ./modules/home-manager/git.nix;
         readline = import ./modules/home-manager/readline.nix;
         tmux = import ./modules/home-manager/tmux.nix;
       };

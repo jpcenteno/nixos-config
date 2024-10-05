@@ -1,11 +1,45 @@
-{ ... }:
+{ pkgs, lib, config, ... }:
+let
+  cfg = config.jpcenteno-home.git;
+in {
+  options.jpcenteno-home.git = {
+    enable = lib.mkEnableOption "Enables git with my personal config";
 
-{
-  programs.git.enable = true;
+    userName = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "User name to use. Must be set when Git is enabled.";
+    };
 
-  xdg.enable = true;
-  xdg.configFile."git/config".source = ../../dotfiles/git/config;
-  xdg.configFile."git/gitignore".source = ../../dotfiles/git/gitignore;
-  xdg.configFile."git/scripts/delete-branches-interactively".source =
-    ../../dotfiles/git/scripts/delete-branches-interactively;
+    userEmail = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "User email to use. Must be set when Git is enabled.";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = builtins.isString cfg.userName;
+        message = "`jpcenteno-home.git.userName` must be set when Git is enabled.";
+      }
+      {
+        assertion = builtins.isString cfg.userEmail;
+        message = "`jpcenteno-home.git.userEmail` must be set when Git is enabled.";
+      }
+    ];
+
+    programs.git = {
+      enable = true;
+      userName = cfg.userName;
+      userEmail = cfg.userEmail;
+    };
+
+    xdg.configFile = {
+      "git/config".source = ../../dotfiles/git/config;
+      "git/gitignore".source = ../../dotfiles/git/gitignore;
+      "git/scripts/delete-branches-interactively".source = ../../dotfiles/git/scripts/delete-branches-interactively;
+    };
+  };
 }
