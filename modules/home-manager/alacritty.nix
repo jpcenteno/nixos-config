@@ -8,6 +8,21 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = lib.attrsets.hasAttrByPath ["colorScheme" "palette"] config;
+        message = ''
+          Alacritty: No colorscheme found at `config.colorScheme`.
+
+          Use `Misterio77/nix-colors` to set the global colorscheme:
+
+          ```nix
+          colorScheme = nix-colors.colorSchemes.everforest;
+          ```
+          '';
+      }
+    ];
+
     programs.alacritty = {
       enable = true;
 
