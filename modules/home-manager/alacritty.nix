@@ -70,39 +70,38 @@ in
           };
         };
 
-        # colors = with config.colorScheme.palette; {
-        #   # The following Base16 mapping for alacritty was taken from:
-        #   # https://github.com/aarowill/base16-alacritty/blob/c95c200b3af739708455a03b5d185d3d2d263c6e/templates/default.mustache
-        #   normal = {
-        #     black = "0x${base00}";
-        #     red = "0x${base08}";
-        #     green = "0x${base0B}";
-        #     yellow = "0x${base0A}";
-        #     blue = "0x${base0D}";
-        #     magenta = "0x${base0E}";
-        #     cyan = "0x${base0C}";
-        #     white = "0x${base05}";
-        #   };
-        #   cursor = {
-        #     text = "0x${base00}";
-        #     cursor = "0x${base05}";
-        #   };
-        #   bright = {
-        #     black = "0x${base03}";
-        #     red = "0x${base09}";
-        #     green = "0x${base01}";
-        #     yellow = "0x${base02}";
-        #     blue = "0x${base04}";
-        #     magenta = "0x${base06}";
-        #     cyan = "0x${base0F}";
-        #     white = "0x${base07}";
-        #   };
-        #   primary = {
-        #     background = "0x${base00}";
-        #     foreground = "0x${base05}";
-        #   };
-        # };
-
+        colors = with config.colorScheme.palette; {
+          # The following Base16 mapping for alacritty was taken from:
+          # https://github.com/aarowill/base16-alacritty/blob/c95c200b3af739708455a03b5d185d3d2d263c6e/templates/default.mustache
+          normal = {
+            black = "0x${base00}";
+            red = "0x${base08}";
+            green = "0x${base0B}";
+            yellow = "0x${base0A}";
+            blue = "0x${base0D}";
+            magenta = "0x${base0E}";
+            cyan = "0x${base0C}";
+            white = "0x${base05}";
+          };
+          cursor = {
+            text = "0x${base00}";
+            cursor = "0x${base05}";
+          };
+          bright = {
+            black = "0x${base03}";
+            red = "0x${base09}";
+            green = "0x${base01}";
+            yellow = "0x${base02}";
+            blue = "0x${base04}";
+            magenta = "0x${base06}";
+            cyan = "0x${base0F}";
+            white = "0x${base07}";
+          };
+          primary = {
+            background = "0x${base00}";
+            foreground = "0x${base05}";
+          };
+        };
       };
     };
 
