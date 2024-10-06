@@ -40,6 +40,7 @@
 
       nixosModules = {
         hello = import ./modules/nixos/hello.nix;
+        keyd = import ./modules/nixos/keyd.nix;
       };
 
       homeManagerModules = {
