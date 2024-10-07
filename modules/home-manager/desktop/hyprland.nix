@@ -3,11 +3,17 @@ let
   cfg = config.jpcenteno-home.hyprland;
 in {
 
+  imports = [
+    ./waybar.nix
+  ];
+
   options.jpcenteno-home.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
   };
 
   config = lib.mkIf cfg.enable {
+
+    jpcenteno-home.waybar.enable = true;
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -15,6 +21,10 @@ in {
         "$mod" = "SUPER";
         "$terminal" = "${pkgs.alacritty}/bin/alacritty";
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
+
+        # exec-once = [
+        #   "${jpcenteno-home.waybar.package}/bin/waybar &"
+        # ];
 
         bind = [
           "$mod, t, exec, $terminal"
