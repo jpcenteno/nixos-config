@@ -131,7 +131,7 @@ in {
           border-radius: 0 0 8px 8px;
         }
 
-        #workspaces button.focused {
+        #workspaces button.focused, #workspaces button.active {
           background-color: #${base09};
           color: #${base00};
         }
