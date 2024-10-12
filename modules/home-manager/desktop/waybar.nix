@@ -126,9 +126,9 @@ in {
         {
           background-color: #${base01};
           color: #${base04};
-          padding: 4px 16px;
-          margin-right: 8px;
-          border-radius: 0 0 8px 8px;
+          padding: 0.4rem 1rem;
+          margin-right: 0.5rem;
+          border-radius: 0 0 0.5rem 0.5rem;
         }
 
         #workspaces button.focused, #workspaces button.active {
