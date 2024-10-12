@@ -17,6 +17,13 @@ in {
       description = "Gap size (In pixels)";
       apply = toString;
     };
+
+    fontSize = lib.mkOption {
+      type = lib.types.int;
+      default = 16;
+      description = "Font size (In pixels)";
+      apply = toString;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -106,7 +113,7 @@ in {
       style = with config.colorScheme.palette; ''
         * {
           font-family: monospace;
-          font-size: 16px;
+          font-size: ${cfg.fontSize}px;
         }
 
         window#waybar {
