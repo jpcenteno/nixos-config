@@ -22,9 +22,9 @@ in {
         "$terminal" = "${pkgs.alacritty}/bin/alacritty";
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 
-        # exec-once = [
-        #   "${jpcenteno-home.waybar.package}/bin/waybar &"
-        # ];
+        exec-once = [
+          "${config.jpcenteno-home.waybar.package}/bin/waybar &"
+        ];
 
         bind = [
           "$mod, t, exec, $terminal"
