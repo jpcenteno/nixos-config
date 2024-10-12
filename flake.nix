@@ -47,6 +47,7 @@
         hello = import ./modules/home-manager/hello.nix;
         alacritty = import ./modules/home-manager/alacritty.nix;
         brave-browser = import ./modules/home-manager/brave.nix;
+        desktop.fonts = import ./modules/home-manager/desktop/fonts.nix;
         git = import ./modules/home-manager/git.nix;
         hyprland = import ./modules/home-manager/desktop/hyprland.nix;
         readline = import ./modules/home-manager/readline.nix;
