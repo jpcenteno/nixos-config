@@ -32,6 +32,11 @@ in {
           "$mod, d, exec, $menu"
           "$mod, space, exec, $menu"
 
+          "$mod, h, movefocus, l"
+          "$mod, j, movefocus, d"
+          "$mod, k, movefocus, u"
+          "$mod, l, movefocus, r"
+
           "$mod, left, movefocus, l"
           "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
