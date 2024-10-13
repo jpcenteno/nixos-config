@@ -50,6 +50,9 @@ in {
           "$mod&SHIFT, up, movewindow, u"
           "$mod&SHIFT, down, movewindow, d"
 
+          "$mod, TAB, cyclenext,"
+          "$mod&SHIFT, TAB, cyclenext, prev"
+
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
           "$mod, 3, workspace, 3"
