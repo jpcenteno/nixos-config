@@ -24,6 +24,14 @@ in {
       description = "Font size (In pixels)";
       apply = toString;
     };
+
+    bluetooth = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable the Bluetooth module";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -34,16 +42,20 @@ in {
         mainBar = {
           position = "top";
           modules-left = [ "hyprland/workspaces" ];
-          modules-right = [
-            "disk"
-            "memory"
-            "temperature"
-            "cpu"
-            "network"
-            "bluetooth"
-            "pulseaudio"
-            "battery"
-            "clock"
+          modules-right = builtins.concatLists [
+            [
+              "disk"
+              "memory"
+              "temperature"
+              "cpu"
+              "network"
+            ]
+            (lib.optional cfg.bluetooth.enable [ "bluetooth" ])
+            [
+              "pulseaudio"
+              "battery"
+              "clock"
+            ]
           ];
           clock = { format = "  {:%H:%M}"; };
           battery = {
