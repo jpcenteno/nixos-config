@@ -36,11 +36,19 @@ in {
           "$mod, j, movefocus, d"
           "$mod, k, movefocus, u"
           "$mod, l, movefocus, r"
-
           "$mod, left, movefocus, l"
           "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
+
+          "$mod&SHIFT, h, movewindow, l"
+          "$mod&SHIFT, j, movewindow, d"
+          "$mod&SHIFT, k, movewindow, u"
+          "$mod&SHIFT, l, movewindow, r"
+          "$mod&SHIFT, left, movewindow, l"
+          "$mod&SHIFT, right, movewindow, r"
+          "$mod&SHIFT, up, movewindow, u"
+          "$mod&SHIFT, down, movewindow, d"
 
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
