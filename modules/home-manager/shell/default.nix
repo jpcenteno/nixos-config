@@ -7,7 +7,7 @@ let
       default = true;
     };
 in {
-  imports = [ ./extras.nix ./eza.nix ./direnv.nix ./starship.nix ];
+  imports = [ ./extras.nix ./direnv.nix ./starship.nix ];
 
   options.jpcenteno-home.shell = {
     enable = lib.mkEnableOption "Shell customizations";
@@ -23,7 +23,6 @@ in {
   config = lib.mkIf cfg.enable {
     jpcenteno-home.shell.extras.enable = lib.mkDefault true;
 
-    jpcenteno-home.shell.extras.eza.enable = lib.mkDefault true;
     jpcenteno-home.shell.extras.direnv.enable = lib.mkDefault true;
     jpcenteno-home.shell.extras.starship.enable = lib.mkDefault true;
 
