@@ -28,7 +28,7 @@ in {
 
     programs.bash = {
       enable = true; # Every other Bash-related option requires this to be set to `true`.
-      initExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
+      bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
     };
 
     home.packages = [
