@@ -26,7 +26,13 @@ in {
     jpcenteno-home.shell.extras.starship.enable = lib.mkDefault true;
     jpcenteno-home.shell.extras.bat.enable = lib.mkDefault true;
 
+    programs.bash = {
+      enable = true;
+      initExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
+    };
+
     home.packages = [
+      pkgs.curl
       (lib.mkIf cfg.fd.enable pkgs.fd)
       (lib.mkIf cfg.fzf.enable pkgs.fzf)
       (lib.mkIf cfg.jq.enable pkgs.jq)
