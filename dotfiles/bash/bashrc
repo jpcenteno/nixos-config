@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+_has_command() { command -v "${1}" >/dev/null; }
+
 alias g=git
 
 alias cdtmp='cd "$(mktemp -d)"'
@@ -7,3 +9,12 @@ cheat() { curl -s "https://cheat.sh/${1}" | less -R; }
 
 # shellcheck disable=SC2164
 mkcd() { mkdir -p "${1}" && cd "${1}"; }
+
+
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ Overriding aliases: (Danger zone)                                      ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+if _has_command 'bat'; then
+    alias cat=bat
+fi

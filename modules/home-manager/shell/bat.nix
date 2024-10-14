@@ -9,7 +9,5 @@ in {
       enable = true;
       config = { theme = "base16"; };
     };
-
-    programs.bash.shellAliases.cat = "bat";
   };
 }
