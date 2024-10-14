@@ -27,7 +27,7 @@ in {
     jpcenteno-home.shell.extras.bat.enable = lib.mkDefault true;
 
     programs.bash = {
-      enable = true;
+      enable = true; # Every other Bash-related option requires this to be set to `true`.
       initExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
     };
 
