@@ -1,8 +1,8 @@
 { config, lib, ... }:
-let cfg = config.self.shell-enhancements.starship;
+let cfg = config.jpcenteno-home.shell.extras.starship;
 in {
 
-  options.self.shell-enhancements.starship = {
+  options.jpcenteno-home.shell.extras.starship = {
     enable = lib.mkEnableOption "Starship";
   };
 

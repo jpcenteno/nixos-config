@@ -1,8 +1,8 @@
 { config, lib, ... }:
-let cfg = config.self.shell-enhancements.bat;
+let cfg = config.jpcenteno-home.shell.extras.bat;
 in {
 
-  options.self.shell-enhancements.bat = { enable = lib.mkEnableOption "Bat"; };
+  options.jpcenteno-home.shell.extras.bat = { enable = lib.mkEnableOption "Bat"; };
 
   config = lib.mkIf cfg.enable {
     programs.bat = {

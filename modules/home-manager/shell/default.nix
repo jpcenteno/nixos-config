@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.self.shell-enhancements;
+  cfg = config.jpcenteno-home.shell;
 
   mkEnabledByDefaultOption = name:
     lib.mkEnableOption name // {
@@ -9,8 +9,8 @@ let
 in {
   imports = [ ./eza.nix ./direnv.nix ./starship.nix ./bat.nix ];
 
-  options.self.shell-enhancements = {
-    enable = lib.mkEnableOption "shell-enhancements";
+  options.jpcenteno-home.shell = {
+    enable = lib.mkEnableOption "Shell customizations";
 
     # Enable options for packages that don't merit their own module.
     fd.enable = mkEnabledByDefaultOption "fd";
@@ -21,10 +21,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    self.shell-enhancements.eza.enable = lib.mkDefault true;
-    self.shell-enhancements.direnv.enable = lib.mkDefault true;
-    self.shell-enhancements.starship.enable = lib.mkDefault true;
-    self.shell-enhancements.bat.enable = lib.mkDefault true;
+    jpcenteno-home.shell.extras.eza.enable = lib.mkDefault true;
+    jpcenteno-home.shell.extras.direnv.enable = lib.mkDefault true;
+    jpcenteno-home.shell.extras.starship.enable = lib.mkDefault true;
+    jpcenteno-home.shell.extras.bat.enable = lib.mkDefault true;
 
     home.packages = [
       (lib.mkIf cfg.fd.enable pkgs.fd)

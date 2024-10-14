@@ -1,8 +1,8 @@
 { config, lib, ... }:
-let cfg = config.self.shell-enhancements.direnv;
+let cfg = config.jpcenteno-home.shell.extras.direnv;
 in {
 
-  options.self.shell-enhancements.direnv = {
+  options.jpcenteno-home.shell.extras.direnv = {
     enable = lib.mkEnableOption "Direnv";
   };
 

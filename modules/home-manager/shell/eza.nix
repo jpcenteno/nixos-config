@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
-let cfg = config.self.shell-enhancements.eza;
+let cfg = config.jpcenteno-home.shell.extras.eza;
 in {
 
-  options.self.shell-enhancements.eza = { enable = lib.mkEnableOption "Eza"; };
+  options.jpcenteno-home.shell.extras.eza = { enable = lib.mkEnableOption "Eza"; };
 
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.eza ];
