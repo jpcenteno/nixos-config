@@ -7,6 +7,7 @@ in {
 
     bat = lib.mkEnableOption "Bat as a cat(1) replacement" // { default = true; };
     eza = lib.mkEnableOption "Eza as a ls(1) replacement" // { default = true; };
+    starship = lib.mkEnableOption "Starship shell prompt" // { default = true; };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -26,6 +27,15 @@ in {
       # Dotfile `../../../dotfiles/bash/bashrc` contains a conditional alias
       # that overrides `ls` with `eza` on interactive shells in case `eza` is
       # available.
+    })
+
+    (lib.mkIf cfg.starship {
+      home.packages = [ pkgs.starship ];
+
+      # NOTE 2024-10-14:
+      # The code that integrates Starship with bash is located at
+      # `../../../dotfiles/bash/bashrc` in order to reduce code complexity and
+      # enhance portability with non-NixOS systems
     })
   ]);
 }
