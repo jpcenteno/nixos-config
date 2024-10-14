@@ -46,9 +46,12 @@ in {
       # systems.
       programs.direnv = {
         enable = true;
-        # Caches the nix-shell environment reducing the waiting time after first run
-        # and prevents garbage collection of build dependencies.
-        # nix-direnv.enable = true;
+        # Nix-direnv is a program that improves the `use nix` and `use flake`
+        # startup time by adding a cache for the nix-shell environment and
+        # preventing the garbage collector from removing the environment
+        # dependencies.
+        # NOTE 2024-10-14: Keeping this here since it's nix-specific.
+        nix-direnv.enable = true;
       };
     })
   ]);
