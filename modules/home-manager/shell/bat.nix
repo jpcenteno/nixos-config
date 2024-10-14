@@ -5,9 +5,7 @@ in {
   options.jpcenteno-home.shell.extras.bat = { enable = lib.mkEnableOption "Bat"; };
 
   config = lib.mkIf cfg.enable {
-    programs.bat = {
-      enable = true;
-      config = { theme = "base16"; };
-    };
+    programs.bat.enable = true;
+    xdg.configFile."bat/config".source = ../../../dotfiles/bat/config;
   };
 }
