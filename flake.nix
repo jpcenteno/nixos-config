@@ -50,7 +50,6 @@
         desktop.fonts = import ./modules/home-manager/desktop/fonts.nix;
         git = import ./modules/home-manager/git.nix;
         hyprland = import ./modules/home-manager/desktop/hyprland.nix;
-        readline = import ./modules/home-manager/readline.nix;
         shell = import ./modules/home-manager/shell;
         tmux = import ./modules/home-manager/tmux.nix;
       };
