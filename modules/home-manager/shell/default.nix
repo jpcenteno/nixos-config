@@ -7,7 +7,7 @@ let
       default = true;
     };
 in {
-  imports = [ ./extras.nix ./direnv.nix ];
+  imports = [ ./extras.nix ];
 
   options.jpcenteno-home.shell = {
     enable = lib.mkEnableOption "Shell customizations";
@@ -22,8 +22,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     jpcenteno-home.shell.extras.enable = lib.mkDefault true;
-
-    jpcenteno-home.shell.extras.direnv.enable = lib.mkDefault true;
 
     programs.bash = {
       enable = true; # Every other Bash-related option requires this to be set to `true`.
