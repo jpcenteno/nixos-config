@@ -18,3 +18,7 @@ mkcd() { mkdir -p "${1}" && cd "${1}"; }
 if _has_command 'bat'; then
     alias cat=bat
 fi
+
+if _has_command 'eza'; then
+    alias ls=eza
+fi

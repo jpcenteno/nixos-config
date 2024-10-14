@@ -7,6 +7,9 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.eza ];
 
-    programs.bash.shellAliases.ls = "eza";
+    # NOTE 2024-10-14:
+    # Dotfile `../../../dotfiles/bash/bashrc` contains a conditional alias that
+    # overrides `ls` with `eza` on interactive shells in case `eza` is
+    # available.
   };
 }
