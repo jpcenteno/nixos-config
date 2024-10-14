@@ -22,3 +22,7 @@ fi
 if _has_command 'eza'; then
     alias ls=eza
 fi
+
+if _has_command 'starship'; then
+    eval "$(starship init bash)"
+fi
