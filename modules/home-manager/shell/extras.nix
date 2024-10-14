@@ -40,12 +40,15 @@ in {
     })
 
     (lib.mkIf cfg.direnv {
+      # NOTE: 2024-10-14:
+      # I moved the Direnv-Bash integration to ../../../dotfiles/bash/bashrc in
+      # order to reduce code complexity and enhance portability with non-nixos
+      # systems.
       programs.direnv = {
         enable = true;
         # Caches the nix-shell environment reducing the waiting time after first run
         # and prevents garbage collection of build dependencies.
         # nix-direnv.enable = true;
-        # enableBashIntegration = true;
       };
     })
   ]);
