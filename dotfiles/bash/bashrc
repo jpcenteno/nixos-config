@@ -10,6 +10,20 @@ cheat() { curl -s "https://cheat.sh/${1}" | less -R; }
 # shellcheck disable=SC2164
 mkcd() { mkdir -p "${1}" && cd "${1}"; }
 
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║ Default programs                                                       ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+
+# Sets nvim > vim > vi as the default $EDITOR (in that order of priority).
+# Leaves $EDITOR without changes when none of these commands are available.
+# TODO 2024-10-14: Check wether this belongs to `~/.bashrc` or `~/.bash_profile`.
+if _has_command 'nvim'; then
+    export EDITOR='nvim'
+elif _has_command 'vim'; then
+    export EDITOR='vim'
+elif _has_command 'vi'; then
+    export EDITOR='vi'
+fi
 
 # ╔════════════════════════════════════════════════════════════════════════╗
 # ║ Overriding aliases: (Danger zone)                                      ║
