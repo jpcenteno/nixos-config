@@ -5,54 +5,47 @@ in {
   options.jpcenteno-home.shell.extras = {
     enable = lib.mkEnableOption "extra shell configuration";
 
-    bat = lib.mkEnableOption "Bat as a cat(1) replacement" // { default = true; };
-    eza = lib.mkEnableOption "Eza as a ls(1) replacement" // { default = true; };
-    starship = lib.mkEnableOption "Starship shell prompt" // { default = true; };
-    direnv = lib.mkEnableOption "Direnv" // { default = true; };
+    bat.enable = lib.mkEnableOption "Bat as a cat(1) replacement" // { default = true; };
+    direnv.enable = lib.mkEnableOption "Direnv" // { default = true; };
+    eza.enable = lib.mkEnableOption "Eza as a ls(1) replacement" // { default = true; };
+    starship.enable = lib.mkEnableOption "Starship shell prompt" // { default = true; };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf cfg.bat {
-      home.packages = [ pkgs.bat ];
-      xdg.configFile."bat/config".source = ../../../dotfiles/bat/config;
+    {
 
-      # NOTE 2024-10-14:
-      # Dotfile `../../../dotfiles/bash/bashrc` contains a conditional alias that
-      # overrides `cat` with `bat` on interactive shells in case bat is available.
-    })
+      # NOTE 2024-10-14: See `~/.bashrc` for bash integration:
+      #
+      # The dotfile `../../../dotfiles/bash/bashrc` includes many overriding
+      # configurations and activation scripts which I decided not to handle
+      # using the home-manager options. The rationale for this decision was to
+      # reduce code complexity and improve compatibility with non-NixOS systems.
+      #
+      # This may include:
+      # - A conditional `alias ls=eza`
+      # - A conditional `alias cat=bat`
+      # - Starship integration.
+      # - Direnv integration.
 
-    (lib.mkIf cfg.eza {
-      home.packages = [ pkgs.eza ];
+      home.packages = [
+        (lib.mkIf cfg.bat.enable pkgs.bat)
+        (lib.mkIf cfg.eza.enable pkgs.eza)
+        (lib.mkIf cfg.starship.enable pkgs.starship)
+      ];
 
-      # NOTE 2024-10-14:
-      # Dotfile `../../../dotfiles/bash/bashrc` contains a conditional alias
-      # that overrides `ls` with `eza` on interactive shells in case `eza` is
-      # available.
-    })
+      xdg.configFile."bat/config" = {
+        enable = cfg.bat.enable;
+        source = ../../../dotfiles/bat/config;
+      };
 
-    (lib.mkIf cfg.starship {
-      home.packages = [ pkgs.starship ];
-
-      # NOTE 2024-10-14:
-      # The code that integrates Starship with bash is located at
-      # `../../../dotfiles/bash/bashrc` in order to reduce code complexity and
-      # enhance portability with non-NixOS systems
-    })
-
-    (lib.mkIf cfg.direnv {
-      # NOTE: 2024-10-14:
-      # I moved the Direnv-Bash integration to ../../../dotfiles/bash/bashrc in
-      # order to reduce code complexity and enhance portability with non-nixos
-      # systems.
       programs.direnv = {
-        enable = true;
+        enable = cfg.direnv.enable;
         # Nix-direnv is a program that improves the `use nix` and `use flake`
         # startup time by adding a cache for the nix-shell environment and
         # preventing the garbage collector from removing the environment
         # dependencies.
-        # NOTE 2024-10-14: Keeping this here since it's nix-specific.
-        nix-direnv.enable = true;
+        nix-direnv.enable = cfg.direnv.enable;
       };
-    })
+    }
   ]);
 }

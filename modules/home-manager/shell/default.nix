@@ -21,8 +21,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    jpcenteno-home.shell.extras.enable = lib.mkDefault true;
-
     programs.bash = {
       enable = true; # Every other Bash-related option requires this to be set to `true`.
       bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
@@ -30,6 +28,8 @@ in {
 
     # NOTE 2024-10-14: Not using `programs.readline` for simplicity.
     home.file.".inputrc".source = ../../../dotfiles/readline/inputrc;
+
+    jpcenteno-home.shell.extras.enable = lib.mkDefault true;
 
     home.packages = [
       pkgs.curl
