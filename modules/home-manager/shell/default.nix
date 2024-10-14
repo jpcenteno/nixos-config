@@ -30,7 +30,7 @@ in {
       bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
     };
 
-    # NOTE 2024-10-14: This instead of `programs.readline` for simplicity.
+    # NOTE 2024-10-14: Not using `programs.readline` for simplicity.
     home.file.".inputrc".source = ../../../dotfiles/readline/inputrc;
 
     home.packages = [
