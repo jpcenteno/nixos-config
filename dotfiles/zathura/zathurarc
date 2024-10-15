@@ -1,0 +1,3 @@
+# NOTE 2024-10-15: Zathura will complain if a SQLite DB exists and this is set
+# to it's default, `plain`.
+set database sqlite
