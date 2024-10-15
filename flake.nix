@@ -48,6 +48,7 @@
         alacritty = import ./modules/home-manager/alacritty.nix;
         brave-browser = import ./modules/home-manager/brave.nix;
         desktop.fonts = import ./modules/home-manager/desktop/fonts.nix;
+        desktop.apps = import ./modules/home-manager/desktop/apps;
         git = import ./modules/home-manager/git.nix;
         hyprland = import ./modules/home-manager/desktop/hyprland.nix;
         shell = import ./modules/home-manager/shell;
