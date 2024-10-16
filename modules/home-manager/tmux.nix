@@ -9,6 +9,6 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.tmux ];
-    xdg.configFile."tmux/tmux.conf".source = ../../dotfiles/tmux/general.conf;
+    xdg.configFile."tmux/tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
   };
 }
