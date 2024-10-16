@@ -72,6 +72,8 @@ in {
           "$mod SHIFT, 7, movetoworkspace, 7"
           "$mod SHIFT, 8, movetoworkspace, 8"
           "$mod SHIFT, 9, movetoworkspace, 9"
+
+          "$mod SHIFT CONTROL, q, killactive,"
         ];
       };
     };
