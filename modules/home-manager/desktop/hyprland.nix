@@ -6,6 +6,7 @@ in {
   imports = [
     ./waybar.nix
     ./hyprland/hypridle.nix
+    ./hyprland/hyprlock.nix
   ];
 
   options.jpcenteno-home.hyprland = {
@@ -16,6 +17,7 @@ in {
 
     jpcenteno-home.waybar.enable = true;
     jpcenteno-home.desktop.hyprland.hypridle.enable = lib.mkDefault true;
+    jpcenteno-home.desktop.hyprland.hyprlock.enable = lib.mkDefault true;
 
     wayland.windowManager.hyprland = {
       enable = true;
