@@ -99,8 +99,9 @@ in {
         ];
 
         misc = {
-          disable_hyprland_logo = "true";
-          disable_splash_rendering = "true";
+          # Set wallpaper to the Base16 background color:
+          disable_hyprland_logo = "true"; # Required for `background_color` to work.
+          disable_splash_rendering = "true"; # Required for `background_color`to work.
           background_color = "0x${config.colorScheme.palette.base00}";
         };
       };
