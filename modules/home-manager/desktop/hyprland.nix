@@ -80,11 +80,14 @@ in {
         # Modifiers used:
         # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
         # e -> repeat, will repeat when held.
-        bindle = [
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          "SHIFT, XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        bindle = let
+          wpctl = "${pkgs.wireplumber}/bin/wpctl";
+          setVolumeCmd = volume: "${wpctl} set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ ${volume}";
+        in [
+          ", XF86AudioRaiseVolume, exec, ${setVolumeCmd "5%+"}"
+          ", XF86AudioLowerVolume, exec, ${setVolumeCmd "5%-"}"
+          "SHIFT, XF86AudioLowerVolume, exec, ${setVolumeCmd "0"}"
+          ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
       };
     };
