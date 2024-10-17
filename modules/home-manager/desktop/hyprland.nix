@@ -83,11 +83,19 @@ in {
         bindle = let
           wpctl = "${pkgs.wireplumber}/bin/wpctl";
           setVolumeCmd = volume: "${wpctl} set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ ${volume}";
+
+          brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+          setBrightnessCmd = brightness: "${brightnessctl} set ${brightness}";
         in [
+          # Volume control:
           ", XF86AudioRaiseVolume, exec, ${setVolumeCmd "5%+"}"
           ", XF86AudioLowerVolume, exec, ${setVolumeCmd "5%-"}"
           "SHIFT, XF86AudioLowerVolume, exec, ${setVolumeCmd "0"}"
           ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+          # Brightness control:
+          ", XF86MonBrightnessUp, exec, ${setBrightnessCmd "+5%"}"
+          ", XF86MonBrightnessDown, exec, ${setBrightnessCmd "5%-"}"
         ];
       };
     };
