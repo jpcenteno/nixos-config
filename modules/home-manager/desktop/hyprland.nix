@@ -74,6 +74,17 @@ in {
           "$mod SHIFT, 9, movetoworkspace, 9"
 
           "$mod SHIFT CONTROL, q, killactive,"
+
+        ];
+
+        # Modifiers used:
+        # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
+        # e -> repeat, will repeat when held.
+        bindle = [
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+          "SHIFT, XF86AudioLowerVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
       };
     };
