@@ -41,7 +41,6 @@
       nixosModules = {
         hello = import ./modules/nixos/hello.nix;
         keyd = import ./modules/nixos/keyd.nix;
-        waylock = import ./modules/nixos/waylock.nix;
       };
 
       homeManagerModules = {
