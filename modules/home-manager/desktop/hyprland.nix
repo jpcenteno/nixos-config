@@ -35,6 +35,7 @@ in {
           "$mod, return, exec, $terminal"
           "$mod, d, exec, $menu"
           "$mod, space, exec, $menu"
+          "$mod SHIFT, l, exec, ${lib.getExe config.programs.hyprlock.package}"
 
           "$mod, h, movefocus, l"
           "$mod, j, movefocus, d"
