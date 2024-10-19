@@ -2,7 +2,15 @@
 let
   cfg = config.jpcenteno-home.desktop.hyprland.hypridle;
 
-  lockCmd = "${lib.getExe config.programs.hyprlock.package}";
+  mkListener = {timeout, ...}@attrs: (lib.mkIf (0 < timeout) attrs);
+
+  mkTimeoutAssertion = attrName: {
+    assertion = (0 <= cfg.timeouts."${attrName}");
+    message = "Hypridle: Timeout `${attrName}` must be non-negative!";
+  };
+
+  hyprlockCmd = "${lib.getExe config.programs.hyprlock.package}";
+  lockSessionCmd = "${pkgs.systemd}/bin/loginctl lock-session";
 in {
   # NOTE I had to enable `sd-switch` to restart on configuration change.
   #
@@ -30,37 +38,29 @@ in {
 
   config = lib.mkIf cfg.enable {
     assertions = [
-      {
-        assertion = 0 <= cfg.timeouts.dim-screen;
-        message = "jpcenteno-home.desktop.hyprland.hypridle.timeouts.dim-screen must be non-negative.";
-      }
-      {
-        assertion = 0 <= cfg.timeouts.lock-screen;
-        message = "jpcenteno-home.desktop.hyprland.hypridle.timeouts.lock-screen must be non-negative.";
-      }
+      (mkTimeoutAssertion "dim-screen")
+      (mkTimeoutAssertion "lock-screen")
     ];
 
     services.hypridle = {
       enable = true;
       settings = {
         general = {
-          lock_cmd = "pidof ${lockCmd} || ${lockCmd}";
-          before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
-          after_sleep_cmd = "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
+          lock_cmd = "pidof ${hyprlockCmd} || ${hyprlockCmd}";
+          before_sleep_cmd = "${lockSessionCmd}"; # lock before suspend.
+          after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
         };
 
-        listener = let
-          brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-        in [
-          (lib.mkIf (0 < cfg.timeouts.dim-screen) {
+        listener = [
+          (mkListener {
             timeout = cfg.timeouts.dim-screen;
-            on-timeout = "${brightnessctl} --save set 10%";
-            on-resume = "${brightnessctl} --restore";
+            on-timeout = "${lib.getExe pkgs.brightnessctl} --save set 10%";
+            on-resume = "${lib.getExe pkgs.brightnessctl} --restore";
           })
 
-          (lib.mkIf (0 < cfg.timeouts.lock-screen) {
+          (mkListener {
             timeout = cfg.timeouts.lock-screen;
-            on-timeout = "loginctl lock-session";
+            on-timeout = "${lockSessionCmd}";
           })
         ];
       };
