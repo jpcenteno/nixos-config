@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.jpcenteno-home.desktop.hyprland.hyprlock;
 
@@ -12,6 +12,15 @@ let
 in {
   options.jpcenteno-home.desktop.hyprland.hyprlock = {
     enable = lib.mkEnableOption "Hyprlock";
+
+    package = lib.mkPackageOption pkgs "hyprlock" { };
+
+    command = lib.mkOption {
+      description = "Command to execute a singleton instance of Hyprlock";
+      type = lib.types.str;
+      default = "${pkgs.procps}/bin/pidof ${lib.getExe cfg.package} || ${lib.getExe cfg.package}";
+      readOnly = true; # Provide external R/O access to this value.
+    };
   };
 
   config = lib.mkIf cfg.enable {
