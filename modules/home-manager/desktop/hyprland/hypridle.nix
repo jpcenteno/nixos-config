@@ -35,6 +35,12 @@ in {
         default = 60;
         type = lib.types.int;
       };
+
+      screen-off = lib.mkOption {
+        description = "Turn screen off after `n` seconds. Set to 0 to deactivate";
+        default = 80;
+        type = lib.types.int;
+      }
     };
   };
 
@@ -42,6 +48,7 @@ in {
     assertions = [
       (mkTimeoutAssertion "dim-screen")
       (mkTimeoutAssertion "lock-screen")
+      (mkTimeoutAssertion "screen-off")
     ];
 
     services.hypridle = {
@@ -63,6 +70,12 @@ in {
           (mkListener {
             timeout = cfg.timeouts.lock-screen;
             on-timeout = "${lockSessionCmd}";
+          })
+
+          (mkListener {
+            timeout = cfg.timeouts.screen-off;
+            on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+            on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
           })
         ];
       };
