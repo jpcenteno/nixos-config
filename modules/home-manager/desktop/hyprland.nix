@@ -5,6 +5,8 @@ in {
 
   imports = [
     ./waybar.nix
+    ./hyprland/hypridle.nix
+    ./hyprland/hyprlock.nix
   ];
 
   options.jpcenteno-home.hyprland = {
@@ -14,9 +16,12 @@ in {
   config = lib.mkIf cfg.enable {
 
     jpcenteno-home.waybar.enable = true;
+    jpcenteno-home.desktop.hyprland.hypridle.enable = lib.mkDefault true;
+    jpcenteno-home.desktop.hyprland.hyprlock.enable = lib.mkDefault true;
 
     wayland.windowManager.hyprland = {
       enable = true;
+      systemd.enable = true;
       settings = {
         "$mod" = "SUPER";
         "$terminal" = "${pkgs.alacritty}/bin/alacritty";
@@ -31,6 +36,7 @@ in {
           "$mod, return, exec, $terminal"
           "$mod, d, exec, $menu"
           "$mod, space, exec, $menu"
+          "$mod SHIFT, l, exec, ${config.jpcenteno-home.desktop.hyprland.hyprlock.command}"
 
           "$mod, h, movefocus, l"
           "$mod, j, movefocus, d"
