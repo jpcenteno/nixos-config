@@ -40,7 +40,7 @@ in {
         description = "Turn screen off after `n` seconds. Set to 0 to deactivate";
         default = 80;
         type = lib.types.int;
-      }
+      };
     };
   };
 
