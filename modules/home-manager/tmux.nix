@@ -15,5 +15,12 @@ in
       (lib.mkIf cfg.smug.enable pkgs.smug)
     ];
     xdg.configFile."tmux/tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
+
+    # Ensure $XDG_CONFIG_HOME/smug exists.
+    home.activation.create-smug-config-dir = lib.mkIf cfg.smug.enable (
+      lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD mkdir -p $VERBOSE_ARG '${config.xdg.configHome}/smug'
+      ''
+    );
   };
 }
