@@ -1,10 +1,11 @@
 # Mac OS
 .DS_Store
 
-# Direnv:
+# Files that might auto-execute code:
 .envrc
 .envfile
 .direnv/
+.smug.yml
 
 # Text Editors and IDEs
 .idea/
