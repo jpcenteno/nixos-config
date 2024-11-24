@@ -34,10 +34,12 @@ in {
       enable = true;
       userName = cfg.userName;
       userEmail = cfg.userEmail;
+      includes = [
+        { path = ../../dotfiles/git/config; }
+      ];
     };
 
     xdg.configFile = {
-      "git/config".source = ../../dotfiles/git/config;
       "git/gitignore".source = ../../dotfiles/git/gitignore;
       "git/scripts/delete-branches-interactively".source = ../../dotfiles/git/scripts/delete-branches-interactively;
     };
