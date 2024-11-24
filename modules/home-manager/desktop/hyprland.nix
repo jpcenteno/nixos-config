@@ -11,6 +11,8 @@ in {
 
   options.jpcenteno-home.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
+
+    wl-clipboard.enable = lib.mkEnableOption "wl-clipboard" // { default = true; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -112,6 +114,10 @@ in {
         };
       };
     };
+
+    home.packages = [
+      (lib.mkIf cfg.wl-clipboard.enable pkgs.wl-clipboard)
+    ];
 
   };
 
