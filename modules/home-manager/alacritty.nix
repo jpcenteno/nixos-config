@@ -41,14 +41,14 @@ in
         window = {
           decorations = "none";
           padding = {
-            y = 24;
+            y = 6;
             x = 8;
           };
           dynamic_padding = true;
         };
 
         font = {
-          size = 16;
+          size = 12;
           # Use the system's default monospace font, which can be set on
           # `~/.config/fontconfig/fonts.confs`.
           # See: https://wiki.archlinux.org/title/Font_configuration/Examples#The_standard_names
