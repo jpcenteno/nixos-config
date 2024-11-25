@@ -7,6 +7,7 @@ in {
     ./waybar.nix
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
+    ./fonts.nix
   ];
 
   options.jpcenteno-home.hyprland = {
@@ -16,8 +17,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-
     jpcenteno-home.waybar.enable = true;
+    jpcenteno-home.desktop.fonts.enable = true;
     jpcenteno-home.desktop.hyprland.hypridle.enable = lib.mkDefault true;
     jpcenteno-home.desktop.hyprland.hyprlock.enable = lib.mkDefault true;
 
