@@ -39,6 +39,7 @@
       };
 
       nixosModules = {
+        default = import ./modules/nixos/default.nix;
         hello = import ./modules/nixos/hello.nix;
         keyd = import ./modules/nixos/keyd.nix;
       };
