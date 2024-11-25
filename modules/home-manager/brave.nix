@@ -18,6 +18,11 @@ in
       programs.chromium = {
         enable = true;
         package = pkgs.brave;
+        # FIXME this will break non-Wayland or non PipeWire hosts.
+        commandLineArgs = [
+          "--ozone-platform=wayland"
+          "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+        ];
       };
     }
 
