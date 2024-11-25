@@ -4,6 +4,7 @@ let
 in {
 
   imports = [
+    ./apps/default.nix
     ./waybar.nix
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
@@ -18,6 +19,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     jpcenteno-home.waybar.enable = true;
+    jpcenteno-home.desktop.apps.enable = lib.mkDefault true;
     jpcenteno-home.desktop.fonts.enable = true;
     jpcenteno-home.desktop.hyprland.hypridle.enable = lib.mkDefault true;
     jpcenteno-home.desktop.hyprland.hyprlock.enable = lib.mkDefault true;
