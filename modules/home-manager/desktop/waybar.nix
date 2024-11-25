@@ -50,7 +50,7 @@ in {
               "cpu"
               "network"
             ]
-            (lib.optional cfg.bluetooth.enable [ "bluetooth" ])
+            (lib.optional cfg.bluetooth.enable "bluetooth")
             [
               "pulseaudio"
               "battery"
