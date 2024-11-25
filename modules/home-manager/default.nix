@@ -4,6 +4,7 @@ let
 in {
   imports = [
     ./shell/default.nix
+    ./desktop/hyprland.nix
     ./xdg.nix
 
     nix-colors.homeManagerModules.default
