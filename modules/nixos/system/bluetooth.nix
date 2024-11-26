@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.jpcenteno.nixos.system.bluetooth;
 in {
@@ -7,7 +7,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # FIXME 2024-11-26 This is for tracing purposes. Delete when done debugging.
-    warnings = [ "config.jpcenteno.nixos.system.bluetooth is enabled!" ];
+    hardware.bluetooth.enable = true;
+    environment.systemPackages = [ pkgs.bluetuith ];
   };
 }
