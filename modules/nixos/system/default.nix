@@ -3,6 +3,7 @@ let
   cfg = config.jpcenteno.nixos.system;
 in {
   imports = [
+    ./audio.nix
     ./bluetooth.nix
   ];
 
@@ -11,6 +12,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    jpcenteno.nixos.system.audio.enable = lib.mkDefault true;
     jpcenteno.nixos.system.bluetooth.enable = lib.mkDefault true;
   };
 }
