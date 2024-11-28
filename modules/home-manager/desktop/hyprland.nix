@@ -5,8 +5,7 @@ in {
 
   imports = [
     ./apps/default.nix
-    # FIXME 2024-11-26 Reactivate Wabar.
-    # ./waybar.nix
+    ./waybar.nix
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
     ./fonts.nix
@@ -19,8 +18,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # FIXME 2024-11-26 Reactivate Wabar.
-    # jpcenteno-home.waybar.enable = true;
+    jpcenteno-home.waybar.enable = true;
     jpcenteno-home.desktop.apps.enable = lib.mkDefault true;
     jpcenteno-home.desktop.fonts.enable = true;
     jpcenteno-home.desktop.hyprland.hypridle.enable = lib.mkDefault true;
