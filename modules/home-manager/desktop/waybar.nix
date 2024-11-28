@@ -35,6 +35,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # Run Waybar after `programs.waybar.systemd.target` starts. This defaults to
+    # `graphical-session.target`. Leaving the mentioned target unchanged should
+    # work for different Wayland window mangers.
+    programs.waybar.systemd.enable = true;
+
     programs.waybar = {
       enable = true;
       package = cfg.package;
