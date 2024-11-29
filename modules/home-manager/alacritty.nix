@@ -48,7 +48,7 @@ in
         };
 
         font = {
-          size = 12;
+          size = 18;
           # Use the system's default monospace font, which can be set on
           # `~/.config/fontconfig/fonts.confs`.
           # See: https://wiki.archlinux.org/title/Font_configuration/Examples#The_standard_names
