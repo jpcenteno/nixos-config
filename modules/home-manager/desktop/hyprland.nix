@@ -86,6 +86,7 @@ in {
           "$mod SHIFT, 9, movetoworkspace, 9"
 
           "$mod SHIFT CONTROL, q, killactive,"
+          "$mod SHIFT CONTROL, e, exit,"
 
         ];
 
