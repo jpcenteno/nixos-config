@@ -32,11 +32,6 @@ in {
         "$terminal" = "${pkgs.alacritty}/bin/alacritty";
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 
-        exec-once = [
-          # FIXME 2024-11-26 Reactivate Wabar.
-          # "${config.jpcenteno-home.waybar.package}/bin/waybar &"
-        ];
-
         bind = [
           "$mod, t, exec, $terminal"
           "$mod, return, exec, $terminal"
