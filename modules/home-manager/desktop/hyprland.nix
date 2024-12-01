@@ -9,6 +9,7 @@ in {
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
     ./fonts.nix
+    ./common/cursor.nix
   ];
 
   options.jpcenteno-home.hyprland = {
@@ -18,6 +19,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+
+    jpcenteno-home.desktop.common.cursor.enable = lib.mkDefault true;
     jpcenteno-home.waybar.enable = true;
     jpcenteno-home.desktop.apps.enable = lib.mkDefault true;
     jpcenteno-home.desktop.fonts.enable = true;
