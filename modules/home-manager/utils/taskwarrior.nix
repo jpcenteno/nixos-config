@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
-let cfg = config.self.taskwarrior;
+let
+  cfg = config.jpcenteno-home.utils.taskwarrior;
 in {
-  options.self.taskwarrior = { enable = lib.mkEnableOption "taskwarrior"; };
+  options.jpcenteno-home.utils.taskwarrior = {
+    enable = lib.mkEnableOption "taskwarrior";
+  };
 
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.taskwarrior-tui ];
