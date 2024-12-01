@@ -2,7 +2,7 @@
 let
   cfg = config.jpcenteno-home.desktop.common.cursor;
 in {
-  options.jpcenteno-home.home.desktop.common.cursor = {
+  options.jpcenteno-home.desktop.common.cursor = {
     enable = lib.mkEnableOption "Cursor theme and size customization";
   };
 
