@@ -29,7 +29,7 @@ in {
 
         report = {
           # Exclude tasks in the inbox (project:INBOX) from the `next` report.
-          next.filter = "+UNBLOCKED -WAITING limit:page project.not:INBOX";
+          next.filter = "status:pending -WAITING limit:page project.not:INBOX";
 
           # List every task in the inbox.
           inbox = {
