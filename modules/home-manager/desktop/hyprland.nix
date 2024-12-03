@@ -10,7 +10,6 @@ in {
     ./hyprland/hyprlock.nix
     ./fonts.nix
     ./common/cursor.nix
-    ./common/flatpak.nix # FIXME delete this.
   ];
 
   options.jpcenteno-home.hyprland = {

@@ -6,6 +6,7 @@ in {
     ./zathura.nix
     ./../../alacritty.nix
     ./../../brave.nix
+    ./../common/flatpak.nix
   ];
 
   options.jpcenteno-home.desktop.apps = {
@@ -18,5 +19,6 @@ in {
     jpcenteno-home.desktop.apps.zathura.enable = lib.mkDefault true;
     jpcenteno-home.brave-browser.enable = lib.mkDefault true;
     jpcenteno-home.brave-browser.setAsDefaultBrowser = lib.mkDefault true;
+    jpcenteno-home.desktop.common.flatpak.enable = lib.mkDefault true;
   };
 }
