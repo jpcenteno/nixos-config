@@ -17,7 +17,7 @@ let
   # subcommands and the program had no issue with it.
   #
   # FIXME override the `flatpak` package instead of intercepting it to get the
-  # man-pages to work.
+  # man-pages and help to work.
   flatpakUserWrapper = pkgs.writeShellScriptBin "flatpak" ''
     #! ${pkgs.dash}/bin/dash
     ${pkgs.flatpak}/bin/flatpak --user "$@"
