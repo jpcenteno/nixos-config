@@ -50,7 +50,7 @@ in {
       run flatpak remote-add --user --if-not-exists $VERBOSE_ARG flathub https://dl.flathub.org/repo/flathub.flatpakrepo 
     '';
 
-    # FIXME add an auto-update periodic script.
+    # TODO add an auto-update periodic script.
 
   };
 }
