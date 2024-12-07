@@ -43,6 +43,8 @@ in {
       systemDirs.data = [ "${config.xdg.dataHome}/flatpak/exports/share" ];
     };
 
+    # FIXME 2024-12-07 Replace with a systemd job. This is failing and should
+    # have never been a part of the home-manager build-phase in the first place.
     home.activation.add-flatpak-remotes = lib.hm.dag.entryAfter
     [ "writeBoundary" ]
     ''

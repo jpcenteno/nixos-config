@@ -6,7 +6,9 @@ in {
     ./zathura.nix
     ./../../alacritty.nix
     ./../../brave.nix
-    ./../common/flatpak.nix
+    # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
+    # that sets the flatpack remotes.
+    # ./../common/flatpak.nix
   ];
 
   options.jpcenteno-home.desktop.apps = {
@@ -19,6 +21,8 @@ in {
     jpcenteno-home.desktop.apps.zathura.enable = lib.mkDefault true;
     jpcenteno-home.brave-browser.enable = lib.mkDefault true;
     jpcenteno-home.brave-browser.setAsDefaultBrowser = lib.mkDefault true;
-    jpcenteno-home.desktop.common.flatpak.enable = lib.mkDefault true;
+    # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
+    # that sets the flatpack remotes.
+    # jpcenteno-home.desktop.common.flatpak.enable = lib.mkDefault true;
   };
 }
