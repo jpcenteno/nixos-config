@@ -40,7 +40,7 @@ in {
           "$mod, return, exec, $terminal"
           "$mod, d, exec, $menu"
           "$mod, space, exec, $menu"
-          "$mod SHIFT, l, exec, ${config.jpcenteno-home.desktop.hyprland.hyprlock.command}"
+          "$mod, escape, exec, ${config.jpcenteno-home.desktop.hyprland.hyprlock.command}"
 
           "$mod, h, movefocus, l"
           "$mod, j, movefocus, d"
