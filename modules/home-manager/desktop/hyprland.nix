@@ -60,6 +60,10 @@ in {
           "$mod&SHIFT, up, movewindow, u"
           "$mod&SHIFT, down, movewindow, d"
 
+          # Cycle current workspace through the active monitors.
+          "$mod&Shift&Control, h, movecurrentworkspacetomonitor, -1"
+          "$mod&Shift&Control, l, movecurrentworkspacetomonitor, +1"
+
           "$mod, TAB, cyclenext,"
           "$mod&SHIFT, TAB, cyclenext, prev"
 
