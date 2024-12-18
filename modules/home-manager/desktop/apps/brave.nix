@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.jpcenteno-home.brave-browser;
+  cfg = config.jpcenteno-home.desktop.apps.brave-browser;
 in
 {
-  options.jpcenteno-home.brave-browser = {
+  options.jpcenteno-home.desktop.apps.brave-browser = {
     enable = lib.mkEnableOption "Enable Brave browser";
 
     setAsDefaultBrowser = lib.mkOption {
