@@ -11,13 +11,17 @@ in
       description = "Set Brave as the default browser";
       default = false;
     };
+
+    package = lib.mkPackageOption pkgs "Chromium" {
+      default = "brave";
+    };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       programs.chromium = {
         enable = true;
-        package = pkgs.brave;
+        package = cfg.package;
         # FIXME this will break non-Wayland or non PipeWire hosts.
         commandLineArgs = [
           "--ozone-platform=wayland"
