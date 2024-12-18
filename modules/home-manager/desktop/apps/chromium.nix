@@ -1,14 +1,14 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.jpcenteno-home.desktop.apps.brave-browser;
+  cfg = config.jpcenteno-home.desktop.apps.chromium;
 in
 {
-  options.jpcenteno-home.desktop.apps.brave-browser = {
-    enable = lib.mkEnableOption "Enable Brave browser";
+  options.jpcenteno-home.desktop.apps.chromium = {
+    enable = lib.mkEnableOption "A Chromium variant with my personal configuration.";
 
     setAsDefaultBrowser = lib.mkOption {
       type = lib.types.bool;
-      description = "Set Brave as the default browser";
+      description = "Set Chromium as the default browser";
       default = false;
     };
 
@@ -30,6 +30,8 @@ in
       };
     }
 
+    # FIXME make this configurable or write a wrapper script that allows the
+    # user to choose interactively.
     (lib.mkIf cfg.setAsDefaultBrowser {
       xdg.mimeApps.defaultApplications = {
        "text/html" = "brave.desktop";
