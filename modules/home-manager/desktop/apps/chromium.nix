@@ -72,10 +72,10 @@ in
     # user to choose interactively.
     (lib.mkIf cfg.setAsDefaultBrowser {
       xdg.mimeApps.defaultApplications = {
-       "text/html" = "brave.desktop";
-       "application/xhtml+xml" = "brave.desktop";
-       "x-scheme-handler/http" = "brave.desktop";
-       "x-scheme-handler/https" = "brave.desktop";
+       "text/html" = "chromium-browser.desktop";
+       "application/xhtml+xml" = "chromium-browser.desktop";
+       "x-scheme-handler/http" = "chromium-browser.desktop";
+       "x-scheme-handler/https" = "chromium-browser.desktop";
       };
     })
   ]);
