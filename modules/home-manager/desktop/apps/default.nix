@@ -5,7 +5,7 @@ in {
   imports = [
     ./zathura.nix
     ./../../alacritty.nix
-    ./../../brave.nix
+    ./chromium.nix
     # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
     # that sets the flatpack remotes.
     # ./../common/flatpak.nix
@@ -19,8 +19,8 @@ in {
     # Enables all the desktop applications allowing the user to opt-out.
     jpcenteno-home.alacritty.enable = lib.mkDefault true;
     jpcenteno-home.desktop.apps.zathura.enable = lib.mkDefault true;
-    jpcenteno-home.brave-browser.enable = lib.mkDefault true;
-    jpcenteno-home.brave-browser.setAsDefaultBrowser = lib.mkDefault true;
+    jpcenteno-home.desktop.apps.chromium.enable = lib.mkDefault true;
+    jpcenteno-home.desktop.apps.chromium.setAsDefaultBrowser = lib.mkDefault true;
     # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
     # that sets the flatpack remotes.
     # jpcenteno-home.desktop.common.flatpak.enable = lib.mkDefault true;
