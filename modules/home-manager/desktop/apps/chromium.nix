@@ -44,7 +44,7 @@ in
     };
 
     package = lib.mkPackageOption pkgs "Chromium" {
-      default = "brave";
+      default = "ungoogled-chromium";
     };
 
     # FIXME autodetect ungoogled chromium or throw a warning, IDK.
