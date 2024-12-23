@@ -33,6 +33,9 @@ in {
         "application/x-cbz" = [ "org.pwmt.zathura-cb.desktop" ];
         "application/x-cb7" = [ "org.pwmt.zathura-cb.desktop" ];
         "application/x-cbt" = [ "org.pwmt.zathura-cb.desktop" ];
+        "application/vnd.comicbook-rar" = [ "org.pwmt.zathura-cb.desktop" ];
+        "application/vnd.comicbook+zip" = [ "org.pwmt.zathura-cb.desktop" ];
+
 
         "image/vnd.djvu" = [ "org.pwmt.zathura-djvu.desktop" ];
         "image/vnd.djvu+multipage" = [ "org.pwmt.zathura-djvu.desktop" ];
