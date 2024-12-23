@@ -8,9 +8,11 @@ in {
 
   imports = [
     ./taskwarrior.nix
+    ./lf.nix
   ];
 
   config = lib.mkIf cfg.enable {
     jpcenteno-home.utils.taskwarrior.enable = lib.mkDefault true;
+    jpcenteno-home.utils.lf.enable = lib.mkDefault true;
   };
 }
