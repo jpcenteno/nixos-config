@@ -14,6 +14,15 @@ in {
       configFile = {
         "lf/lfrc".text = ''
           set previewer ${config.xdg.configHome}/lf/previewer.sh
+
+          map gc cd ~/Code/
+          map gd cd ~/Downloads/
+          map gD cd ~/Documents/
+          map gb cd ~/Documents/Bib/
+          map gf cd ~/Documents/finance/
+          map gn cd ~/Documents/Notes/
+          map gp cd ~/Documents/Projects/
+          map gr cd ~/Documents/Reference/
         '';
 
         "lf/previewer.sh" = {
