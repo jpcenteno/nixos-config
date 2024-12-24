@@ -12,7 +12,11 @@ in {
     xdg = {
       enable = true;
       configFile = {
+        "lf/icons".source = ../../../dotfiles/lf/icons;
+
         "lf/lfrc".text = ''
+          set icons true
+
           set previewer ${config.xdg.configHome}/lf/previewer.sh
 
           map gc cd ~/Code/
