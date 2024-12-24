@@ -34,13 +34,19 @@ in {
           text = ''
             #!/bin/sh
 
-            mime="$( "${pkgs.file}/bin/file" --dereference --brief --mime-type -- "$1" )"
+            # Glow will clutter the preview with the URLs
+            remove_terminal_hyperlinks() {
+                '${pkgs.perl}/bin/perl' -pe 's/\x1b\x5d\x38\x3b\x3b.*?\x1b\x5c//g'
+            }
+
+            mime="$( "${pkgs.xdg-utils}/bin/xdg-mime" query filetype "$1" )"
             case "$mime" in
               image/*)           "${pkgs.viu}/bin/viu" "$1"        ;;
               application/zip)   "${pkgs.unzip}/bin/unzip" -l "$1" ;;
               application/x-rar) "${pkgs.unrar}/bin/unrar" l "$1"  ;;
               application/x-tar) "${pkgs.gnutar}/bin/tar" -tf "$1" ;;
               application/json)  "${pkgs.jq}/bin/jq" --color-output . "$1" ;;
+              text/markdown)     "${pkgs.mdcat}/bin/mdcat" "$1" | remove_terminal_hyperlinks ;;
               *)                 "${pkgs.bat}/bin/bat" --style=plain --color always "$1" ;;
             esac
           '';
