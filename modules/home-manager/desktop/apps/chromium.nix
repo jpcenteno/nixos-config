@@ -47,6 +47,12 @@ in
       default = "ungoogled-chromium";
     };
 
+    enableWideVine = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enable WideVine";
+      default = true;
+    };
+
     # FIXME autodetect ungoogled chromium or throw a warning, IDK.
     enableUngoogledChromiumFlags = lib.mkEnableOption "Ungoogled-chromium specific flags";
   };
@@ -55,7 +61,7 @@ in
     {
       programs.chromium = {
         enable = true;
-        package = cfg.package;
+        package = (cfg.package.override { enableWideVine = cfg.enableWideVine; });
         # FIXME this will break non-Wayland or non PipeWire hosts.
         commandLineArgs = lib.concatLists [
           [
