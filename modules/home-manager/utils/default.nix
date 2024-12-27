@@ -7,11 +7,13 @@ in {
   };
 
   imports = [
+    ./file-compression.nix
     ./taskwarrior.nix
     ./lf.nix
   ];
 
   config = lib.mkIf cfg.enable {
+    jpcenteno-home.utils.file-compression.enable = lib.mkDefault true;
     jpcenteno-home.utils.taskwarrior.enable = lib.mkDefault true;
     jpcenteno-home.utils.lf.enable = lib.mkDefault true;
   };
