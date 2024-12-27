@@ -59,10 +59,16 @@ in {
             [
               "pulseaudio"
               "battery"
-              "clock"
+              "custom/clock"
             ]
           ];
-          clock = { format = "  {:%H:%M}"; };
+          "custom/clock" = {
+            # Reinventing the wheel here to avoid desynchronization issues I was
+            # having with `timedatectl`.
+            exec = "date '+%H:%M'";
+            format = " {}";
+            interval = 10;
+          };
           battery = {
             interval = 15;
             states = {
