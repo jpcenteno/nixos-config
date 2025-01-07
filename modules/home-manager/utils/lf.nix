@@ -27,6 +27,7 @@ in {
           map gn cd ~/Documents/Notes/
           map gp cd ~/Documents/Projects/
           map gr cd ~/Documents/Reference/
+          map R !${pkgs.massren}/bin/massren $fx
         '';
 
         "lf/previewer.sh" = {
