@@ -17,7 +17,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     # Set the default color scheme.
-    colorScheme = nix-colors.colorSchemes.rose-pine;
+    colorScheme = nix-colors.colorSchemes.dracula;
 
     # These modules are enabled by default across all my home-manager configs:
     jpcenteno-home.shell.enable = lib.mkDefault true;
