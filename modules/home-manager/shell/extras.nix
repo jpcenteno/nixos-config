@@ -2,17 +2,21 @@
 let
   cfg = config.jpcenteno-home.shell.extras;
 in {
+  imports = [
+    ./extras/starship.nix
+  ];
+
   options.jpcenteno-home.shell.extras = {
     enable = lib.mkEnableOption "extra shell configuration";
 
     bat.enable = lib.mkEnableOption "Bat as a cat(1) replacement" // { default = true; };
     direnv.enable = lib.mkEnableOption "Direnv" // { default = true; };
     eza.enable = lib.mkEnableOption "Eza as a ls(1) replacement" // { default = true; };
-    starship.enable = lib.mkEnableOption "Starship shell prompt" // { default = true; };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
+      jpcenteno-home.shell.extras.starship.enable = lib.mkDefault true;
 
       # NOTE 2024-10-14: See `~/.bashrc` for bash integration:
       #
@@ -30,7 +34,6 @@ in {
       home.packages = [
         (lib.mkIf cfg.bat.enable pkgs.bat)
         (lib.mkIf cfg.eza.enable pkgs.eza)
-        (lib.mkIf cfg.starship.enable pkgs.starship)
       ];
 
       xdg.configFile."bat/config" = {
