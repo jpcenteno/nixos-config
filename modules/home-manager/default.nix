@@ -17,7 +17,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     # Set the default color scheme.
-    colorScheme = nix-colors.colorSchemes.dracula;
+    colorScheme = nix-colors.colorSchemes.gruvbox-material-dark-soft;
 
     # These modules are enabled by default across all my home-manager configs:
     jpcenteno-home.shell.enable = lib.mkDefault true;
