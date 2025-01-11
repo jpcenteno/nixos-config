@@ -8,6 +8,7 @@ in {
     ./waybar.nix
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
+    ./hyprland/wallpaper.nix
     ./fonts.nix
     ./common/cursor.nix
   ];
@@ -26,6 +27,7 @@ in {
     jpcenteno-home.desktop.fonts.enable = true;
     jpcenteno-home.desktop.hyprland.hypridle.enable = lib.mkDefault true;
     jpcenteno-home.desktop.hyprland.hyprlock.enable = lib.mkDefault true;
+    jpcenteno-home.desktop.hyprland.wallpaper.enable = lib.mkDefault true;
 
     wayland.windowManager.hyprland = {
       enable = true;

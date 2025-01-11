@@ -27,7 +27,7 @@ in {
     programs.hyprlock = {
       enable = true;
       settings = {
-        background = {
+        background = lib.mkDefault {
           monitor = ""; # Apply to every monitor.
           color = "rgb(${colors.background})";
 
