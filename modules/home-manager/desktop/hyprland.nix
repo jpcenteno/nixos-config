@@ -57,21 +57,18 @@ in {
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
 
-          "$mod&SHIFT, h, movewindow, l"
-          "$mod&SHIFT, j, movewindow, d"
-          "$mod&SHIFT, k, movewindow, u"
-          "$mod&SHIFT, l, movewindow, r"
-          "$mod&SHIFT, left, movewindow, l"
-          "$mod&SHIFT, right, movewindow, r"
-          "$mod&SHIFT, up, movewindow, u"
-          "$mod&SHIFT, down, movewindow, d"
+          "$mod&SHIFT, h, movewindoworgroup, l"
+          "$mod&SHIFT, j, movewindoworgroup, d"
+          "$mod&SHIFT, k, movewindoworgroup, u"
+          "$mod&SHIFT, l, movewindoworgroup, r"
+          "$mod&SHIFT, left, movewindoworgroup, l"
+          "$mod&SHIFT, right, movewindoworgroup, r"
+          "$mod&SHIFT, up, movewindoworgroup, u"
+          "$mod&SHIFT, down, movewindoworgroup, d"
 
           # Cycle current workspace through the active monitors.
           "$mod&Shift&Control, h, movecurrentworkspacetomonitor, -1"
           "$mod&Shift&Control, l, movecurrentworkspacetomonitor, +1"
-
-          "$mod, TAB, cyclenext,"
-          "$mod&SHIFT, TAB, cyclenext, prev"
 
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
@@ -92,6 +89,12 @@ in {
           "$mod SHIFT, 7, movetoworkspace, 7"
           "$mod SHIFT, 8, movetoworkspace, 8"
           "$mod SHIFT, 9, movetoworkspace, 9"
+
+          # Window groups:
+          "$mod, g, togglegroup"
+          "$mod SHIFT, g, lockactivegroup, toggle"
+          "$mod, Tab, changegroupactive, f" # Change to the tab on the right.
+          "$mod&Shift, Tab, movegroupwindow" # Move tab to the right.
 
           "$mod SHIFT CONTROL, q, killactive,"
           "$mod SHIFT CONTROL, e, exit,"
