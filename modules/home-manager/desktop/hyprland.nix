@@ -129,6 +129,19 @@ in {
           background_color = "0x${config.colorScheme.palette.base00}";
         };
 
+        group = {
+          groupbar = let
+            alpha = "58";
+          in {
+            render_titles = "false";
+            scrolling = "false";
+            "col.active" = "0x${alpha}${config.colorscheme.palette.base09}";
+            "col.locked_active" = "0x${alpha}${config.colorscheme.palette.base09}";
+            "col.inactive" = "0x${alpha}${config.colorscheme.palette.base01}";
+            "col.locked_inactive" = "0x${alpha}${config.colorscheme.palette.base01}";
+          };
+        };
+
         exec = [
           # Update pre-existing Systemd and TMUX environment with relevant ENV
           # vars set by the desktop environment. For Tmux, this does not affect
