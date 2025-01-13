@@ -17,7 +17,13 @@ in {
       }
     ];
 
-
-    home.packages = [ pkgs.gh ];
+    # GitHub CLI and extensions.
+    programs.gh = {
+      enable = lib.mkforce cfg.github-cli.enable;
+      extensions = with pkgs; [
+        gh-poi # Safely clean up your local branches.
+        gh-dash # TUI dashboard for GitHub.
+      ];
+    };
   };
 }
