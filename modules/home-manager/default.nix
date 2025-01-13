@@ -6,8 +6,8 @@ in {
     ./shell/default.nix
     ./desktop/hyprland.nix
     ./utils/default.nix
+    ./system/default.nix
     ./xdg.nix
-    ./ssh-agent.nix
 
     nix-colors.homeManagerModules.default
   ];
@@ -22,7 +22,7 @@ in {
 
     # These modules are enabled by default across all my home-manager configs:
     jpcenteno-home.shell.enable = lib.mkDefault true;
+    jpcenteno-home.system.enable = lib.mkDefault true;
     jpcenteno-home.utils.enable = lib.mkDefault true;
-    jpcenteno-home.ssh-agent.enable = lib.mkDefault true;
   };
 }

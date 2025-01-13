@@ -1,8 +1,8 @@
 { config, lib, ... }:
 let
-  cfg = config.jpcenteno-home.ssh-agent;
+  cfg = config.jpcenteno-home.system.ssh-agent;
 in {
-  options.jpcenteno-home.ssh-agent = {
+  options.jpcenteno-home.system.ssh-agent = {
     enable = lib.mkEnableOption "SSH-Agent";
   };
 
