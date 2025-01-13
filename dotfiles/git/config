@@ -32,6 +32,10 @@
     current-branch = rev-parse --abbrev-ref HEAD
     current-commit = rev-parse --verify HEAD
 
+[push]
+    default = current # Push to branch with same name on the remote.
+    autoSetupRemote = true # Use default upstream.
+
 # ╔════════════════════════════════════════════════════════════════════════╗
 # ║ Commit signing                                                         ║
 # ╚════════════════════════════════════════════════════════════════════════╝
