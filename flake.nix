@@ -12,6 +12,7 @@
     };
 
     nix-colors.url = "github:misterio77/nix-colors";
+    zen-browser.url = "github:jpcenteno/zen-browser-flake";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
@@ -45,7 +46,7 @@
       };
 
       homeManagerModules = {
-        default = import ./modules/home-manager;
+        default = import ./modules/home-manager self;
         hello = import ./modules/home-manager/hello.nix;
         alacritty = import ./modules/home-manager/alacritty.nix;
         brave-browser = import ./modules/home-manager/desktop/apps/brave.nix;
