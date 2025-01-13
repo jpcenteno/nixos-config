@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+self: { config, lib, pkgs, ... }:
 let
   cfg = config.jpcenteno-home.hyprland;
 
@@ -8,7 +8,7 @@ let
 in {
 
   imports = [
-    ./apps/default.nix
+    (import ./apps/default.nix self)
     ./waybar.nix
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
