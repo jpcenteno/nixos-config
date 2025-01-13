@@ -142,6 +142,10 @@ in {
           };
         };
 
+        decoration = {
+          rounding = "16";
+        };
+
         exec = [
           # Update pre-existing Systemd and TMUX environment with relevant ENV
           # vars set by the desktop environment. For Tmux, this does not affect
