@@ -39,6 +39,16 @@ in {
       }
     ];
 
+    programs.git = {
+      enable = true;
+      userName = cfg.userName;
+      userEmail = cfg.userEmail;
+      includes = [
+        { path = ../../dotfiles/git/config; }
+      ];
+    };
+
+
     xdg.configFile = {
       "git/gitignore".source = ../../dotfiles/git/gitignore;
       "git/scripts/delete-branches-interactively".source = ../../dotfiles/git/scripts/delete-branches-interactively;
