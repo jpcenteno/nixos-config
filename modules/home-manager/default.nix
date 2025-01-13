@@ -5,7 +5,6 @@ in {
   imports = [
     ./shell/default.nix
     ./desktop/hyprland.nix
-    ./development/default.nix
     ./utils/default.nix
     ./system/default.nix
     ./xdg.nix
@@ -25,6 +24,5 @@ in {
     jpcenteno-home.shell.enable = lib.mkDefault true;
     jpcenteno-home.system.enable = lib.mkDefault true;
     jpcenteno-home.utils.enable = lib.mkDefault true;
-    jpcenteno-home.development.enable = lib.mkDefault true;
   };
 }
