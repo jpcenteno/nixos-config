@@ -2,6 +2,11 @@
 let
   cfg = config.jpcenteno-home.git;
 in {
+
+  imports = [
+    ./development/github.nix
+  ];
+
   options.jpcenteno-home.git = {
     enable = lib.mkEnableOption "Enables git with my personal config";
 
@@ -15,6 +20,10 @@ in {
       type = lib.types.nullOr lib.types.str;
       default = null;
       description = "User email to use. Must be set when Git is enabled.";
+    };
+
+    github = {
+      enable = lib.mkEnableOption "GitHub integrations" // { default = true; };
     };
   };
 
@@ -39,9 +48,13 @@ in {
       ];
     };
 
+
     xdg.configFile = {
       "git/gitignore".source = ../../dotfiles/git/gitignore;
       "git/scripts/delete-branches-interactively".source = ../../dotfiles/git/scripts/delete-branches-interactively;
     };
+
+    # Git server tools and integrations:
+    jpcenteno-home.development.github.enable = cfg.github.enable;
   };
 }
