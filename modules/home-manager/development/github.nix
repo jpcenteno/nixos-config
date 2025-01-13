@@ -7,11 +7,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # GitHub CLI and extensions.
     programs.gh = {
-      enable = lib.mkforce cfg.github-cli.enable;
+      enable = lib.mkForce true;
       extensions = with pkgs; [
-        gh-poi # Safely clean up your local branches.
+        gh-poi # Clean up branches merged at GitHub.
         gh-dash # TUI dashboard for GitHub.
       ];
     };
