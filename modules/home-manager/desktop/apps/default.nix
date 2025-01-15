@@ -7,6 +7,7 @@ in {
     ./../../alacritty.nix
     ./chromium.nix
     ./imv.nix
+    ./keepasxc.nix
     (import ./zen-browser.nix self)
 
     # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
@@ -27,6 +28,7 @@ in {
     jpcenteno-home.desktop.apps.chromium.enable = lib.mkDefault true;
     jpcenteno-home.desktop.apps.chromium.setAsDefaultBrowser = lib.mkDefault true;
     jpcenteno-home.desktop.apps.imv.enable = lib.mkDefault true;
+    jpcenteno-home.desktop.apps.keepassxc.enable = lib.mkDefault true;
     jpcenteno-home.desktop.apps.zen-browser.enable = lib.mkDefault true;
 
     home.packages = [
