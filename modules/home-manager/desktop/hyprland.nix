@@ -129,6 +129,11 @@ in {
           background_color = "0x${config.colorScheme.palette.base00}";
         };
 
+        general = {
+          "col.inactive_border" = "0x00000000";
+          "col.active_border" = "0x00000000";
+        };
+
         group = {
           groupbar = let
             alpha = "58";
