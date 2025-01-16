@@ -149,6 +149,7 @@ in {
 
         decoration = {
           rounding = "16";
+          inactive_opacity = "0.9";
         };
 
         exec = [
