@@ -30,7 +30,9 @@ in
       # Language wrapper.
       settings = {
         # Reload after rebuild.
-        live_config_reload = true;
+        general = {
+          live_config_reload = true;
+        };
 
         # Point to the right terminfo entry.
         #
