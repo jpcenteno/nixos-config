@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  packages,
   ...
 }: let
   cfg = config.jpcenteno-home.desktop.apps.imv;

@@ -13,7 +13,6 @@
     message = "Hypridle: Timeout `${attrName}` must be non-negative!";
   };
 
-  hyprlockCmd = "${lib.getExe config.programs.hyprlock.package}";
   lockSessionCmd = "${pkgs.systemd}/bin/loginctl lock-session";
 in {
   # NOTE I had to enable `sd-switch` to restart on configuration change.
