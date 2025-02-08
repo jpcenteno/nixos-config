@@ -3,13 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-
-    home-manager = {
-      # Important: Specify branch following same release as nixpkgs.
-      url = "github:nix-community/home-manager/release-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-colors.url = "github:misterio77/nix-colors";
     zen-browser.url = "github:jpcenteno/zen-browser-flake";
   };
