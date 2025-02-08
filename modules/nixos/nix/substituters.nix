@@ -1,5 +1,8 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.jpcenteno.nixos.nix.substituters;
 in {
   options.jpcenteno.nixos.nix.substituters = {
@@ -9,7 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     nix.settings.substituters = [
       "https://cache.nixos.org"
-      "https://nix-community.cachix.org" 
+      "https://nix-community.cachix.org"
     ];
 
     # NOTE There is no need to add the trusted key for `cache.nixos.org`.

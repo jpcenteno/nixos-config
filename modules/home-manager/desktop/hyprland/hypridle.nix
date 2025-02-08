@@ -1,11 +1,15 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.desktop.hyprland.hypridle;
 
-  mkListener = {timeout, ...}@attrs: (lib.mkIf (0 < timeout) attrs);
+  mkListener = {timeout, ...} @ attrs: (lib.mkIf (0 < timeout) attrs);
 
   mkTimeoutAssertion = attrName: {
-    assertion = (0 <= cfg.timeouts."${attrName}");
+    assertion = 0 <= cfg.timeouts."${attrName}";
     message = "Hypridle: Timeout `${attrName}` must be non-negative!";
   };
 
@@ -18,7 +22,7 @@ in {
   # systemd.user.startServices = "sd-switch";
   # ```
 
-  imports = [ ./hyprlock.nix ];
+  imports = [./hyprlock.nix];
 
   options.jpcenteno-home.desktop.hyprland.hypridle = {
     enable = lib.mkEnableOption "Hypridle";

@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.shell.extras;
 in {
   imports = [
@@ -9,9 +13,9 @@ in {
   options.jpcenteno-home.shell.extras = {
     enable = lib.mkEnableOption "extra shell configuration";
 
-    bat.enable = lib.mkEnableOption "Bat as a cat(1) replacement" // { default = true; };
-    direnv.enable = lib.mkEnableOption "Direnv" // { default = true; };
-    eza.enable = lib.mkEnableOption "Eza as a ls(1) replacement" // { default = true; };
+    bat.enable = lib.mkEnableOption "Bat as a cat(1) replacement" // {default = true;};
+    direnv.enable = lib.mkEnableOption "Direnv" // {default = true;};
+    eza.enable = lib.mkEnableOption "Eza as a ls(1) replacement" // {default = true;};
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [

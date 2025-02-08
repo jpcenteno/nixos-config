@@ -1,5 +1,9 @@
-self: { config, lib, pkgs, ... }:
-let
+self: {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.desktop.apps;
 in {
   imports = [
@@ -17,9 +21,8 @@ in {
 
   options.jpcenteno-home.desktop.apps = {
     enable = lib.mkEnableOption "My Desktop applications";
-    mpv.enable = lib.mkEnableOption "Mpv Video Player" // { default = true; };
+    mpv.enable = lib.mkEnableOption "Mpv Video Player" // {default = true;};
   };
-
 
   config = lib.mkIf cfg.enable {
     # Enables all the desktop applications allowing the user to opt-out.

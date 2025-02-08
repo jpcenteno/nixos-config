@@ -1,6 +1,11 @@
 # This module optionally installs extra Nix development tools.
-{ config, lib, pkgs, ... }:
-let cfg = config.development.nil;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.development.nil;
 in {
   options.development.nil = {
     enable = lib.mkOption {
@@ -12,5 +17,5 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable { home.packages = with pkgs; [ nil nixfmt ]; };
+  config = lib.mkIf cfg.enable {home.packages = with pkgs; [nil nixfmt];};
 }

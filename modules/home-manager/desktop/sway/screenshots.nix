@@ -1,5 +1,10 @@
-{ config, lib, pkgs, ... }:
-let cfg = config.self.desktop.sway.screenshots;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.self.desktop.sway.screenshots;
 in {
   options.self.desktop.sway.screenshots = {
     enable = lib.mkEnableOption "Sway screenshots";
@@ -10,7 +15,7 @@ in {
     home.packages = let
       name = "take-screenshot";
       src = builtins.readFile ../../../../dotfiles/sway/take-screenshot;
-      buildInputs = with pkgs; [ bemenu grim jq libnotify slurp sway ];
+      buildInputs = with pkgs; [bemenu grim jq libnotify slurp sway];
       script = (pkgs.writeScriptBin name src).overrideAttrs (old: {
         buildCommand = ''
           ${old.buildCommand}
@@ -18,10 +23,10 @@ in {
       });
       take-screenshot-package = pkgs.symlinkJoin {
         name = name;
-        paths = [ script ] ++ buildInputs;
-        buildInputs = [ pkgs.makeWrapper ];
+        paths = [script] ++ buildInputs;
+        buildInputs = [pkgs.makeWrapper];
         postBuild = "wrapProgram $out/bin/${name} --prefix PATH : $out/bin";
       };
-    in [ take-screenshot-package ];
+    in [take-screenshot-package];
   };
 }

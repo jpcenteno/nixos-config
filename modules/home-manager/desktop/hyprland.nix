@@ -1,12 +1,16 @@
-self: { config, lib, pkgs, ... }:
-let
+self: {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.hyprland;
 
-  import-env = pkgs.writeShellScriptBin
+  import-env =
+    pkgs.writeShellScriptBin
     "import-env"
     (builtins.readFile ../../../dotfiles/hyprland/import_env.sh);
 in {
-
   imports = [
     (import ./apps/default.nix self)
     ./waybar.nix
@@ -20,11 +24,10 @@ in {
   options.jpcenteno-home.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
 
-    wl-clipboard.enable = lib.mkEnableOption "wl-clipboard" // { default = true; };
+    wl-clipboard.enable = lib.mkEnableOption "wl-clipboard" // {default = true;};
   };
 
   config = lib.mkIf cfg.enable {
-
     jpcenteno-home.desktop.common.cursor.enable = lib.mkDefault true;
     jpcenteno-home.waybar.enable = true;
     jpcenteno-home.desktop.apps.enable = lib.mkDefault true;
@@ -98,7 +101,6 @@ in {
 
           "$mod SHIFT CONTROL, q, killactive,"
           "$mod SHIFT CONTROL, e, exit,"
-
         ];
 
         # Modifiers used:
@@ -165,7 +167,5 @@ in {
     home.packages = [
       (lib.mkIf cfg.wl-clipboard.enable pkgs.wl-clipboard)
     ];
-
   };
-
 }

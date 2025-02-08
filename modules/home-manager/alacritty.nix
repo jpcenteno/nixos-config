@@ -1,8 +1,10 @@
-{ config, lib, ... }:
-let
-  cfg = config.jpcenteno-home.alacritty;
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.jpcenteno-home.alacritty;
+in {
   options.jpcenteno-home.alacritty = {
     enable = lib.mkEnableOption "Enables Alacritty";
   };
@@ -19,7 +21,7 @@ in
           ```nix
           colorScheme = nix-colors.colorSchemes.everforest;
           ```
-          '';
+        '';
       }
     ];
 
@@ -38,7 +40,7 @@ in
         #
         # As a sidenote, this is required so that Base16 colorschemes don't break
         # under TMUX.
-        env = { "TERM" = "alacritty"; };
+        env = {"TERM" = "alacritty";};
 
         window = {
           decorations = "none";
@@ -112,9 +114,9 @@ in
       comment = "Terminal emulator";
       icon = "Alacritty";
       exec = "alacritty";
-      categories = [ "System" "TerminalEmulator" ];
+      categories = ["System" "TerminalEmulator"];
       terminal = false;
-      mimeType = [ "text/plain" ];
+      mimeType = ["text/plain"];
     };
   };
 }

@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.desktop.apps.chromium;
 
   ungoogledChromiumFlags = [
-
     # Prompt for install when downloading Chromium extensions (`.crx`
     # files) or User Scripts.
     #
@@ -29,11 +32,8 @@ let
     # 1. Relaunch `ungoogled-chromium`.
     # 2. Check `chrome://flags/#extension-mime-request-handling`.
     "--extension-mime-request-handling=always-prompt-for-install"
-
   ];
-
-in
-{
+in {
   options.jpcenteno-home.desktop.apps.chromium = {
     enable = lib.mkEnableOption "A Chromium variant with my personal configuration.";
 
@@ -72,10 +72,10 @@ in
     # user to choose interactively.
     (lib.mkIf cfg.setAsDefaultBrowser {
       xdg.mimeApps.defaultApplications = {
-       "text/html" = "chromium-browser.desktop";
-       "application/xhtml+xml" = "chromium-browser.desktop";
-       "x-scheme-handler/http" = "chromium-browser.desktop";
-       "x-scheme-handler/https" = "chromium-browser.desktop";
+        "text/html" = "chromium-browser.desktop";
+        "application/xhtml+xml" = "chromium-browser.desktop";
+        "x-scheme-handler/http" = "chromium-browser.desktop";
+        "x-scheme-handler/https" = "chromium-browser.desktop";
       };
     })
   ]);

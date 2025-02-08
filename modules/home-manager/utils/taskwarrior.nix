@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.utils.taskwarrior;
 in {
   options.jpcenteno-home.utils.taskwarrior = {
@@ -7,7 +11,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.taskwarrior-tui ];
+    home.packages = [pkgs.taskwarrior-tui];
 
     programs.taskwarrior = {
       enable = true;
