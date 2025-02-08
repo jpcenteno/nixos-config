@@ -24,7 +24,7 @@
         config = { allowUnfree = true; };
       };
     in {
-      formatter."${system}" = pkgs.nixfmt;
+      formatter."${system}" = pkgs.alejandra;
 
       nixosConfigurations = {
         abend = nixpkgs.lib.nixosSystem {
