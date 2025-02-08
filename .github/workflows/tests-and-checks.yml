@@ -21,7 +21,6 @@ jobs:
       - name: Setup Nix
         uses: cachix/install-nix-action@v27
 
-      - name: Run nix fmt and check for changes
+      - name: Run flake checks
         run: |
-          nix fmt
-          git diff --exit-code
+          nix flake check
