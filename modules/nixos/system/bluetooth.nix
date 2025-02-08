@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno.nixos.system.bluetooth;
 in {
   options.jpcenteno.nixos.system.bluetooth = {
@@ -8,6 +12,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     hardware.bluetooth.enable = true;
-    environment.systemPackages = [ pkgs.bluetuith ];
+    environment.systemPackages = [pkgs.bluetuith];
   };
 }

@@ -1,5 +1,9 @@
-self: { config, lib, nix-colors, ... }:
-let
+self: {
+  config,
+  lib,
+  nix-colors,
+  ...
+}: let
   cfg = config.jpcenteno-home;
 in {
   imports = [

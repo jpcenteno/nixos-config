@@ -1,5 +1,8 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.jpcenteno-home.system.ssh-agent;
 in {
   options.jpcenteno-home.system.ssh-agent = {

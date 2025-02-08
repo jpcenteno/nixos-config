@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.utils.lf;
 in {
   options.jpcenteno-home.utils.lf = {
@@ -7,7 +11,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.lf ];
+    home.packages = [pkgs.lf];
 
     xdg = {
       enable = true;

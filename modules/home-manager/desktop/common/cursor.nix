@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.desktop.common.cursor;
 in {
   options.jpcenteno-home.desktop.common.cursor = {

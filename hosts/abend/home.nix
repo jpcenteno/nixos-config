@@ -1,7 +1,10 @@
-{ config, pkgs, pkgs-unstable, inputs, ... }:
-
 {
-
+  config,
+  pkgs,
+  pkgs-unstable,
+  inputs,
+  ...
+}: {
   imports = [
     ../../modules/home-manager/alacritty.nix
     ../../modules/home-manager/anki.nix

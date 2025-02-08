@@ -1,8 +1,11 @@
-{ pkgs, lib, config, ... }:
-let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   cfg = config.jpcenteno-home.git;
 in {
-
   imports = [
     ./development/github.nix
   ];
@@ -23,7 +26,7 @@ in {
     };
 
     github = {
-      enable = lib.mkEnableOption "GitHub integrations" // { default = true; };
+      enable = lib.mkEnableOption "GitHub integrations" // {default = true;};
     };
   };
 
@@ -44,10 +47,9 @@ in {
       userName = cfg.userName;
       userEmail = cfg.userEmail;
       includes = [
-        { path = ../../dotfiles/git/config; }
+        {path = ../../dotfiles/git/config;}
       ];
     };
-
 
     xdg.configFile = {
       "git/gitignore".source = ../../dotfiles/git/gitignore;

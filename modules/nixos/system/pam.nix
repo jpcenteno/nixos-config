@@ -1,5 +1,8 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.jpcenteno.nixos.system.pam;
 in {
   options.jpcenteno.nixos.system.pam = {

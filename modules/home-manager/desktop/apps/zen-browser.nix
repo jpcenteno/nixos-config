@@ -1,5 +1,9 @@
-self: { config, lib, pkgs, ... }:
-let
+self: {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.desktop.apps.zen-browser;
 in {
   options.jpcenteno-home.desktop.apps.zen-browser = {
@@ -7,7 +11,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-
     home.packages = [
       self.inputs.zen-browser.packages."${pkgs.system}".default
     ];

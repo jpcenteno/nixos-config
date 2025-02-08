@@ -1,62 +1,64 @@
-{ lib, config, pkgs, ... }:
-
-let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   swaySessionSystemdTarget = "sway-session.target";
   palette = config.colorScheme.palette;
-  waylockCommand =
-    "${pkgs.waylock}/bin/waylock -fork-on-lock -init-color 0x${palette.base00} -input-color 0x${palette.base0B} -fail-color 0x${palette.base0A}";
+  waylockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock -init-color 0x${palette.base00} -input-color 0x${palette.base0B} -fail-color 0x${palette.base0A}";
   gapSizeInPixels = 16;
   desktopBackground = palette.base03;
 in {
-  imports = [ ./desktop/sway/screenshots.nix ];
+  imports = [./desktop/sway/screenshots.nix];
 
   services.dunst.enable = true;
 
   self.desktop.sway.screenshots.enable = true;
 
-  home.packages = with pkgs; [ bemenu brightnessctl waylock mpv ];
+  home.packages = with pkgs; [bemenu brightnessctl waylock mpv];
 
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
-    config = let modifier = "Mod4";
+    config = let
+      modifier = "Mod4";
     in {
       inherit modifier;
       keybindings = let
         wpctl = "${pkgs.wireplumber}/bin/wpctl";
         brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-      in lib.mkOptionDefault {
-        "XF86AudioMute" = "exec ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
-        "XF86AudioRaiseVolume" =
-          "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-        "XF86AudioLowerVolume" =
-          "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-        "XF86MonBrightnessUp" = "exec ${brightnessctl} set +5%";
-        "XF86MonBrightnessDown" = "exec ${brightnessctl} set 5%-";
-        "Print" = "exec take-screenshot";
+      in
+        lib.mkOptionDefault {
+          "XF86AudioMute" = "exec ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioRaiseVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioLowerVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "XF86MonBrightnessUp" = "exec ${brightnessctl} set +5%";
+          "XF86MonBrightnessDown" = "exec ${brightnessctl} set 5%-";
+          "Print" = "exec take-screenshot";
 
-        "${modifier}+Control+Shift+l" = "move workspace to output right";
-        "${modifier}+Control+Shift+h" = "move workspace to output left";
-        "${modifier}+Control+Shift+j" = "move workspace to output down";
-        "${modifier}+Control+Shift+k" = "move workspace to output up";
-      };
+          "${modifier}+Control+Shift+l" = "move workspace to output right";
+          "${modifier}+Control+Shift+h" = "move workspace to output left";
+          "${modifier}+Control+Shift+j" = "move workspace to output down";
+          "${modifier}+Control+Shift+k" = "move workspace to output up";
+        };
       terminal = "alacritty";
       menu = "bemenu-run";
-      focus = { followMouse = false; };
+      focus = {followMouse = false;};
       window.titlebar = false;
       input."*" = {
         xkb_layout = "us";
         xkb_variant = "altgr-intl";
       };
       output = {
-        "*" = { background = "#${desktopBackground} solid_color"; };
+        "*" = {background = "#${desktopBackground} solid_color";};
         "eDP-1" = {
           scale = "1";
           mode = "1920x1080";
         };
-        "Samsung Electric Company U32R59x H1AK500000" = { scale = "1.2"; };
+        "Samsung Electric Company U32R59x H1AK500000" = {scale = "1.2";};
       };
-      bars = [ ]; # Hide default bar. Use `waybar` instead.
+      bars = []; # Hide default bar. Use `waybar` instead.
       startup = [
         {
           command = "systemctl --user restart ${swaySessionSystemdTarget}";
@@ -71,9 +73,9 @@ in {
           always = true;
         }
       ];
-      gaps = { inner = gapSizeInPixels; };
+      gaps = {inner = gapSizeInPixels;};
       fonts = {
-        names = [ "monospace" ];
+        names = ["monospace"];
         size = 12.0;
       };
       colors = {
@@ -129,7 +131,7 @@ in {
     settings = {
       mainBar = {
         position = "top";
-        modules-left = [ "sway/workspaces" ];
+        modules-left = ["sway/workspaces"];
         modules-right = [
           "disk"
           "memory"
@@ -141,7 +143,7 @@ in {
           "battery"
           "clock"
         ];
-        clock = { format = "  {:%H:%M}"; };
+        clock = {format = "  {:%H:%M}";};
         battery = {
           interval = 15;
           states = {
@@ -150,19 +152,19 @@ in {
             "critical" = 15;
           };
           format = "{icon}  {capacity}%";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = ["" "" "" "" ""];
           format-charging = "󰂄 {capacity}%";
         };
         pulseaudio = {
           format = "{icon}  {volume}%";
           format-bluetooth = "{icon}  {volume}%";
           format-muted = "󰝟";
-          format-icons = { default = [ "󰕿" "󰖀" "󰕾" ]; };
+          format-icons = {default = ["󰕿" "󰖀" "󰕾"];};
         };
-        cpu = { format = "  {}%"; };
+        cpu = {format = "  {}%";};
         temperature = {
           format = "{icon} {temperatureC}°C";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = ["" "" "" "" ""];
         };
         network = {
           interval = 10;
@@ -183,12 +185,11 @@ in {
             ↓ {bandwidthDownBytes}
             ↑ {bandwidthUpBytes}'';
         };
-        memory = { format = "  {}%"; };
-        disk = { format = "  {percentage_used}%"; };
+        memory = {format = "  {}%";};
+        disk = {format = "  {percentage_used}%";};
         bluetooth = {
           format-connected = " {num_connections}";
-          on-click =
-            "${pkgs.alacritty}/bin/alacritty -e ${pkgs.bluetuith}/bin/bluetuith";
+          on-click = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.bluetuith}/bin/bluetuith";
           tooltip-format = ''
             {controller_alias}	{controller_address}
 
@@ -199,10 +200,8 @@ in {
             {num_connections} connected
 
             {device_enumerate}'';
-          tooltip-format-enumerate-connected =
-            "{device_alias}	{device_address}";
-          tooltip-format-enumerate-connected-battery =
-            "{device_alias}	{device_address}	{device_battery_percentage}%";
+          tooltip-format-enumerate-connected = "{device_alias}	{device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias}	{device_address}	{device_battery_percentage}%";
         };
       };
     };
@@ -254,8 +253,7 @@ in {
   };
 
   services.swayidle = let
-    setDisplayStatusCommand = status:
-      ''${pkgs.sway}/bin/swaymsg output "*" dpms ${status}'';
+    setDisplayStatusCommand = status: ''${pkgs.sway}/bin/swaymsg output "*" dpms ${status}'';
     lockTimeout = 120;
     displayOffTimeout = lockTimeout + 30;
   in {
@@ -285,7 +283,7 @@ in {
 
     # FIXME:To make sure swayidle waits for swaylock to lock the screen before
     # it releases the inhibition lock, the -w options is used in swayidle, and
-    # -f in swaylock. 
+    # -f in swaylock.
   };
 
   services.wlsunset = {
@@ -303,7 +301,7 @@ in {
   };
 
   home.sessionVariables = with palette; {
-    BEMENU_OPTS = lib.cli.toGNUCommandLineShell { } {
+    BEMENU_OPTS = lib.cli.toGNUCommandLineShell {} {
       ignorecase = true; # match items case insensitively.
       center = true; # Mimic a floating alert window.
 

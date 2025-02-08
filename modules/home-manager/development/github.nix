@@ -1,13 +1,19 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.development.github;
 in {
   options.jpcenteno-home.development.github = {
     enable = lib.mkEnableOption "GitHub tools";
 
-    preferSSH = lib.mkEnableOption "Redirect HTTPS connections to SSH" // {
-      default = true;
-    };
+    preferSSH =
+      lib.mkEnableOption "Redirect HTTPS connections to SSH"
+      // {
+        default = true;
+      };
   };
 
   config = lib.mkIf cfg.enable {

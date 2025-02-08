@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.jpcenteno-home.desktop.hyprland.wallpaper;
   wallpaperTargetPath = config.xdg.configFile."wallpaper.jpg".source;
 in {
@@ -12,15 +16,14 @@ in {
     xdg.configFile."wallpaper.jpg".source = ../../../../dotfiles/wallpapers/dark_leaves_gruvbox_material.jpg;
 
     systemd.user.services.swaybg = {
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {WantedBy = ["graphical-session.target"];};
 
       Unit = {
         ConditionEnvironment = "WAYLAND_DISPLAY";
         Description = "swaybg";
-        After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
-        X-Restart-Triggers =
-          [ "${wallpaperTargetPath}" ];
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target"];
+        X-Restart-Triggers = ["${wallpaperTargetPath}"];
       };
 
       Service = {
