@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       # Important: Specify branch following same release as nixpkgs.
@@ -18,15 +17,10 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    pkgs-unstable = import nixpkgs-unstable {
-      system = "${system}";
-      config = {allowUnfree = true;};
-    };
   in {
     formatter."${system}" = pkgs.alejandra;
 
