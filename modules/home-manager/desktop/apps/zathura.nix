@@ -5,7 +5,6 @@
   ...
 }: let
   cfg = config.jpcenteno-home.desktop.apps.zathura;
-  desktopEntry = "org.pwmt.zathura.desktop";
 in {
   options.jpcenteno-home.desktop.apps.zathura = {
     enable = lib.mkEnableOption "Zathura";

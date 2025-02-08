@@ -6,14 +6,17 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     ...
-  } @ inputs: let
+  } : let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     formatter."${system}" = pkgs.alejandra;
+
+    devShells.${system}.default = pkgs.mkShell {
+      packages = with pkgs; [ nil ];
+    };
 
     nixosModules = {
       default = import ./modules/nixos/default.nix;
