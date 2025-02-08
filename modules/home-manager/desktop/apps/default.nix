@@ -1,4 +1,4 @@
-self: {
+{
   config,
   lib,
   pkgs,
@@ -12,7 +12,7 @@ in {
     ./chromium.nix
     ./imv.nix
     ./keepasxc.nix
-    (import ./zen-browser.nix self)
+    ./zen-browser.nix
 
     # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
     # that sets the flatpack remotes.

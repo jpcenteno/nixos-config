@@ -1,4 +1,4 @@
-self: {
+{
   config,
   lib,
   nix-colors,
@@ -8,7 +8,7 @@ self: {
 in {
   imports = [
     ./shell/default.nix
-    (import ./desktop/hyprland.nix self)
+    ./desktop/hyprland.nix
     ./utils/default.nix
     ./system/default.nix
     ./xdg.nix

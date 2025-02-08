@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    zen-browser.url = "github:jpcenteno/zen-browser-flake";
   };
 
   outputs = {
@@ -23,7 +22,7 @@
     };
 
     homeManagerModules = {
-      default = import ./modules/home-manager self;
+      default = import ./modules/home-manager;
       hello = import ./modules/home-manager/hello.nix;
       alacritty = import ./modules/home-manager/alacritty.nix;
       brave-browser = import ./modules/home-manager/desktop/apps/brave.nix;
