@@ -1,4 +1,4 @@
-self: {
+{
   config,
   lib,
   pkgs,
@@ -12,7 +12,7 @@ self: {
     (builtins.readFile ../../../dotfiles/hyprland/import_env.sh);
 in {
   imports = [
-    (import ./apps/default.nix self)
+    ./apps/default.nix
     ./waybar.nix
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
