@@ -30,19 +30,6 @@
   in {
     formatter."${system}" = pkgs.alejandra;
 
-    nixosConfigurations = {
-      abend = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          inherit pkgs-unstable;
-        };
-        modules = [
-          ./hosts/abend/configuration.nix
-          inputs.home-manager.nixosModules.default
-        ];
-      };
-    };
-
     nixosModules = {
       default = import ./modules/nixos/default.nix;
       hello = import ./modules/nixos/hello.nix;
