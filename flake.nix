@@ -46,6 +46,18 @@
         '';
         installPhase = "mkdir $out"; # Will fail otherwise.
       };
+
+      statix = pkgs.stdenv.mkDerivation {
+        name = "statix";
+        src = ./.;
+        dontBuild = true;
+        doCheck = true;
+        nativeBuildInputs = [pkgs.statix];
+        checkPhase = ''
+          statix check .
+        '';
+        installPhase = "mkdir $out"; # Will fail otherwise.
+      };
     };
 
     devShells.${system}.default = pkgs.mkShell {
