@@ -16,8 +16,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    jpcenteno.nixos.system.audio.enable = lib.mkDefault true;
-    jpcenteno.nixos.system.bluetooth.enable = lib.mkDefault true;
-    jpcenteno.nixos.system.pam.enable = lib.mkDefault true;
+    jpcenteno.nixos.system = {
+      audio.enable = lib.mkDefault true;
+      bluetooth.enable = lib.mkDefault true;
+      pam.enable = lib.mkDefault true;
+    };
   };
 }

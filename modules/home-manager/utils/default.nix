@@ -16,8 +16,10 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    jpcenteno-home.utils.file-compression.enable = lib.mkDefault true;
-    jpcenteno-home.utils.taskwarrior.enable = lib.mkDefault true;
-    jpcenteno-home.utils.lf.enable = lib.mkDefault true;
+    jpcenteno-home.utils = {
+      file-compression.enable = lib.mkDefault true;
+      taskwarrior.enable = lib.mkDefault true;
+      lf.enable = lib.mkDefault true;
+    };
   };
 }

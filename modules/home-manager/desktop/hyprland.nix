@@ -28,13 +28,19 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    jpcenteno-home.desktop.common.cursor.enable = lib.mkDefault true;
-    jpcenteno-home.waybar.enable = true;
-    jpcenteno-home.desktop.apps.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.fonts.enable = true;
-    jpcenteno-home.desktop.hyprland.hypridle.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.hyprland.hyprlock.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.hyprland.wallpaper.enable = lib.mkDefault true;
+    jpcenteno-home = {
+      waybar.enable = true;
+      desktop = {
+        apps.enable = lib.mkDefault true;
+        common.cursor.enable = lib.mkDefault true;
+        fonts.enable = true;
+        hyprland = {
+          hypridle.enable = lib.mkDefault true;
+          hyprlock.enable = lib.mkDefault true;
+          wallpaper.enable = lib.mkDefault true;
+        };
+      };
+    };
 
     wayland.windowManager.hyprland = {
       enable = true;

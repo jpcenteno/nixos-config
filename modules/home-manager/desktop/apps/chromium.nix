@@ -54,8 +54,8 @@ in {
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       programs.chromium = {
+        inherit (cfg) package;
         enable = true;
-        package = cfg.package;
         # FIXME this will break non-Wayland or non PipeWire hosts.
         commandLineArgs = lib.concatLists [
           [

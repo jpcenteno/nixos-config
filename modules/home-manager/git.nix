@@ -42,9 +42,8 @@ in {
     ];
 
     programs.git = {
+      inherit (cfg) userName userEmail;
       enable = true;
-      userName = cfg.userName;
-      userEmail = cfg.userEmail;
       includes = [
         {path = ../../dotfiles/git/config;}
       ];

@@ -15,8 +15,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    jpcenteno.nixos.admin.enable = lib.mkDefault true;
-    jpcenteno.nixos.nix.enable = lib.mkDefault true;
-    jpcenteno.nixos.system.enable = lib.mkDefault true;
+    jpcenteno.nixos = {
+      admin.enable = lib.mkDefault true;
+      nix.enable = lib.mkDefault true;
+      system.enable = lib.mkDefault true;
+    };
   };
 }

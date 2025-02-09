@@ -41,12 +41,12 @@ in {
       ];
 
       xdg.configFile."bat/config" = {
-        enable = cfg.bat.enable;
+        inherit (cfg.bat) enable;
         source = ../../../dotfiles/bat/config;
       };
 
       programs.direnv = {
-        enable = cfg.direnv.enable;
+        inherit (cfg.direnv) enable;
         # Nix-direnv is a program that improves the `use nix` and `use flake`
         # startup time by adding a cache for the nix-shell environment and
         # preventing the garbage collector from removing the environment
