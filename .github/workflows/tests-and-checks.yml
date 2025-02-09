@@ -21,6 +21,9 @@ jobs:
       - name: Setup Nix
         uses: cachix/install-nix-action@v27
 
+      - name: Install devShell packages
+        run: nix develop --command -- true
+
       - name: Run flake checks
         run: |
           nix flake check
