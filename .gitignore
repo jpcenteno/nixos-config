@@ -1,0 +1,4 @@
+# direnv files
+.direnv
+.envrc
+.env
