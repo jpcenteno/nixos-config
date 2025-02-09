@@ -25,8 +25,10 @@ in {
     colorScheme = nix-colors.colorSchemes.gruvbox-material-dark-soft;
 
     # These modules are enabled by default across all my home-manager configs:
-    jpcenteno-home.shell.enable = lib.mkDefault true;
-    jpcenteno-home.system.enable = lib.mkDefault true;
-    jpcenteno-home.utils.enable = lib.mkDefault true;
+    jpcenteno-home = {
+      shell.enable = lib.mkDefault true;
+      system.enable = lib.mkDefault true;
+      utils.enable = lib.mkDefault true;
+    };
   };
 }

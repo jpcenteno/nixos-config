@@ -64,7 +64,7 @@ with lib; let
   }
   ```
   */
-  inputsToRegistry = lib.attrsets.mapAttrs (_name: flake: {flake = flake;});
+  inputsToRegistry = lib.attrsets.mapAttrs (_name: flake: {inherit flake;});
 
   /*
   *

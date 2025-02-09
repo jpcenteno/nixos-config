@@ -45,8 +45,8 @@ in {
     programs.waybar.systemd.enable = true;
 
     programs.waybar = {
+      inherit (cfg) package;
       enable = true;
-      package = cfg.package;
       settings = {
         mainBar = {
           position = "top";

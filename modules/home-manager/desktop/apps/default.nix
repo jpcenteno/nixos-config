@@ -25,14 +25,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # Enables all the desktop applications allowing the user to opt-out.
-    jpcenteno-home.alacritty.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.apps.zathura.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.apps.chromium.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.apps.chromium.setAsDefaultBrowser = lib.mkDefault true;
-    jpcenteno-home.desktop.apps.imv.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.apps.keepassxc.enable = lib.mkDefault true;
-    jpcenteno-home.desktop.apps.zen-browser.enable = lib.mkDefault true;
+    jpcenteno-home = {
+      # Enables all the desktop applications allowing the user to opt-out.
+      alacritty.enable = lib.mkDefault true;
+      desktop.apps = {
+        zathura.enable = lib.mkDefault true;
+        chromium.enable = lib.mkDefault true;
+        chromium.setAsDefaultBrowser = lib.mkDefault true;
+        imv.enable = lib.mkDefault true;
+        keepassxc.enable = lib.mkDefault true;
+        zen-browser.enable = lib.mkDefault true;
+      };
+    };
 
     home.packages = [
       (lib.mkIf cfg.mpv.enable pkgs.mpv)

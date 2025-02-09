@@ -11,9 +11,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    xdg.enable = true;
-    xdg.mime.enable = true;
-    xdg.mimeApps.enable = true;
+    xdg = {
+      enable = true;
+      mime.enable = true;
+      mimeApps.enable = true;
+    };
 
     home.packages = [pkgs.xdg-utils];
   };
