@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   cfg = config.jpcenteno-home.git;
@@ -27,6 +28,8 @@ in {
     github = {
       enable = lib.mkEnableOption "GitHub integrations" // {default = true;};
     };
+
+    git-crypt.enable = lib.mkEnableOption "git-crypt" // { default = true; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -56,5 +59,9 @@ in {
 
     # Git server tools and integrations:
     jpcenteno-home.development.github.enable = cfg.github.enable;
+
+    home.packages = [
+      (lib.mkIf cfg.git-crypt.enable pkgs.git-crypt)
+    ];
   };
 }
