@@ -23,6 +23,9 @@ in {
         bun.disabled = lib.mkDefault true;
         conda.disabled = lib.mkDefault true;
         nodejs.disabled = lib.mkDefault true;
+
+        # Development environments:
+        nix_shell.format = "via [$symbol$state]($style) ";
       };
     };
   };
