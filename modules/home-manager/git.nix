@@ -29,7 +29,7 @@ in {
       enable = lib.mkEnableOption "GitHub integrations" // {default = true;};
     };
 
-    git-crypt.enable = lib.mkEnableOption "git-crypt" // { default = true; };
+    git-crypt.enable = lib.mkEnableOption "git-crypt" // {default = true;};
   };
 
   config = lib.mkIf cfg.enable {
