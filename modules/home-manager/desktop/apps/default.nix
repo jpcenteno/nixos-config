@@ -22,7 +22,7 @@ in {
   options.jpcenteno-home.desktop.apps = {
     enable = lib.mkEnableOption "My Desktop applications";
     mpv.enable = lib.mkEnableOption "Mpv Video Player" // {default = true;};
-    gnumeric.enable = lib.mkEnableOption "Gnumeric" // { default = true; };
+    gnumeric.enable = lib.mkEnableOption "Gnumeric" // {default = true;};
   };
 
   config = lib.mkIf cfg.enable {
