@@ -23,7 +23,7 @@ in {
     enable = lib.mkEnableOption "My Desktop applications";
     mpv.enable = lib.mkEnableOption "Mpv Video Player" // {default = true;};
     gnumeric.enable = lib.mkEnableOption "Gnumeric" // {default = true;};
-    libreoffice.enable = lib.mkEnableOption "Libreoffice"// { default = true; };
+    libreoffice.enable = lib.mkEnableOption "Libreoffice" // {default = true;};
   };
 
   config = lib.mkIf cfg.enable {
