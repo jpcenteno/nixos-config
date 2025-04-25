@@ -21,6 +21,8 @@ in {
 
   options.jpcenteno-home.desktop.apps = {
     enable = lib.mkEnableOption "My Desktop applications";
+
+    calibre.enable = lib.mkEnableOption "Calibre" // { default = true; };
     mpv.enable = lib.mkEnableOption "Mpv Video Player" // {default = true;};
     gnumeric.enable = lib.mkEnableOption "Gnumeric" // {default = true;};
     libreoffice.enable = lib.mkEnableOption "Libreoffice" // {default = true;};
@@ -42,6 +44,7 @@ in {
     };
 
     home.packages = [
+      (lib.mkIf cfg.calibre.enable pkgs.calibre)
       (lib.mkIf cfg.mpv.enable pkgs.mpv)
       (lib.mkIf cfg.gnumeric.enable pkgs.gnumeric)
       (lib.mkIf cfg.libreoffice.enable pkgs.libreoffice)
