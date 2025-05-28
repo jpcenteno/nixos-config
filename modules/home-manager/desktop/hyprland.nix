@@ -138,8 +138,9 @@ in {
         };
 
         general = {
-          "col.inactive_border" = "0x00000000";
-          "col.active_border" = "0x00000000";
+          "border_size" = 2;
+          "col.inactive_border" = "0xff${config.colorScheme.palette.base03}";
+          "col.active_border" = "0xff${config.colorScheme.palette.base0A}";
         };
 
         group = {
