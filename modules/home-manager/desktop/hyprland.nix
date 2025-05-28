@@ -16,7 +16,6 @@ in {
     ./waybar.nix
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
-    ./hyprland/wallpaper.nix
     ./fonts.nix
     ./common/cursor.nix
   ];
@@ -37,7 +36,6 @@ in {
         hyprland = {
           hypridle.enable = lib.mkDefault true;
           hyprlock.enable = lib.mkDefault true;
-          wallpaper.enable = lib.mkDefault true;
         };
       };
     };
