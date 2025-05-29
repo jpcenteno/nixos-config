@@ -1,5 +1,8 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.jpcenteno-home.desktop.hyprland.wofi;
 in {
   options.jpcenteno-home.desktop.hyprland.wofi = {
@@ -11,22 +14,22 @@ in {
       enable = true;
 
       settings = {
-        width=600;
-        height=400;
-        location="center";
-        show="drun";
-        prompt="Search...";
-        filter_rate=100;
-        allow_markup=true;
-        no_actions=true;
-        halign="fill";
-        orientation="vertical";
-        content_halign="fill";
-        insensitive=true;
-        allow_images=true;
-        image_size=24;
-        gtk_dark=true;
-        dynamic_lines=true;
+        width = 600;
+        height = 400;
+        location = "center";
+        show = "drun";
+        prompt = "Search...";
+        filter_rate = 100;
+        allow_markup = true;
+        no_actions = true;
+        halign = "fill";
+        orientation = "vertical";
+        content_halign = "fill";
+        insensitive = true;
+        allow_images = true;
+        image_size = 24;
+        gtk_dark = true;
+        dynamic_lines = true;
       };
 
       # See: https://github.com/princejoogie/dotfiles/blob/28276ca726b8a4418660e2f9e38e4ccbc550c839/hyprland/.config/wofi/style.css
