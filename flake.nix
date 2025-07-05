@@ -17,9 +17,9 @@
         src = ./.;
         dontBuild = true;
         doCheck = true;
-        nativeBuildInputs = with pkgs; [alejandra];
+        nativeBuildInputs = with pkgs; [nixfmt-rfc-style];
         checkPhase = ''
-          find . -name '*.nix' | xargs alejandra --check
+          find . -name '*.nix' | xargs nixfmt --check
         '';
         installPhase = "mkdir $out"; # Will fail otherwise.
       };
