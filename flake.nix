@@ -3,26 +3,28 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {nixpkgs, ...}: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    formatter."${system}" = pkgs.alejandra;
+  outputs = { self, nixpkgs, systems, treefmt-nix, ...}: let
+      # Small tool to iterate over each systems
+      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
 
-    checks.${system} = {
-      format = pkgs.stdenv.mkDerivation {
-        name = "format";
-        src = ./.;
-        dontBuild = true;
-        doCheck = true;
-        nativeBuildInputs = with pkgs; [nixfmt-rfc-style];
-        checkPhase = ''
-          find . -name '*.nix' | xargs nixfmt --check
-        '';
-        installPhase = "mkdir $out"; # Will fail otherwise.
-      };
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      # Eval the treefmt modules from ./treefmt.nix
+      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+    in
+    {
+            formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+
+    checks = eachSystem (pkgs: {
+      format = treefmtEval.${pkgs.system}.config.build.check self;
 
       nil = pkgs.stdenv.mkDerivation {
         name = "linter";
@@ -58,7 +60,7 @@
         '';
         installPhase = "mkdir $out"; # Will fail otherwise.
       };
-    };
+    });
 
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [nil];
