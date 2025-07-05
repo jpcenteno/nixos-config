@@ -3,15 +3,17 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.tmux;
-in {
+in
+{
   options.jpcenteno-home.tmux = {
     enable = lib.mkEnableOption "Enable Tmux with my personal config";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.tmux];
+    home.packages = [ pkgs.tmux ];
     xdg.configFile."tmux/tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
   };
 }

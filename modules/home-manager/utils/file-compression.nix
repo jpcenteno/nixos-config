@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.utils.file-compression;
-in {
+in
+{
   options.jpcenteno-home.utils.file-compression = {
     enable = lib.mkEnableOption "File compression utilities";
   };

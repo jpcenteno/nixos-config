@@ -3,9 +3,11 @@
   lib,
   nix-colors,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home;
-in {
+in
+{
   imports = [
     ./shell/default.nix
     ./desktop/hyprland.nix

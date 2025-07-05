@@ -3,14 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.desktop.apps.keepassxc;
-in {
+in
+{
   options.jpcenteno-home.desktop.apps.keepassxc = {
     enable = lib.mkEnableOption "KeepassXC";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.keepassxc];
+    home.packages = [ pkgs.keepassxc ];
   };
 }

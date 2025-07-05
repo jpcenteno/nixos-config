@@ -3,120 +3,138 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   swaySessionSystemdTarget = "sway-session.target";
   inherit (config.colorScheme) palette;
   waylockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock -init-color 0x${palette.base00} -input-color 0x${palette.base0B} -fail-color 0x${palette.base0A}";
   gapSizeInPixels = 16;
   desktopBackground = palette.base03;
-in {
-  imports = [./desktop/sway/screenshots.nix];
+in
+{
+  imports = [ ./desktop/sway/screenshots.nix ];
 
   self.desktop.sway.screenshots.enable = true;
 
-  home.packages = with pkgs; [bemenu brightnessctl waylock mpv];
+  home.packages = with pkgs; [
+    bemenu
+    brightnessctl
+    waylock
+    mpv
+  ];
 
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
-    config = let
-      modifier = "Mod4";
-    in {
-      inherit modifier;
-      keybindings = let
-        wpctl = "${pkgs.wireplumber}/bin/wpctl";
-        brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+    config =
+      let
+        modifier = "Mod4";
       in
-        lib.mkOptionDefault {
-          "XF86AudioMute" = "exec ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioRaiseVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-          "XF86AudioLowerVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-          "XF86MonBrightnessUp" = "exec ${brightnessctl} set +5%";
-          "XF86MonBrightnessDown" = "exec ${brightnessctl} set 5%-";
-          "Print" = "exec take-screenshot";
+      {
+        inherit modifier;
+        keybindings =
+          let
+            wpctl = "${pkgs.wireplumber}/bin/wpctl";
+            brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+          in
+          lib.mkOptionDefault {
+            "XF86AudioMute" = "exec ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            "XF86AudioRaiseVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+            "XF86AudioLowerVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+            "XF86MonBrightnessUp" = "exec ${brightnessctl} set +5%";
+            "XF86MonBrightnessDown" = "exec ${brightnessctl} set 5%-";
+            "Print" = "exec take-screenshot";
 
-          "${modifier}+Control+Shift+l" = "move workspace to output right";
-          "${modifier}+Control+Shift+h" = "move workspace to output left";
-          "${modifier}+Control+Shift+j" = "move workspace to output down";
-          "${modifier}+Control+Shift+k" = "move workspace to output up";
+            "${modifier}+Control+Shift+l" = "move workspace to output right";
+            "${modifier}+Control+Shift+h" = "move workspace to output left";
+            "${modifier}+Control+Shift+j" = "move workspace to output down";
+            "${modifier}+Control+Shift+k" = "move workspace to output up";
+          };
+        terminal = "alacritty";
+        menu = "bemenu-run";
+        focus = {
+          followMouse = false;
         };
-      terminal = "alacritty";
-      menu = "bemenu-run";
-      focus = {followMouse = false;};
-      window.titlebar = false;
-      input."*" = {
-        xkb_layout = "us";
-        xkb_variant = "altgr-intl";
+        window.titlebar = false;
+        input."*" = {
+          xkb_layout = "us";
+          xkb_variant = "altgr-intl";
+        };
+        output = {
+          "*" = {
+            background = "#${desktopBackground} solid_color";
+          };
+          "eDP-1" = {
+            scale = "1";
+            mode = "1920x1080";
+          };
+          "Samsung Electric Company U32R59x H1AK500000" = {
+            scale = "1.2";
+          };
+        };
+        bars = [ ]; # Hide default bar. Use `waybar` instead.
+        startup = [
+          {
+            command = "systemctl --user restart ${swaySessionSystemdTarget}";
+            always = true;
+          }
+          {
+            command = "systemctl --user restart waybar";
+            always = true;
+          }
+          {
+            command = "systemctl --user restart swayidle";
+            always = true;
+          }
+        ];
+        gaps = {
+          inner = gapSizeInPixels;
+        };
+        fonts = {
+          names = [ "monospace" ];
+          size = 12.0;
+        };
+        colors = {
+          focused = {
+            background = "#${palette.base09}";
+            childBorder = "#${palette.base09}";
+            border = "#${palette.base09}";
+            indicator = "#${palette.base09}";
+            text = "#${palette.base00}";
+          };
+          focusedInactive = {
+            background = "#${palette.base00}";
+            childBorder = "#${palette.base00}";
+            border = "#${palette.base00}";
+            indicator = "#${palette.base00}";
+            text = "#${palette.base06}";
+          };
+          unfocused = {
+            background = "#${palette.base00}";
+            childBorder = "#${palette.base00}";
+            border = "#${palette.base00}";
+            indicator = "#${palette.base00}";
+            text = "#${palette.base06}";
+          };
+          urgent = {
+            background = "#${palette.base0A}";
+            childBorder = "#${palette.base00}";
+            border = "#${palette.base00}";
+            indicator = "#${palette.base00}";
+            text = "#${palette.base00}";
+          };
+        };
+        input = {
+          "type:pointer".natural_scroll = "enabled";
+          "type:touchpad" = {
+            dwt = "enabled"; # Disable while typing.
+            tap = "enabled"; # Tap to click.
+            accel_profile = "adaptive";
+            pointer_accel = "0.5";
+            natural_scroll = "enabled";
+          };
+        };
       };
-      output = {
-        "*" = {background = "#${desktopBackground} solid_color";};
-        "eDP-1" = {
-          scale = "1";
-          mode = "1920x1080";
-        };
-        "Samsung Electric Company U32R59x H1AK500000" = {scale = "1.2";};
-      };
-      bars = []; # Hide default bar. Use `waybar` instead.
-      startup = [
-        {
-          command = "systemctl --user restart ${swaySessionSystemdTarget}";
-          always = true;
-        }
-        {
-          command = "systemctl --user restart waybar";
-          always = true;
-        }
-        {
-          command = "systemctl --user restart swayidle";
-          always = true;
-        }
-      ];
-      gaps = {inner = gapSizeInPixels;};
-      fonts = {
-        names = ["monospace"];
-        size = 12.0;
-      };
-      colors = {
-        focused = {
-          background = "#${palette.base09}";
-          childBorder = "#${palette.base09}";
-          border = "#${palette.base09}";
-          indicator = "#${palette.base09}";
-          text = "#${palette.base00}";
-        };
-        focusedInactive = {
-          background = "#${palette.base00}";
-          childBorder = "#${palette.base00}";
-          border = "#${palette.base00}";
-          indicator = "#${palette.base00}";
-          text = "#${palette.base06}";
-        };
-        unfocused = {
-          background = "#${palette.base00}";
-          childBorder = "#${palette.base00}";
-          border = "#${palette.base00}";
-          indicator = "#${palette.base00}";
-          text = "#${palette.base06}";
-        };
-        urgent = {
-          background = "#${palette.base0A}";
-          childBorder = "#${palette.base00}";
-          border = "#${palette.base00}";
-          indicator = "#${palette.base00}";
-          text = "#${palette.base00}";
-        };
-      };
-      input = {
-        "type:pointer".natural_scroll = "enabled";
-        "type:touchpad" = {
-          dwt = "enabled"; # Disable while typing.
-          tap = "enabled"; # Tap to click.
-          accel_profile = "adaptive";
-          pointer_accel = "0.5";
-          natural_scroll = "enabled";
-        };
-      };
-    };
     extraConfig = ''
       # Enable touchpad gestures.
       bindgesture swipe:right workspace prev
@@ -129,7 +147,7 @@ in {
     settings = {
       mainBar = {
         position = "top";
-        modules-left = ["sway/workspaces"];
+        modules-left = [ "sway/workspaces" ];
         modules-right = [
           "disk"
           "memory"
@@ -141,7 +159,9 @@ in {
           "battery"
           "clock"
         ];
-        clock = {format = "  {:%H:%M}";};
+        clock = {
+          format = "  {:%H:%M}";
+        };
         battery = {
           interval = 15;
           states = {
@@ -150,19 +170,39 @@ in {
             "critical" = 15;
           };
           format = "{icon}  {capacity}%";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
           format-charging = "󰂄 {capacity}%";
         };
         pulseaudio = {
           format = "{icon}  {volume}%";
           format-bluetooth = "{icon}  {volume}%";
           format-muted = "󰝟";
-          format-icons = {default = ["󰕿" "󰖀" "󰕾"];};
+          format-icons = {
+            default = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
+          };
         };
-        cpu = {format = "  {}%";};
+        cpu = {
+          format = "  {}%";
+        };
         temperature = {
           format = "{icon} {temperatureC}°C";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
         network = {
           interval = 10;
@@ -183,8 +223,12 @@ in {
             ↓ {bandwidthDownBytes}
             ↑ {bandwidthUpBytes}'';
         };
-        memory = {format = "  {}%";};
-        disk = {format = "  {percentage_used}%";};
+        memory = {
+          format = "  {}%";
+        };
+        disk = {
+          format = "  {percentage_used}%";
+        };
         bluetooth = {
           format-connected = " {num_connections}";
           on-click = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.bluetuith}/bin/bluetuith";
@@ -251,39 +295,41 @@ in {
   };
 
   services = {
-    swayidle = let
-      setDisplayStatusCommand = status: ''${pkgs.sway}/bin/swaymsg output "*" dpms ${status}'';
-      lockTimeout = 120;
-      displayOffTimeout = lockTimeout + 30;
-    in {
-      enable = true;
-      systemdTarget = swaySessionSystemdTarget;
-      timeouts = [
-        {
-          timeout = lockTimeout;
-          command = waylockCommand;
-        }
-        {
-          timeout = displayOffTimeout;
-          command = "${setDisplayStatusCommand "off"}";
-          resumeCommand = "${setDisplayStatusCommand "on"}";
-        }
-      ];
-      events = [
-        {
-          event = "before-sleep";
-          command = waylockCommand;
-        }
-        {
-          event = "lock";
-          command = waylockCommand;
-        }
-      ];
+    swayidle =
+      let
+        setDisplayStatusCommand = status: ''${pkgs.sway}/bin/swaymsg output "*" dpms ${status}'';
+        lockTimeout = 120;
+        displayOffTimeout = lockTimeout + 30;
+      in
+      {
+        enable = true;
+        systemdTarget = swaySessionSystemdTarget;
+        timeouts = [
+          {
+            timeout = lockTimeout;
+            command = waylockCommand;
+          }
+          {
+            timeout = displayOffTimeout;
+            command = "${setDisplayStatusCommand "off"}";
+            resumeCommand = "${setDisplayStatusCommand "on"}";
+          }
+        ];
+        events = [
+          {
+            event = "before-sleep";
+            command = waylockCommand;
+          }
+          {
+            event = "lock";
+            command = waylockCommand;
+          }
+        ];
 
-      # FIXME:To make sure swayidle waits for swaylock to lock the screen before
-      # it releases the inhibition lock, the -w options is used in swayidle, and
-      # -f in swaylock.
-    };
+        # FIXME:To make sure swayidle waits for swaylock to lock the screen before
+        # it releases the inhibition lock, the -w options is used in swayidle, and
+        # -f in swaylock.
+      };
 
     dunst.enable = true;
 
@@ -303,13 +349,12 @@ in {
   };
 
   home.sessionVariables = with palette; {
-    BEMENU_OPTS = lib.cli.toGNUCommandLineShell {} {
+    BEMENU_OPTS = lib.cli.toGNUCommandLineShell { } {
       ignorecase = true; # match items case insensitively.
       center = true; # Mimic a floating alert window.
 
       list = 10; # list items vertically with the given number of lines.
-      width-factor =
-        0.33; # defines the relative width factor of the menu (from 0 to 1). (wx)
+      width-factor = 0.33; # defines the relative width factor of the menu (from 0 to 1). (wx)
       fn = "monospace 16"; # defines the font to be used ('name [size]'). (wx)
       border = 2; # border size in pixels.
       bdr = "#${base09}"; # defines the border color. (wx)

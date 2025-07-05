@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno.nixos.nix.substituters;
-in {
+in
+{
   options.jpcenteno.nixos.nix.substituters = {
     enable = lib.mkEnableOption "Nix substituters (Cache servers)";
   };

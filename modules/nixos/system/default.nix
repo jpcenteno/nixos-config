@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno.nixos.system;
-in {
+in
+{
   imports = [
     ./audio.nix
     ./bluetooth.nix

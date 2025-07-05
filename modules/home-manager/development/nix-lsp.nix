@@ -4,9 +4,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.development.nil;
-in {
+in
+{
   options.development.nil = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -17,5 +19,10 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {home.packages = with pkgs; [nil nixfmt];};
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      nil
+      nixfmt
+    ];
+  };
 }

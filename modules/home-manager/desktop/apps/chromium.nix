@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.desktop.apps.chromium;
 
   ungoogledChromiumFlags = [
@@ -33,7 +34,8 @@
     # 2. Check `chrome://flags/#extension-mime-request-handling`.
     "--extension-mime-request-handling=always-prompt-for-install"
   ];
-in {
+in
+{
   options.jpcenteno-home.desktop.apps.chromium = {
     enable = lib.mkEnableOption "A Chromium variant with my personal configuration.";
 
@@ -51,32 +53,34 @@ in {
     enableUngoogledChromiumFlags = lib.mkEnableOption "Ungoogled-chromium specific flags";
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    {
-      programs.chromium = {
-        inherit (cfg) package;
-        enable = true;
-        # FIXME this will break non-Wayland or non PipeWire hosts.
-        commandLineArgs = lib.concatLists [
-          [
-            "--ozone-platform=wayland"
-            "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
-          ]
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        programs.chromium = {
+          inherit (cfg) package;
+          enable = true;
+          # FIXME this will break non-Wayland or non PipeWire hosts.
+          commandLineArgs = lib.concatLists [
+            [
+              "--ozone-platform=wayland"
+              "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+            ]
 
-          (lib.optionals cfg.enableUngoogledChromiumFlags ungoogledChromiumFlags)
-        ];
-      };
-    }
+            (lib.optionals cfg.enableUngoogledChromiumFlags ungoogledChromiumFlags)
+          ];
+        };
+      }
 
-    # FIXME make this configurable or write a wrapper script that allows the
-    # user to choose interactively.
-    (lib.mkIf cfg.setAsDefaultBrowser {
-      xdg.mimeApps.defaultApplications = {
-        "text/html" = "chromium-browser.desktop";
-        "application/xhtml+xml" = "chromium-browser.desktop";
-        "x-scheme-handler/http" = "chromium-browser.desktop";
-        "x-scheme-handler/https" = "chromium-browser.desktop";
-      };
-    })
-  ]);
+      # FIXME make this configurable or write a wrapper script that allows the
+      # user to choose interactively.
+      (lib.mkIf cfg.setAsDefaultBrowser {
+        xdg.mimeApps.defaultApplications = {
+          "text/html" = "chromium-browser.desktop";
+          "application/xhtml+xml" = "chromium-browser.desktop";
+          "x-scheme-handler/http" = "chromium-browser.desktop";
+          "x-scheme-handler/https" = "chromium-browser.desktop";
+        };
+      })
+    ]
+  );
 }

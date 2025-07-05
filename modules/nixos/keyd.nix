@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.keyd;
-in {
+in
+{
   options.keyd = {
     enable = lib.mkEnableOption "Enable Keyd";
   };

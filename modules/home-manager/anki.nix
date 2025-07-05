@@ -1,1 +1,4 @@
-{pkgs, ...}: {home.packages = [pkgs.anki-bin];}
+{ pkgs, ... }:
+{
+  home.packages = [ pkgs.anki-bin ];
+}

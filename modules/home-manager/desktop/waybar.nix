@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.waybar;
-in {
+in
+{
   options.jpcenteno-home.waybar = {
     enable = lib.mkEnableOption "Enable waybar";
 
@@ -50,7 +52,7 @@ in {
       settings = {
         mainBar = {
           position = "top";
-          modules-left = ["hyprland/workspaces"];
+          modules-left = [ "hyprland/workspaces" ];
           modules-right = builtins.concatLists [
             [
               "disk"
@@ -81,19 +83,39 @@ in {
               "critical" = 15;
             };
             format = "{icon}  {capacity}%";
-            format-icons = ["" "" "" "" ""];
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
             format-charging = "󰂄 {capacity}%";
           };
           pulseaudio = {
             format = "{icon}  {volume}%";
             format-bluetooth = "{icon}  {volume}%";
             format-muted = "󰝟";
-            format-icons = {default = ["󰕿" "󰖀" "󰕾"];};
+            format-icons = {
+              default = [
+                "󰕿"
+                "󰖀"
+                "󰕾"
+              ];
+            };
           };
-          cpu = {format = "  {}%";};
+          cpu = {
+            format = "  {}%";
+          };
           temperature = {
             format = "{icon} {temperatureC}°C";
-            format-icons = ["" "" "" "" ""];
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
           };
           network = {
             interval = 10;
@@ -114,8 +136,12 @@ in {
               ↓ {bandwidthDownBytes}
               ↑ {bandwidthUpBytes}'';
           };
-          memory = {format = "  {}%";};
-          disk = {format = "  {percentage_used}%";};
+          memory = {
+            format = "  {}%";
+          };
+          disk = {
+            format = "  {percentage_used}%";
+          };
           bluetooth = {
             format-connected = " {num_connections}";
             on-click = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.bluetuith}/bin/bluetuith";

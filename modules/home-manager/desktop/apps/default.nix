@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.desktop.apps;
-in {
+in
+{
   imports = [
     ./zathura.nix
     ./../../alacritty.nix
@@ -22,11 +24,21 @@ in {
   options.jpcenteno-home.desktop.apps = {
     enable = lib.mkEnableOption "My Desktop applications";
 
-    calibre.enable = lib.mkEnableOption "Calibre" // {default = true;};
-    mpv.enable = lib.mkEnableOption "Mpv Video Player" // {default = true;};
-    gnumeric.enable = lib.mkEnableOption "Gnumeric" // {default = true;};
-    libreoffice.enable = lib.mkEnableOption "Libreoffice" // {default = true;};
-    freecad.enable = lib.mkEnableOption "freecad" // {default = true;};
+    calibre.enable = lib.mkEnableOption "Calibre" // {
+      default = true;
+    };
+    mpv.enable = lib.mkEnableOption "Mpv Video Player" // {
+      default = true;
+    };
+    gnumeric.enable = lib.mkEnableOption "Gnumeric" // {
+      default = true;
+    };
+    libreoffice.enable = lib.mkEnableOption "Libreoffice" // {
+      default = true;
+    };
+    freecad.enable = lib.mkEnableOption "freecad" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {

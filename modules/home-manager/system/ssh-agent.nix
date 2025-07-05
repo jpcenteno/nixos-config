@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.system.ssh-agent;
-in {
+in
+{
   options.jpcenteno-home.system.ssh-agent = {
     enable = lib.mkEnableOption "SSH-Agent";
   };
