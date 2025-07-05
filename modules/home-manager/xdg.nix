@@ -3,11 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.xdg;
-in {
+in
+{
   options.jpcenteno-home.xdg = {
-    enable = lib.mkEnableOption "XDG" // {default = true;};
+    enable = lib.mkEnableOption "XDG" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,6 +21,6 @@ in {
       mimeApps.enable = true;
     };
 
-    home.packages = [pkgs.xdg-utils];
+    home.packages = [ pkgs.xdg-utils ];
   };
 }

@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.alacritty;
-in {
+in
+{
   options.jpcenteno-home.alacritty = {
     enable = lib.mkEnableOption "Enables Alacritty";
   };
@@ -12,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     assertions = [
       {
-        assertion = lib.attrsets.hasAttrByPath ["colorScheme" "palette"] config;
+        assertion = lib.attrsets.hasAttrByPath [ "colorScheme" "palette" ] config;
         message = ''
           Alacritty: No colorscheme found at `config.colorScheme`.
 
@@ -40,7 +42,9 @@ in {
         #
         # As a sidenote, this is required so that Base16 colorschemes don't break
         # under TMUX.
-        env = {"TERM" = "alacritty";};
+        env = {
+          "TERM" = "alacritty";
+        };
 
         window = {
           decorations = "none";
@@ -114,9 +118,12 @@ in {
       comment = "Terminal emulator";
       icon = "Alacritty";
       exec = "alacritty";
-      categories = ["System" "TerminalEmulator"];
+      categories = [
+        "System"
+        "TerminalEmulator"
+      ];
       terminal = false;
-      mimeType = ["text/plain"];
+      mimeType = [ "text/plain" ];
     };
   };
 }

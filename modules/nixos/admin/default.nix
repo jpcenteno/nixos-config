@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno.nixos.admin;
-in {
+in
+{
   options.jpcenteno.nixos.admin = {
     enable = lib.mkEnableOption "Admin tools";
   };

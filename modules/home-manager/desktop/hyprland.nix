@@ -3,14 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.hyprland;
 
-  import-env =
-    pkgs.writeShellScriptBin
-    "import-env"
-    (builtins.readFile ../../../dotfiles/hyprland/import_env.sh);
-in {
+  import-env = pkgs.writeShellScriptBin "import-env" (
+    builtins.readFile ../../../dotfiles/hyprland/import_env.sh
+  );
+in
+{
   imports = [
     ./apps/default.nix
     ./waybar.nix
@@ -24,7 +25,9 @@ in {
   options.jpcenteno-home.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
 
-    wl-clipboard.enable = lib.mkEnableOption "wl-clipboard" // {default = true;};
+    wl-clipboard.enable = lib.mkEnableOption "wl-clipboard" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -112,23 +115,25 @@ in {
         # Modifiers used:
         # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
         # e -> repeat, will repeat when held.
-        bindle = let
-          wpctl = "${pkgs.wireplumber}/bin/wpctl";
-          setVolumeCmd = volume: "${wpctl} set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ ${volume}";
+        bindle =
+          let
+            wpctl = "${pkgs.wireplumber}/bin/wpctl";
+            setVolumeCmd = volume: "${wpctl} set-volume --limit 1.0 @DEFAULT_AUDIO_SINK@ ${volume}";
 
-          brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-          setBrightnessCmd = brightness: "${brightnessctl} set ${brightness}";
-        in [
-          # Volume control:
-          ", XF86AudioRaiseVolume, exec, ${setVolumeCmd "5%+"}"
-          ", XF86AudioLowerVolume, exec, ${setVolumeCmd "5%-"}"
-          "SHIFT, XF86AudioLowerVolume, exec, ${setVolumeCmd "0"}"
-          ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+            setBrightnessCmd = brightness: "${brightnessctl} set ${brightness}";
+          in
+          [
+            # Volume control:
+            ", XF86AudioRaiseVolume, exec, ${setVolumeCmd "5%+"}"
+            ", XF86AudioLowerVolume, exec, ${setVolumeCmd "5%-"}"
+            "SHIFT, XF86AudioLowerVolume, exec, ${setVolumeCmd "0"}"
+            ", XF86AudioMute, exec, ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
-          # Brightness control:
-          ", XF86MonBrightnessUp, exec, ${setBrightnessCmd "+5%"}"
-          ", XF86MonBrightnessDown, exec, ${setBrightnessCmd "5%-"}"
-        ];
+            # Brightness control:
+            ", XF86MonBrightnessUp, exec, ${setBrightnessCmd "+5%"}"
+            ", XF86MonBrightnessDown, exec, ${setBrightnessCmd "5%-"}"
+          ];
 
         misc = {
           # Set wallpaper to the Base16 background color:
@@ -144,16 +149,18 @@ in {
         };
 
         group = {
-          groupbar = let
-            alpha = "58";
-          in {
-            render_titles = "false";
-            scrolling = "false";
-            "col.active" = "0x${alpha}${config.colorscheme.palette.base09}";
-            "col.locked_active" = "0x${alpha}${config.colorscheme.palette.base09}";
-            "col.inactive" = "0x${alpha}${config.colorscheme.palette.base01}";
-            "col.locked_inactive" = "0x${alpha}${config.colorscheme.palette.base01}";
-          };
+          groupbar =
+            let
+              alpha = "58";
+            in
+            {
+              render_titles = "false";
+              scrolling = "false";
+              "col.active" = "0x${alpha}${config.colorscheme.palette.base09}";
+              "col.locked_active" = "0x${alpha}${config.colorscheme.palette.base09}";
+              "col.inactive" = "0x${alpha}${config.colorscheme.palette.base01}";
+              "col.locked_inactive" = "0x${alpha}${config.colorscheme.palette.base01}";
+            };
         };
 
         decoration = {

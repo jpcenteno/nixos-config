@@ -3,14 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.self.sc-im;
-in {
+in
+{
   options.self.sc-im = {
     enable = lib.mkEnableOption "SC-IM, a spreadsheet program for the terminal";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.sc-im];
+    home.packages = [ pkgs.sc-im ];
   };
 }

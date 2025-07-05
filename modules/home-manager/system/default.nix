@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.system;
-in {
+in
+{
   imports = [
     ./ssh-agent.nix
   ];

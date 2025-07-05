@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.utils;
-in {
+in
+{
   options.jpcenteno-home.utils = {
     enable = lib.mkEnableOption "Utility programs and their customizations";
   };

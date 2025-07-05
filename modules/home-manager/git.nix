@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.git;
-in {
+in
+{
   imports = [
     ./development/github.nix
   ];
@@ -26,10 +28,14 @@ in {
     };
 
     github = {
-      enable = lib.mkEnableOption "GitHub integrations" // {default = true;};
+      enable = lib.mkEnableOption "GitHub integrations" // {
+        default = true;
+      };
     };
 
-    git-crypt.enable = lib.mkEnableOption "git-crypt" // {default = true;};
+    git-crypt.enable = lib.mkEnableOption "git-crypt" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -48,13 +54,14 @@ in {
       inherit (cfg) userName userEmail;
       enable = true;
       includes = [
-        {path = ../../dotfiles/git/config;}
+        { path = ../../dotfiles/git/config; }
       ];
     };
 
     xdg.configFile = {
       "git/gitignore".source = ../../dotfiles/git/gitignore;
-      "git/scripts/delete-branches-interactively".source = ../../dotfiles/git/scripts/delete-branches-interactively;
+      "git/scripts/delete-branches-interactively".source =
+        ../../dotfiles/git/scripts/delete-branches-interactively;
     };
 
     # Git server tools and integrations:

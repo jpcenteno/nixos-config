@@ -3,15 +3,17 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.utils.lf;
-in {
+in
+{
   options.jpcenteno-home.utils.lf = {
     enable = lib.mkEnableOption "LF - Terminal file manager";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.lf];
+    home.packages = [ pkgs.lf ];
 
     xdg = {
       enable = true;

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.desktop.common.cursor;
-in {
+in
+{
   options.jpcenteno-home.desktop.common.cursor = {
     enable = lib.mkEnableOption "Cursor theme and size customization";
   };

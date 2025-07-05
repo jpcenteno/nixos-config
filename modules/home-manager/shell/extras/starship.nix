@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.shell.extras.starship;
-in {
+in
+{
   options.jpcenteno-home.shell.extras.starship = {
     enable = lib.mkEnableOption "Starship";
   };

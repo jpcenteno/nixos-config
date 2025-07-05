@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno.nixos.system.audio;
-in {
+in
+{
   options.jpcenteno.nixos.system.audio = {
     enable = lib.mkEnableOption "Audio";
   };

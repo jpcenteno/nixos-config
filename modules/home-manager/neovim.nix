@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.neovim = {
     enable = true;
     defaultEditor = true; # Sets $EDITOR.
@@ -7,7 +8,7 @@
     withPython3 = true;
     extraPackages = [
       # Test this by running `:checkhealth provider` in vim.
-      (pkgs.python3.withPackages (python-packages: [python-packages.pynvim]))
+      (pkgs.python3.withPackages (python-packages: [ python-packages.pynvim ]))
     ];
   };
 }

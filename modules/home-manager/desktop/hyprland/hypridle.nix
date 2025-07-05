@@ -3,10 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.desktop.hyprland.hypridle;
 
-  mkListener = {timeout, ...} @ attrs: (lib.mkIf (0 < timeout) attrs);
+  mkListener = { timeout, ... }@attrs: (lib.mkIf (0 < timeout) attrs);
 
   mkTimeoutAssertion = attrName: {
     assertion = 0 <= cfg.timeouts."${attrName}";
@@ -14,14 +15,15 @@
   };
 
   lockSessionCmd = "${pkgs.systemd}/bin/loginctl lock-session";
-in {
+in
+{
   # NOTE I had to enable `sd-switch` to restart on configuration change.
   #
   # ```nix
   # systemd.user.startServices = "sd-switch";
   # ```
 
-  imports = [./hyprlock.nix];
+  imports = [ ./hyprlock.nix ];
 
   options.jpcenteno-home.desktop.hyprland.hypridle = {
     enable = lib.mkEnableOption "Hypridle";

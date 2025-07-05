@@ -1,20 +1,22 @@
 /*
-  hello.nix
-*
-* This module is intended as an example which provides a simple test
-* to make sure that the `nixosModules` exported by this Flake are
-* exported correctly and their options accessible to the end user.
-*
-* It installs the `hello` package at a system level.
+    hello.nix
+  *
+  * This module is intended as an example which provides a simple test
+  * to make sure that the `nixosModules` exported by this Flake are
+  * exported correctly and their options accessible to the end user.
+  *
+  * It installs the `hello` package at a system level.
 */
 {
   pkgs,
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.hello;
-in {
+in
+{
   options.hello = {
     enable = lib.mkEnableOption "Enables `hello` at a system level for testing purposes.";
   };
@@ -24,6 +26,6 @@ in {
       "You have enabled the nixosModule `hello.nix`. Dont forget to disable it once testing is done!"
     ];
 
-    environment.systemPackages = [pkgs.hello];
+    environment.systemPackages = [ pkgs.hello ];
   };
 }

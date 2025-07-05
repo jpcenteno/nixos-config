@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno.nixos;
-in {
+in
+{
   imports = [
     ./nix/default.nix
     ./system/default.nix

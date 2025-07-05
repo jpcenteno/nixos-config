@@ -3,16 +3,19 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.shell;
 
-  mkEnabledByDefaultOption = name:
+  mkEnabledByDefaultOption =
+    name:
     lib.mkEnableOption name
     // {
       default = true;
     };
-in {
-  imports = [./extras.nix];
+in
+{
+  imports = [ ./extras.nix ];
 
   options.jpcenteno-home.shell = {
     enable = lib.mkEnableOption "Shell customizations";

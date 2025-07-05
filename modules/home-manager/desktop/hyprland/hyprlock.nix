@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.jpcenteno-home.desktop.hyprland.hyprlock;
 
   colors = with config.colorScheme.palette; {
@@ -13,11 +14,12 @@
     fail = base08;
     checking = base0A;
   };
-in {
+in
+{
   options.jpcenteno-home.desktop.hyprland.hyprlock = {
     enable = lib.mkEnableOption "Hyprlock";
 
-    package = lib.mkPackageOption pkgs "hyprlock" {};
+    package = lib.mkPackageOption pkgs "hyprlock" { };
 
     command = lib.mkOption {
       description = "Command to execute a singleton instance of Hyprlock";
