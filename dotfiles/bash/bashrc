@@ -2,6 +2,7 @@
 
 _has_command() { command -v "${1}" >/dev/null; }
 
+alias c=clear
 alias g=git
 
 alias cdtmp='cd "$(mktemp -d)"'
