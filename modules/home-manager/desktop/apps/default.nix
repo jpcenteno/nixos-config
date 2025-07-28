@@ -12,6 +12,7 @@ in
     ./zathura.nix
     ./../../alacritty.nix
     ./chromium.nix
+    ./ghostty.nix
     ./imv.nix
     ./keepasxc.nix
     ./zen-browser.nix
@@ -49,6 +50,7 @@ in
         zathura.enable = lib.mkDefault true;
         chromium.enable = lib.mkDefault true;
         chromium.setAsDefaultBrowser = lib.mkDefault true;
+        ghostty.enable = lib.mkDefault true;
         imv.enable = lib.mkDefault true;
         keepassxc.enable = lib.mkDefault true;
         zen-browser.enable = lib.mkDefault true;
