@@ -50,7 +50,7 @@ in
       systemd.enable = true;
       settings = {
         "$mod" = "SUPER";
-        "$terminal" = "${pkgs.alacritty}/bin/alacritty";
+        "$terminal" = lib.getExe pkgs.ghostty;
         "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
 
         bind = [
