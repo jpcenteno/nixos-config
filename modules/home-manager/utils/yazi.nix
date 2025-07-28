@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno-home.utils.yazi;
-in {
+in
+{
   options.jpcenteno-home.utils.yazi = {
     enable = lib.mkEnableOption "Yazi";
   };
@@ -21,7 +22,10 @@ in {
         plugin = {
           prepend_previewers = [
             # Chrome extensions:
-            { name = "*.crx"; run = "archive"; }
+            {
+              name = "*.crx";
+              run = "archive";
+            }
           ];
         };
       };
