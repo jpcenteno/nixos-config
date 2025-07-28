@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno-home.desktop.apps.ghostty;
-in {
+in
+{
   options.jpcenteno-home.desktop.apps.ghostty = {
     enable = lib.mkEnableOption "Ghostty";
   };
