@@ -15,6 +15,7 @@ in
     ./file-compression.nix
     ./taskwarrior.nix
     ./lf.nix
+    ./yazi.nix
   ];
 
   config = lib.mkIf cfg.enable {
@@ -22,6 +23,7 @@ in
       file-compression.enable = lib.mkDefault true;
       taskwarrior.enable = lib.mkDefault true;
       lf.enable = lib.mkDefault true;
+      yazi.enable = lib.mkDefault true;
     };
   };
 }
