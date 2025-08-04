@@ -11,6 +11,7 @@ in
     ./audio.nix
     ./bluetooth.nix
     ./pam.nix
+    ./gpu.nix
   ];
 
   options.jpcenteno.nixos.system = {
@@ -22,6 +23,7 @@ in
       audio.enable = lib.mkDefault true;
       bluetooth.enable = lib.mkDefault true;
       pam.enable = lib.mkDefault true;
+      gpu.enable = lib.mkDefault true;
     };
   };
 }
