@@ -1,27 +1,35 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
   cfg = config.jpcenteno-home.ai;
 in {
   options.jpcenteno-home.ai = {
-    ollama ={
-      enable = lib.mkEnableOption "Ollama";
-      package = lib.mkPackageOption pkgs "ollama" {};
+    enable = lib.mkEnableOption "all AI-related submodules" // {
+      description = ''
+        Whether to enable all AI-related submodules.
+
+        When this option is enabled, all current and future submodules under the
+        `ai` hierarchy will be enabled by default using `lib.mkDefault`. This
+        simplifies setup by activating common AI tools automatically.
+
+        You can still override and disable individual submodules explicitly:
+
+        ```nix
+        jpcenteno-home.ai = {
+          enable = true;
+          ollama.enable = false;
+        };
+        ```
+      '';
     };
   };
 
-  config = {
-    home.packages = lib.optional cfg.ollama.enable cfg.ollama.package;
+  imports = [
+    ./ollama.nix
+  ];
 
-    # FIXME make this respect `cfg.ollama.enable`.
-    systemd.user.services.ollama = {
-      Unit = {
-        description = "Ollama LLM daemon";
-        After = [ "network.target" ];
-      };
-      Service = {
-        ExecStart = "${lib.getExe cfg.ollama.package} serve";
-        Restart = "always";
-      };
+  config = lib.mkIf cfg.enable {
+    jpcenteno-home.ai = {
+      ollama.enable = lib.mkDefault true;
     };
   };
 }
