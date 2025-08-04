@@ -14,6 +14,7 @@ in
     ./utils/default.nix
     ./system/default.nix
     ./xdg.nix
+    ./ai/default.nix
 
     nix-colors.homeManagerModules.default
   ];
