@@ -21,6 +21,8 @@ in {
         ```
       '';
     };
+
+    cudaSupport = lib.mkEnableOption "CUDA support for AI-related submodules";
   };
 
   imports = [
@@ -28,8 +30,9 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    jpcenteno-home.ai = {
-      ollama.enable = lib.mkDefault true;
+    jpcenteno-home.ai.ollama = {
+      enable = lib.mkDefault true;
+      cudaSupport = lib.mkDefault cfg.cudaSupport;
     };
   };
 }
