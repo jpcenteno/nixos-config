@@ -29,6 +29,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.shell.enableBashIntegration = true;
+
     programs.bash = {
       enable = true; # Every other Bash-related option requires this to be set to `true`.
       bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
