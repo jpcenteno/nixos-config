@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./extras/starship.nix
+    ./extras/zoxide.nix
   ];
 
   options.jpcenteno-home.shell.extras = {
@@ -29,7 +30,10 @@ in
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
-        jpcenteno-home.shell.extras.starship.enable = lib.mkDefault true;
+        jpcenteno-home.shell.extras = {
+          starship.enable = lib.mkDefault true;
+          zoxide.enable = lib.mkDefault true;
+        };
 
         # NOTE 2024-10-14: See `~/.bashrc` for bash integration:
         #
