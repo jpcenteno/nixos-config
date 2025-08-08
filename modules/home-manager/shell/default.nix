@@ -29,25 +29,28 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.shell.enableBashIntegration = true;
-
     programs.bash = {
       enable = true; # Every other Bash-related option requires this to be set to `true`.
       bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
     };
 
-    # NOTE 2024-10-14: Not using `programs.readline` for simplicity.
-    home.file.".inputrc".source = ../../../dotfiles/readline/inputrc;
-
     jpcenteno-home.shell.extras.enable = lib.mkDefault true;
 
-    home.packages = [
-      pkgs.curl
-      (lib.mkIf cfg.fd.enable pkgs.fd)
-      (lib.mkIf cfg.fzf.enable pkgs.fzf)
-      (lib.mkIf cfg.jq.enable pkgs.jq)
-      (lib.mkIf cfg.ripgrep.enable pkgs.ripgrep)
-      (lib.mkIf cfg.shellcheck.enable pkgs.shellcheck)
-    ];
+    home = {
+      # NOTE 2024-10-14: Not using `programs.readline` for simplicity.
+      file.".inputrc".source = ../../../dotfiles/readline/inputrc;
+
+      # Enable Home-Manager module Bash integration.
+      shell.enableBashIntegration = true;
+
+      packages = [
+        pkgs.curl
+        (lib.mkIf cfg.fd.enable pkgs.fd)
+        (lib.mkIf cfg.fzf.enable pkgs.fzf)
+        (lib.mkIf cfg.jq.enable pkgs.jq)
+        (lib.mkIf cfg.ripgrep.enable pkgs.ripgrep)
+        (lib.mkIf cfg.shellcheck.enable pkgs.shellcheck)
+      ];
+    };
   };
 }
