@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno-home.shell.extras.zoxide;
-in {
+in
+{
   options.jpcenteno-home.shell.extras.zoxide = {
     enable = lib.mkEnableOption "Zoxide";
 
@@ -19,7 +20,10 @@ in {
     excludeDirectories = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ "$HOME" ];
-      example = [ "$HOME" "$HOME/private/*" ];
+      example = [
+        "$HOME"
+        "$HOME/private/*"
+      ];
       description = ''
         Prevents the specified directories from being added to the database.
         This is provided as a list of glob patterns.
@@ -28,8 +32,7 @@ in {
 
   };
 
-  config = lib.mkIf cfg.enable
-  {
+  config = lib.mkIf cfg.enable {
     # Some options are set using environment variables. Please, refer to the
     # `ENVIRONMENT VARIABLES` section of the `zoxide (1)` manpage.
     #
@@ -45,22 +48,29 @@ in {
     #
     # NOTE: Why use `programs.bash.initExtra`?
     #
-    # Home-Manager (version 25.05) uses 
-    # The Zoxide-Bash integration is done 
-    programs.bash.initExtra = let
-      _ZO_EXCLUDE_DIRS = lib.strings.concatStringsSep ":" cfg.excludeDirectories;
-    in lib.mkIf config.programs.zoxide.enableBashIntegration (
-      lib.mkOrder 1900 ''
-        # Zoxide configuration. See `man 1 zoxide` for relevant documentation.
-        export _ZO_EXCLUDE_DIRS='${_ZO_EXCLUDE_DIRS}'
-      ''
-    );
+    # Home-Manager (version 25.05) uses
+    # The Zoxide-Bash integration is done
+    programs.bash.initExtra =
+      let
+        _ZO_EXCLUDE_DIRS = lib.strings.concatStringsSep ":" cfg.excludeDirectories;
+      in
+      lib.mkIf config.programs.zoxide.enableBashIntegration (
+        lib.mkOrder 1900 ''
+          # Zoxide configuration. See `man 1 zoxide` for relevant documentation.
+          export _ZO_EXCLUDE_DIRS='${_ZO_EXCLUDE_DIRS}'
+        ''
+      );
 
-    programs.zoxide = let
-      cmdOption = lib.optionals cfg.useCdCommand [ "--cmd" "cd" ];
-    in {
-      enable = true;
-      options = cmdOption;
-    };
+    programs.zoxide =
+      let
+        cmdOption = lib.optionals cfg.useCdCommand [
+          "--cmd"
+          "cd"
+        ];
+      in
+      {
+        enable = true;
+        options = cmdOption;
+      };
   };
 }
