@@ -13,7 +13,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.tmux ];
+    home.packages = [
+      pkgs.tmux
+      pkgs.smug
+    ];
     xdg.configFile."tmux/tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
   };
 }
