@@ -11,6 +11,7 @@ in
   imports = [
     ./shell/default.nix
     ./desktop/hyprland.nix
+    ./development/default.nix
     ./utils/default.nix
     ./system/default.nix
     ./xdg.nix
@@ -32,6 +33,7 @@ in
       shell.enable = lib.mkDefault true;
       system.enable = lib.mkDefault true;
       utils.enable = lib.mkDefault true;
+      development.enable = lib.mkDefault true;
     };
   };
 }
