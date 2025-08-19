@@ -4,24 +4,24 @@ let
 
   # FIXME move this to a theming module.
   base16TerminalColors = {
-          base00 = "0";
-          base01 = "10";
-          base02 = "11";
-          base03 = "8";
-          base04 = "12";
-          base05 = "7";
-          base06 = "13";
-          base07 = "15";
-          base08 = "1";
-          base09 = "9";
-          base0A = "3";
-          base0B = "2";
-          base0C = "6";
-          base0D = "4";
-          base0E = "5";
-          base0F = "14";
+    base00 = "0";
+    base01 = "10";
+    base02 = "11";
+    base03 = "8";
+    base04 = "12";
+    base05 = "7";
+    base06 = "13";
+    base07 = "15";
+    base08 = "1";
+    base09 = "9";
+    base0A = "3";
+    base0B = "2";
+    base0C = "6";
+    base0D = "4";
+    base0E = "5";
+    base0F = "14";
   };
-  
+
   colors = {
     highlight = base16TerminalColors.base03;
     decorations = base16TerminalColors.base04;
@@ -32,7 +32,8 @@ let
     diffInserted = base16TerminalColors.base0B;
   };
 
-in {
+in
+{
   options.jpcenteno-home.development.delta = {
     enable = lib.mkEnableOption "the Delta syntax highlighter";
   };

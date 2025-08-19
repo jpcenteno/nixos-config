@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno-home.development;
-in {
+in
+{
   imports = [
     ./delta.nix
     # FIXME include these:
