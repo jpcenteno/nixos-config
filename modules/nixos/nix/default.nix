@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./garbage-collector.nix
     ./substituters.nix
   ];
 
@@ -16,6 +17,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    jpcenteno.nixos.nix.substituters.enable = lib.mkDefault true;
+    jpcenteno.nixos.nix = {
+      garbage-collector.enable = lib.mkDefault true;
+      substituters.enable = lib.mkDefault true;
+    };
   };
 }
