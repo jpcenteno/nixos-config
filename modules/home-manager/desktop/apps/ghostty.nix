@@ -14,6 +14,10 @@ in
 
       settings = {
         theme = "base16-dark"; # See custom theme declaration below.
+
+        # Changing the system's default font does not automatically update
+        # Ghostty's font. To apply a new font, its name must be updated here.
+        font-family = lib.head config.fonts.fontconfig.defaultFonts.monospace;
         font-size = 16;
       };
 
