@@ -8,12 +8,18 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Cheatsheet:
-    # - Trigger: `sudo systemctl start nix-gc.service`.
-    # - Logs: `journalctl -u nix-gc.service`.
-    nix.gc = {
-      automatic = true;
-      options = "--delete-older-than 15d";
+    nix = {
+      gc = {
+        # Cheatsheet:
+        # - Trigger: `sudo systemctl start nix-gc.service`.
+        # - Logs: `journalctl -u nix-gc.service`.
+        automatic = true;
+        options = "--delete-older-than 15d";
+      };
+
+      # The "nix store optimiser" saves up space by replacing identical files
+      # with hardlinks.
+      optimise.automatic = true;
     };
   };
 }
