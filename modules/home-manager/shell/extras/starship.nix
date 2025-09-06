@@ -25,6 +25,8 @@ in
         bun.disabled = lib.mkDefault true;
         conda.disabled = lib.mkDefault true;
         nodejs.disabled = lib.mkDefault true;
+        package.disabled = lib.mkDefault true; # Current package version number.
+        rust.disabled = lib.mkDefault true;
 
         # Development environments:
         nix_shell.format = "via [$symbol$state]($style) ";
