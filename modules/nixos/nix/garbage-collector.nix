@@ -13,7 +13,6 @@ in
     # - Logs: `journalctl -u nix-gc.service`.
     nix.gc = {
       automatic = true;
-      randomizedDelaySec = "45min";
       options = "--delete-older-than 15d";
     };
   };
