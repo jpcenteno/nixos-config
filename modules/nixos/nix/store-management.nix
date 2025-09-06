@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.jpcenteno.nixos.nix.garbage-collector;
+  cfg = config.jpcenteno.nixos.nix.store-management;
 in
 {
-  options.jpcenteno.nixos.nix.garbage-collector = {
-    enable = lib.mkEnableOption "Garbage collector";
+  options.jpcenteno.nixos.nix.store-management = {
+    enable = lib.mkEnableOption "Nix store management jobs";
   };
 
   config = lib.mkIf cfg.enable {
