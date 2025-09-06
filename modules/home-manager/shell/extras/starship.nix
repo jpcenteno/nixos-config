@@ -28,8 +28,11 @@ in
         package.disabled = lib.mkDefault true; # Current package version number.
         rust.disabled = lib.mkDefault true;
 
-        # Development environments:
-        nix_shell.format = "via [$symbol$state]($style) ";
+        nix_shell = {
+          symbol = "  "; # Avoid colorized emoji.
+          format = "via [$symbol$state]($style) ";
+          style = "fg:4"; # Base0D. Usually blue, the color of the Nix logo.
+        };
       };
     };
   };
