@@ -14,7 +14,7 @@ in
 
       settings = {
         theme = "base16-dark"; # See custom theme declaration below.
-        font-size = 14;
+        font-size = 16;
       };
 
       themes.base16-dark = with config.colorScheme.palette; {
