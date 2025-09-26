@@ -12,6 +12,7 @@ in
   };
 
   imports = [
+    ./colors/default.nix
     ./file-compression.nix
     ./taskwarrior.nix
     ./lf.nix
@@ -20,6 +21,7 @@ in
 
   config = lib.mkIf cfg.enable {
     jpcenteno-home.utils = {
+      colors.enable = lib.mkDefault true;
       file-compression.enable = lib.mkDefault true;
       taskwarrior.enable = lib.mkDefault true;
       lf.enable = lib.mkDefault true;
