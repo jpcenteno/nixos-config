@@ -24,6 +24,7 @@ in
         # Disable version info.
         bun.disabled = lib.mkDefault true;
         conda.disabled = lib.mkDefault true;
+        lua.disabled = lib.mkDefault true;
         nodejs.disabled = lib.mkDefault true;
         package.disabled = lib.mkDefault true; # Current package version number.
         rust.disabled = lib.mkDefault true;
