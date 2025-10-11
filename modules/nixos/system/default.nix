@@ -12,6 +12,7 @@ in
     ./bluetooth.nix
     ./pam.nix
     ./gpu.nix
+    ./encrypted-dns.nix
   ];
 
   options.jpcenteno.nixos.system = {
@@ -22,6 +23,7 @@ in
     jpcenteno.nixos.system = {
       audio.enable = lib.mkDefault true;
       bluetooth.enable = lib.mkDefault true;
+      encrypted-dns.enable = lib.mkDefault true;
       pam.enable = lib.mkDefault true;
       gpu.enable = lib.mkDefault true;
     };
