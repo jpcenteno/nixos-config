@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno.nixos.system.encrypted-dns;
-in {
+in
+{
   options.jpcenteno.nixos.system.encrypted-dns = {
     enable = lib.mkEnableOption "Encrypted DNS proxy";
   };
