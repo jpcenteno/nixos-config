@@ -15,8 +15,17 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       usbutils # Provides lsusb usb-devices usbhid-dump usbreset.
+
+      # Networking tools
       tcpdump
       dig
+      gping
+      bandwhich
+
+      # Process monitoring
+      htop
+      btop
+      bottom
     ];
   };
 }
