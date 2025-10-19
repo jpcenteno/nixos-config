@@ -1,6 +1,33 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.jpcenteno-home.desktop.apps.ghostty;
+
+  reload-ghostty-config =
+    let
+      src = ./reload-ghostty-config.sh;
+      binName = "reload-ghostty-config";
+      deps = with pkgs; [
+        hyprland
+        jq
+      ];
+    in
+    pkgs.runCommand "${binName}"
+      {
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        meta = {
+          mainProgram = "${binName}";
+        };
+      }
+      ''
+        mkdir -p $out/bin
+        install -m +x ${src} $out/bin/${binName}
+        wrapProgram $out/bin/${binName} --prefix PATH : ${lib.makeBinPath deps}
+      '';
 in
 {
   options.jpcenteno-home.desktop.apps.ghostty = {
@@ -47,5 +74,11 @@ in
         ];
       };
     };
+
+    # NOTE: This runs on every rebuild regardless of whether the Ghostty config
+    # has changed or not.
+    home.activation.reloadGhosttyConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run ${lib.getExe reload-ghostty-config}
+    '';
   };
 }
