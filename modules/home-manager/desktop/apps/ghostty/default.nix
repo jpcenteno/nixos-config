@@ -9,7 +9,7 @@ let
 
   reload-ghostty-config =
     let
-      src = ./ghostty/reload-ghostty-config.sh;
+      src = ./reload-ghostty-config.sh;
       binName = "reload-ghostty-config";
       deps = with pkgs; [
         hyprland

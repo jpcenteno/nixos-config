@@ -12,7 +12,7 @@ in
     ./zathura.nix
     ./../../alacritty.nix
     ./chromium.nix
-    ./ghostty.nix
+    ./ghostty/default.nix
     ./imv.nix
     ./keepasxc.nix
     ./zen-browser.nix
