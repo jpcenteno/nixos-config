@@ -12,7 +12,6 @@ in
           "fakenews"
           "gambling"
           "porn"
-          "social"
         ];
       in
       lib.mkOption {
