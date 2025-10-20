@@ -12,6 +12,7 @@ in
     ./bluetooth.nix
     ./pam.nix
     ./gpu.nix
+    ./hosts-blocklist.nix
     ./encrypted-dns.nix
   ];
 
@@ -26,6 +27,7 @@ in
       encrypted-dns.enable = lib.mkDefault true;
       pam.enable = lib.mkDefault true;
       gpu.enable = lib.mkDefault true;
+      hosts-blocklist.enable = lib.mkDefault true;
     };
   };
 }
