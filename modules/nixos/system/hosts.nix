@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.jpcenteno.nixos.system.hosts-blocklist;
+  cfg = config.jpcenteno.nixos.system.hosts;
 in
 {
-  options.jpcenteno.nixos.system.hosts-blocklist = {
-    enable = lib.mkEnableOption "Hosts-level domain blocking";
+  options.jpcenteno.nixos.system.hosts = {
+    enable = lib.mkEnableOption "/etc/hosts configuration.";
 
     extraBlockLists =
       let
