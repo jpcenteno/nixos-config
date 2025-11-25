@@ -8,6 +8,7 @@ in
     # FIXME include these:
     # ./github.nix
     # ./nix-lsp.nix
+    ./neovim.nix
   ];
 
   options.jpcenteno-home.development = {
@@ -17,6 +18,7 @@ in
   config = lib.mkIf cfg.enable {
     jpcenteno-home.development = {
       delta.enable = lib.mkDefault true;
+      neovim.enable = lib.mkDefault true;
     };
   };
 }
