@@ -19,11 +19,14 @@ in
       viAlias = true;
       vimAlias = true;
       withPython3 = true;
-      plugins = with pkgs.vimPlugins; [
-      ];
+
+      # These packages are only made available to the Neovim wrapper.
       extraPackages = with pkgs; [
         # Test this by running `:checkhealth provider` in vim.
         (python3.withPackages (python-packages: [ python-packages.pynvim ]))
+
+        gcc # Required by `nvim-treesitter` to build parsers.
+        tree-sitter # Required by `nvim-treesitter` to build parsers.
       ];
     };
   };
