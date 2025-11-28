@@ -15,7 +15,10 @@ let
     };
 in
 {
-  imports = [ ./extras.nix ];
+  imports = [
+    ./direnv.nix
+    ./extras.nix
+  ];
 
   options.jpcenteno-home.shell = {
     enable = lib.mkEnableOption "Shell customizations";
@@ -34,6 +37,7 @@ in
       bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
     };
 
+    jpcenteno-home.shell.direnv.enable = lib.mkDefault true;
     jpcenteno-home.shell.extras.enable = lib.mkDefault true;
 
     home = {
