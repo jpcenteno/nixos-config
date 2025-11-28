@@ -19,9 +19,6 @@ in
     bat.enable = lib.mkEnableOption "Bat as a cat(1) replacement" // {
       default = true;
     };
-    direnv.enable = lib.mkEnableOption "Direnv" // {
-      default = true;
-    };
     eza.enable = lib.mkEnableOption "Eza as a ls(1) replacement" // {
       default = true;
     };
@@ -56,15 +53,6 @@ in
         xdg.configFile."bat/config" = {
           inherit (cfg.bat) enable;
           source = ../../../dotfiles/bat/config;
-        };
-
-        programs.direnv = {
-          inherit (cfg.direnv) enable;
-          # Nix-direnv is a program that improves the `use nix` and `use flake`
-          # startup time by adding a cache for the nix-shell environment and
-          # preventing the garbage collector from removing the environment
-          # dependencies.
-          nix-direnv.enable = cfg.direnv.enable;
         };
       }
     ]
