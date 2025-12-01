@@ -18,6 +18,7 @@ in
   imports = [
     ./direnv.nix
     ./extras.nix
+    ./fzf.nix
   ];
 
   options.jpcenteno-home.shell = {
@@ -25,7 +26,6 @@ in
 
     # Enable options for packages that don't merit their own module.
     fd.enable = mkEnabledByDefaultOption "fd";
-    fzf.enable = mkEnabledByDefaultOption "fzf";
     jq.enable = mkEnabledByDefaultOption "jq";
     ripgrep.enable = mkEnabledByDefaultOption "ripgrep";
     shellcheck.enable = mkEnabledByDefaultOption "shellcheck";
@@ -37,8 +37,11 @@ in
       bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
     };
 
-    jpcenteno-home.shell.direnv.enable = lib.mkDefault true;
-    jpcenteno-home.shell.extras.enable = lib.mkDefault true;
+    jpcenteno-home.shell = {
+      direnv.enable = lib.mkDefault true;
+      extras.enable = lib.mkDefault true;
+      fzf.enable = lib.mkDefault true;
+    };
 
     home = {
       # NOTE 2024-10-14: Not using `programs.readline` for simplicity.
@@ -50,7 +53,6 @@ in
       packages = [
         pkgs.curl
         (lib.mkIf cfg.fd.enable pkgs.fd)
-        (lib.mkIf cfg.fzf.enable pkgs.fzf)
         (lib.mkIf cfg.jq.enable pkgs.jq)
         (lib.mkIf cfg.ripgrep.enable pkgs.ripgrep)
         (lib.mkIf cfg.shellcheck.enable pkgs.shellcheck)
