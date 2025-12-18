@@ -40,6 +40,9 @@ in
     freecad.enable = lib.mkEnableOption "freecad" // {
       default = true;
     };
+    obsidian.enable = lib.mkEnableOption "obsidian" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -63,6 +66,7 @@ in
       (lib.mkIf cfg.gnumeric.enable pkgs.gnumeric)
       (lib.mkIf cfg.libreoffice.enable pkgs.libreoffice)
       (lib.mkIf cfg.freecad.enable pkgs.freecad-wayland)
+      (lib.mkIf cfg.obsidian.enable pkgs.obsidian)
     ];
 
     # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
