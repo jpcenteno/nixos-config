@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./home-manager.nix
     ./store-management.nix
     ./substituters.nix
   ];
@@ -20,6 +21,7 @@ in
     jpcenteno.nixos.nix = {
       store-management.enable = lib.mkDefault true;
       substituters.enable = lib.mkDefault true;
+      home-manager.enable = lib.mkDefault true;
     };
   };
 }
