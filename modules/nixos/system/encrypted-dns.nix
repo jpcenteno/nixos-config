@@ -8,7 +8,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.dnscrypt-proxy2 = {
+    services.dnscrypt-proxy = {
       enable = lib.mkForce true;
 
       # The service will source the configuration file directly from the Nix
