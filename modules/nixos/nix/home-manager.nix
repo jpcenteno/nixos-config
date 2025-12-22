@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno.nixos.nix.home-manager;
-in {
+in
+{
   options.jpcenteno.nixos.nix.home-manager = {
     enable = lib.mkEnableOption "the NixOS settings required by my home-manager config.";
   };
