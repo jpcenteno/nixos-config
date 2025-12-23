@@ -18,6 +18,7 @@ in
     programs = {
       taskwarrior = {
         enable = true;
+        package = pkgs.taskwarrior3;
         colorTheme = "dark-16";
         config = {
           # Set INBOX as the default project to capture new tasks.
@@ -38,7 +39,7 @@ in
 
           report = {
             # Exclude tasks in the inbox (project:INBOX) from the `next` report.
-            next.filter = "status:pending -WAITING limit:page project.not:INBOX";
+            next.filter = "status:pending -WAITING limit:page project.not:INBOX -BLOCKED";
 
             # List every task in the inbox.
             inbox = {
