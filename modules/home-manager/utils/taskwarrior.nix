@@ -6,6 +6,12 @@
 }:
 let
   cfg = config.jpcenteno-home.utils.taskwarrior;
+
+  statusbar-widget = pkgs.writeShellApplication {
+    name = "taskwarrior-statusbar-widget";
+    runtimeInputs = with pkgs; [ gnugrep taskwarrior3 ];
+    text = builtins.readFile ./taskwarrior/statusbar-widget.sh;
+  };
 in
 {
   options.jpcenteno-home.utils.taskwarrior = {
@@ -58,6 +64,16 @@ in
 
             waiting.filter = "+WAITING wait.before:7000years";
           };
+        };
+      };
+
+      waybar.settings.mainBar = {
+        modules-right = lib.mkBefore [ "custom/taskwarrior" ];
+        "custom/taskwarrior" = {
+          # FIXME move this module to the taskwarrior module.
+          interval = 30;
+          exec = "${lib.getExe statusbar-widget}";
+          format = "{}";
         };
       };
 
