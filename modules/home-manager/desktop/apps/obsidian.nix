@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.jpcenteno-home.desktop.apps.obsidian;
-in {
+in
+{
   options.jpcenteno-home.desktop.apps.obsidian = {
     enable = lib.mkEnableOption "Obsidian";
   };
