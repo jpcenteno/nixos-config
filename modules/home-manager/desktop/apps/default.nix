@@ -16,6 +16,7 @@ in
     ./imv.nix
     ./keepasxc.nix
     ./zen-browser.nix
+    ./obsidian.nix
 
     # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
     # that sets the flatpack remotes.
@@ -40,9 +41,6 @@ in
     freecad.enable = lib.mkEnableOption "freecad" // {
       default = true;
     };
-    obsidian.enable = lib.mkEnableOption "obsidian" // {
-      default = true;
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -57,6 +55,7 @@ in
         imv.enable = lib.mkDefault true;
         keepassxc.enable = lib.mkDefault true;
         zen-browser.enable = lib.mkDefault true;
+        obsidian.enable = lib.mkDefault true;
       };
     };
 
@@ -66,7 +65,6 @@ in
       (lib.mkIf cfg.gnumeric.enable pkgs.gnumeric)
       (lib.mkIf cfg.libreoffice.enable pkgs.libreoffice)
       (lib.mkIf cfg.freecad.enable pkgs.freecad-wayland)
-      (lib.mkIf cfg.obsidian.enable pkgs.obsidian)
     ];
 
     # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
