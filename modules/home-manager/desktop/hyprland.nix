@@ -143,7 +143,7 @@ in
         };
 
         general = {
-          "border_size" = 2;
+          "border_size" = 0;
           "col.inactive_border" = "0xff${config.colorScheme.palette.base03}";
           "col.active_border" = "0xff${config.colorScheme.palette.base0A}";
         };
@@ -164,8 +164,9 @@ in
         };
 
         decoration = {
-          rounding = "16";
-          inactive_opacity = "0.9";
+          shadow.enabled = false;
+          rounding = 8;
+          inactive_opacity = "0.75";
         };
 
         exec = [
