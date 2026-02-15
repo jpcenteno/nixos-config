@@ -167,6 +167,8 @@ in
           shadow.enabled = false;
           rounding = 8;
           inactive_opacity = "0.75";
+          dim_inactive = true; # Dim inactive windows.
+          dim_strength = 0.25;
         };
 
         exec = [
