@@ -12,6 +12,7 @@ in
     ./zathura.nix
     ./../../alacritty.nix
     ./chromium.nix
+    ./brave.nix
     ./ghostty/default.nix
     ./imv.nix
     ./keepasxc.nix
@@ -49,8 +50,7 @@ in
       alacritty.enable = lib.mkDefault true;
       desktop.apps = {
         zathura.enable = lib.mkDefault true;
-        chromium.enable = lib.mkDefault true;
-        chromium.setAsDefaultBrowser = lib.mkDefault true;
+        brave.enable = lib.mkDefault true;
         ghostty.enable = lib.mkDefault true;
         imv.enable = lib.mkDefault true;
         keepassxc.enable = lib.mkDefault true;
