@@ -4,6 +4,8 @@ let
 in {
   options.jpcenteno-home.desktop.apps.brave = {
     enable = lib.mkEnableOption "Brave browser";
+
+    enableChromiumExtensions = lib.mkEnableOption "extensions set by `programs.chromium.extensions`" // { default = true; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -11,7 +13,7 @@ in {
       enable = true;
       package = lib.mkForce pkgs.brave;
       extensions = builtins.concatLists [
-        config.programs.chromium.extensions # Inherit from other modules.
+        (lib.optionals cfg.enableChromiumExtensions config.programs.chromium.extensions)
         [
           { id = "jinjaccalgkegednnccohejagnlnfdag"; } # ViolentMonkey
           { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # uBlacklist
