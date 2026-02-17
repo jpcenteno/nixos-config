@@ -16,6 +16,8 @@ in
     ./system/default.nix
     ./xdg.nix
     ./ai/default.nix
+    ./git.nix
+    ./tmux.nix
 
     nix-colors.homeManagerModules.default
   ];
