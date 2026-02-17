@@ -27,5 +27,9 @@ in
     # FIXME Replace this with a rule that only applies to Obsidian, so that this
     # module does not affect Hyprland preferences in general.
     wayland.windowManager.hyprland.settings.misc.focus_on_activate = true;
+
+    programs.chromium.extensions = [
+      { id = "cnjifjpddelmedmihgijeibhnjfabmlf"; }
+    ];
   };
 }
