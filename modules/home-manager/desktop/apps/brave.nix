@@ -1,11 +1,21 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.jpcenteno-home.desktop.apps.brave;
-in {
+in
+{
   options.jpcenteno-home.desktop.apps.brave = {
     enable = lib.mkEnableOption "Brave browser";
 
-    enableChromiumExtensions = lib.mkEnableOption "extensions set by `programs.chromium.extensions`" // { default = true; };
+    enableChromiumExtensions =
+      lib.mkEnableOption "extensions set by `programs.chromium.extensions`"
+      // {
+        default = true;
+      };
   };
 
   config = lib.mkIf cfg.enable {
