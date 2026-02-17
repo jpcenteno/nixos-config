@@ -10,11 +10,14 @@ in {
     programs.brave = {
       enable = true;
       package = lib.mkForce pkgs.brave;
-      extensions = [
-        { id = "jinjaccalgkegednnccohejagnlnfdag"; } # ViolentMonkey
-        { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # uBlacklist
-        { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock
-        { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # OneTab
+      extensions = builtins.concatLists [
+        config.programs.chromium.extensions # Inherit from other modules.
+        [
+          { id = "jinjaccalgkegednnccohejagnlnfdag"; } # ViolentMonkey
+          { id = "pncfbmialoiaghdehhbnbhkkgmjanfhe"; } # uBlacklist
+          { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock
+          { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # OneTab
+        ]
       ];
     };
   };
