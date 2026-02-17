@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.keyd;
+  cfg = config.jpcenteno.nixos.keyd;
 in
 {
-  options.keyd = {
+  options.jpcenteno.nixos.keyd = {
     enable = lib.mkEnableOption "Enable Keyd";
   };
 
