@@ -1,6 +1,20 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno-home.desktop.hyprland.bindings;
+
+  mkBindingOption =
+    { default }:
+    lib.mkOption {
+      inherit default;
+      type = lib.types.str;
+    };
+
+  mkFunctionBindingOption =
+    { default }:
+    lib.mkOption {
+      inherit default;
+      type = lib.types.functionTo lib.types.str;
+    };
 in
 {
   options.jpcenteno-home.desktop.hyprland.bindings = {
@@ -11,27 +25,27 @@ in
       abstraction for key maps.
     '';
 
-    modH = lib.mkOption { default = "movefocus, l"; };
-    modJ = lib.mkOption { default = "movefocus, d"; };
-    modK = lib.mkOption { default = "movefocus, u"; };
-    modL = lib.mkOption { default = "movefocus, r"; };
+    modH = mkBindingOption { default = "movefocus, l"; };
+    modJ = mkBindingOption { default = "movefocus, d"; };
+    modK = mkBindingOption { default = "movefocus, u"; };
+    modL = mkBindingOption { default = "movefocus, r"; };
 
-    modShiftH = lib.mkOption { default = "movewindoworgroup, l"; };
-    modShiftJ = lib.mkOption { default = "movewindoworgroup, d"; };
-    modShiftK = lib.mkOption { default = "movewindoworgroup, u"; };
-    modShiftL = lib.mkOption { default = "movewindoworgroup, r"; };
+    modShiftH = mkBindingOption { default = "movewindoworgroup, l"; };
+    modShiftJ = mkBindingOption { default = "movewindoworgroup, d"; };
+    modShiftK = mkBindingOption { default = "movewindoworgroup, u"; };
+    modShiftL = mkBindingOption { default = "movewindoworgroup, r"; };
 
     # Arrow key bindings default to `hjkl` mappings because Vim.
-    modLeft = lib.mkOption { default = cfg.modH; };
-    modDown = lib.mkOption { default = cfg.modJ; };
-    modUp = lib.mkOption { default = cfg.modK; };
-    modRight = lib.mkOption { default = cfg.modL; };
-    modShiftLeft = lib.mkOption { default = cfg.modShiftH; };
-    modShiftDown = lib.mkOption { default = cfg.modShiftJ; };
-    modShiftUp = lib.mkOption { default = cfg.modShiftK; };
-    modShiftRight = lib.mkOption { default = cfg.modShiftL; };
+    modLeft = mkBindingOption { default = cfg.modH; };
+    modDown = mkBindingOption { default = cfg.modJ; };
+    modUp = mkBindingOption { default = cfg.modK; };
+    modRight = mkBindingOption { default = cfg.modL; };
+    modShiftLeft = mkBindingOption { default = cfg.modShiftH; };
+    modShiftDown = mkBindingOption { default = cfg.modShiftJ; };
+    modShiftUp = mkBindingOption { default = cfg.modShiftK; };
+    modShiftRight = mkBindingOption { default = cfg.modShiftL; };
 
-    modShiftNumber = lib.mkOption {
+    modShiftNumber = mkFunctionBindingOption {
       default = n: "movetoworkspace, ${toString n}";
     };
   };
