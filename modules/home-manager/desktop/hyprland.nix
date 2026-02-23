@@ -18,6 +18,7 @@ in
     ./hyprland/hypridle.nix
     ./hyprland/hyprlock.nix
     ./hyprland/wofi.nix
+    ./hyprland/hyprscrolling.nix
     ./fonts.nix
     ./common/cursor.nix
   ];
@@ -38,8 +39,10 @@ in
         common.cursor.enable = lib.mkDefault true;
         fonts.enable = true;
         hyprland = {
+          bindings.enable = true;
           hypridle.enable = lib.mkDefault true;
           hyprlock.enable = lib.mkDefault true;
+          hyprscrolling.enable = lib.mkDefault true;
           wofi.enable = lib.mkDefault true;
         };
       };
@@ -60,24 +63,6 @@ in
           "$mod, space, exec, $menu"
           "$mod, escape, exec, ${config.jpcenteno-home.desktop.hyprland.hyprlock.command}"
 
-          "$mod, h, movefocus, l"
-          "$mod, j, movefocus, d"
-          "$mod, k, movefocus, u"
-          "$mod, l, movefocus, r"
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
-
-          "$mod&SHIFT, h, movewindoworgroup, l"
-          "$mod&SHIFT, j, movewindoworgroup, d"
-          "$mod&SHIFT, k, movewindoworgroup, u"
-          "$mod&SHIFT, l, movewindoworgroup, r"
-          "$mod&SHIFT, left, movewindoworgroup, l"
-          "$mod&SHIFT, right, movewindoworgroup, r"
-          "$mod&SHIFT, up, movewindoworgroup, u"
-          "$mod&SHIFT, down, movewindoworgroup, d"
-
           # Cycle current workspace through the active monitors.
           "$mod&Shift&Control, h, movecurrentworkspacetomonitor, -1"
           "$mod&Shift&Control, l, movecurrentworkspacetomonitor, +1"
@@ -91,16 +76,6 @@ in
           "$mod, 7, workspace, 7"
           "$mod, 8, workspace, 8"
           "$mod, 9, workspace, 9"
-
-          "$mod SHIFT, 1, movetoworkspace, 1"
-          "$mod SHIFT, 2, movetoworkspace, 2"
-          "$mod SHIFT, 3, movetoworkspace, 3"
-          "$mod SHIFT, 4, movetoworkspace, 4"
-          "$mod SHIFT, 5, movetoworkspace, 5"
-          "$mod SHIFT, 6, movetoworkspace, 6"
-          "$mod SHIFT, 7, movetoworkspace, 7"
-          "$mod SHIFT, 8, movetoworkspace, 8"
-          "$mod SHIFT, 9, movetoworkspace, 9"
 
           # Window groups:
           "$mod, g, togglegroup"
@@ -139,7 +114,7 @@ in
           # Set wallpaper to the Base16 background color:
           disable_hyprland_logo = "true"; # Required for `background_color` to work.
           disable_splash_rendering = "true"; # Required for `background_color`to work.
-          background_color = "0x${config.colorScheme.palette.base00}";
+          background_color = "0x${config.colorScheme.palette.base01}";
         };
 
         general = {
