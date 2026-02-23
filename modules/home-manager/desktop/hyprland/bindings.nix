@@ -48,15 +48,15 @@ in
       "$mod, up, ${cfg.modUp}"
       "$mod, right, ${cfg.modRight}"
 
-      "$mod&SHIFT, h, ${cfg.modShiftH}"
-      "$mod&SHIFT, j, ${cfg.modShiftJ}"
-      "$mod&SHIFT, k, ${cfg.modShiftK}"
-      "$mod&SHIFT, l, ${cfg.modShiftL}"
+      "$mod SHIFT, h, ${cfg.modShiftH}"
+      "$mod SHIFT, j, ${cfg.modShiftJ}"
+      "$mod SHIFT, k, ${cfg.modShiftK}"
+      "$mod SHIFT, l, ${cfg.modShiftL}"
 
-      "$mod&SHIFT, left, ${cfg.modShiftLeft}"
-      "$mod&SHIFT, down, ${cfg.modShiftDown}"
-      "$mod&SHIFT, up, ${cfg.modShiftUp}"
-      "$mod&SHIFT, right, ${cfg.modShiftRight}"
+      "$mod SHIFT, left, ${cfg.modShiftLeft}"
+      "$mod SHIFT, down, ${cfg.modShiftDown}"
+      "$mod SHIFT, up, ${cfg.modShiftUp}"
+      "$mod SHIFT, right, ${cfg.modShiftRight}"
 
       "$mod SHIFT, 1, ${cfg.modShiftNumber 1}"
       "$mod SHIFT, 2, ${cfg.modShiftNumber 2}"
