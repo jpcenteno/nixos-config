@@ -10,6 +10,10 @@ in {
     '';
   };
 
+  imports = [
+    ./bindings.nix
+  ];
+
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.plugins = [
       pkgs.hyprlandPlugins.hyprscrolling
@@ -18,15 +22,6 @@ in {
     # Required for this plugin to work.
     wayland.windowManager.hyprland.settings = {
       general.layout = "scrolling";
-
-      bind = [
-        "$mod, h, layoutmsg, move -col"
-        "$mod, l, layoutmsg, move +col"
-        "$mod, j, layoutmsg, colresize -0.0.5"
-        "$mod, k, layoutmsg, colresize +0.0.5"
-        "$mod SHIFT, h, layoutmsg, swapcol l"
-        "$mod SHIFT, l, layoutmsg, swapcol r"
-      ];
 
       # Here, `2` means: don't switch keyboard focus when hovering over another
       # window, but do switch focus on click.
@@ -40,6 +35,19 @@ in {
         # 1 => Fit the column on focus.
         "focus_fit_method" = 1;
       };
+    };
+
+    jpcenteno-home.desktop.hyprland.bindings = {
+      enable = true;
+
+      modH = "layoutmsg, move -col";
+      modL = "layoutmsg, move +col";
+
+      modShiftH = "layoutmsg, swapcol l";
+      modShiftL = "layoutmsg, swapcol r";
+
+      modShiftK = "layoutmsg, colresize +0.05";
+      modShiftJ = "layoutmsg, colresize -0.05";
     };
   };
 }

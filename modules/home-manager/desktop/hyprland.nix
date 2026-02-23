@@ -39,6 +39,7 @@ in
         common.cursor.enable = lib.mkDefault true;
         fonts.enable = true;
         hyprland = {
+          bindings.enable = true;
           hypridle.enable = lib.mkDefault true;
           hyprlock.enable = lib.mkDefault true;
           hyprscrolling.enable = lib.mkDefault true;
@@ -61,24 +62,6 @@ in
           "$mod, d, exec, $menu"
           "$mod, space, exec, $menu"
           "$mod, escape, exec, ${config.jpcenteno-home.desktop.hyprland.hyprlock.command}"
-
-          # "$mod, h, movefocus, l"
-          # "$mod, j, movefocus, d"
-          # "$mod, k, movefocus, u"
-          # "$mod, l, movefocus, r"
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
-
-          # "$mod&SHIFT, h, movewindoworgroup, l"
-          # "$mod&SHIFT, j, movewindoworgroup, d"
-          # "$mod&SHIFT, k, movewindoworgroup, u"
-          # "$mod&SHIFT, l, movewindoworgroup, r"
-          "$mod&SHIFT, left, movewindoworgroup, l"
-          "$mod&SHIFT, right, movewindoworgroup, r"
-          "$mod&SHIFT, up, movewindoworgroup, u"
-          "$mod&SHIFT, down, movewindoworgroup, d"
 
           # Cycle current workspace through the active monitors.
           "$mod&Shift&Control, h, movecurrentworkspacetomonitor, -1"
