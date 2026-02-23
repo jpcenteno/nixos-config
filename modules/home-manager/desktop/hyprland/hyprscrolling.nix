@@ -48,6 +48,8 @@ in {
 
       modShiftK = "layoutmsg, colresize +0.05";
       modShiftJ = "layoutmsg, colresize -0.05";
+
+      modShiftNumber = n: "layoutmsg, movecoltoworkspace ${toString n}";
     };
   };
 }

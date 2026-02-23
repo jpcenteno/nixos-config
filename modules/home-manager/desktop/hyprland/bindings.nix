@@ -29,6 +29,10 @@ in {
     modShiftDown =lib.mkOption { default = cfg.modShiftJ; };
     modShiftUp = lib.mkOption { default = cfg.modShiftK; };
     modShiftRight =lib.mkOption { default = cfg.modShiftL; };
+
+    modShiftNumber = lib.mkOption {
+      default = n: "movetoworkspace, ${toString n}";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -52,6 +56,16 @@ in {
       "$mod&SHIFT, down, ${cfg.modShiftDown}"
       "$mod&SHIFT, up, ${cfg.modShiftUp}"
       "$mod&SHIFT, right, ${cfg.modShiftRight}"
+
+      "$mod SHIFT, 1, ${cfg.modShiftNumber 1}"
+      "$mod SHIFT, 2, ${cfg.modShiftNumber 2}"
+      "$mod SHIFT, 3, ${cfg.modShiftNumber 3}"
+      "$mod SHIFT, 4, ${cfg.modShiftNumber 4}"
+      "$mod SHIFT, 5, ${cfg.modShiftNumber 5}"
+      "$mod SHIFT, 6, ${cfg.modShiftNumber 6}"
+      "$mod SHIFT, 7, ${cfg.modShiftNumber 7}"
+      "$mod SHIFT, 8, ${cfg.modShiftNumber 8}"
+      "$mod SHIFT, 9, ${cfg.modShiftNumber 9}"
     ];
   };
 }
