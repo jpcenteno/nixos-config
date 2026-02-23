@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.jpcenteno-home.desktop.hyprland.hyprscrolling;
-in {
+in
+{
   options.jpcenteno-home.desktop.hyprland.hyprscrolling = {
     enable = lib.mkEnableOption ''
       Hyprscrolling plugin for Hyprland.

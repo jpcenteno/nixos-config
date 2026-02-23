@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno-home.desktop.hyprland.bindings;
-in {
+in
+{
   options.jpcenteno-home.desktop.hyprland.bindings = {
     enable = lib.mkEnableOption ''
       Hyprland binding configuration.
@@ -22,13 +23,13 @@ in {
 
     # Arrow key bindings default to `hjkl` mappings because Vim.
     modLeft = lib.mkOption { default = cfg.modH; };
-    modDown =lib.mkOption { default = cfg.modJ; };
+    modDown = lib.mkOption { default = cfg.modJ; };
     modUp = lib.mkOption { default = cfg.modK; };
-    modRight =lib.mkOption { default = cfg.modL; };
+    modRight = lib.mkOption { default = cfg.modL; };
     modShiftLeft = lib.mkOption { default = cfg.modShiftH; };
-    modShiftDown =lib.mkOption { default = cfg.modShiftJ; };
+    modShiftDown = lib.mkOption { default = cfg.modShiftJ; };
     modShiftUp = lib.mkOption { default = cfg.modShiftK; };
-    modShiftRight =lib.mkOption { default = cfg.modShiftL; };
+    modShiftRight = lib.mkOption { default = cfg.modShiftL; };
 
     modShiftNumber = lib.mkOption {
       default = n: "movetoworkspace, ${toString n}";
