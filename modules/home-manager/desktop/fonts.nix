@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = [
       pkgs.ibm-plex
-      pkgs.nerd-fonts.iosevka
+      pkgs.nerd-fonts.lilex
       pkgs.noto-fonts-monochrome-emoji
     ];
 
@@ -25,7 +25,7 @@ in
         emoji = [ "Noto Emoji" ];
         sansSerif = [ "IBM Plex Sans" ];
         serif = [ "IBM Plex Serif" ];
-        monospace = [ "Iosevka Nerd Font" ];
+        monospace = [ "Lilex Nerd Font" ];
       };
     };
   };
