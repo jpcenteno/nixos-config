@@ -12,6 +12,7 @@ in
   };
 
   imports = [
+    ./clipboard/default.nix
     ./colors/default.nix
     ./file-compression.nix
     ./taskwarrior.nix
@@ -21,6 +22,7 @@ in
 
   config = lib.mkIf cfg.enable {
     jpcenteno-home.utils = {
+      clipboard.enable = lib.mkDefault true;
       colors.enable = lib.mkDefault true;
       file-compression.enable = lib.mkDefault true;
       taskwarrior.enable = lib.mkDefault true;
