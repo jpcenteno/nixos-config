@@ -5,14 +5,14 @@
   ...
 }:
 let
-  cfg = config.jpcenteno-home.git;
+  cfg = config.jpcenteno-home.development.git;
 in
 {
   imports = [
-    ./development/github.nix
+    ./github.nix
   ];
 
-  options.jpcenteno-home.git = {
+  options.jpcenteno-home.development.git = {
     enable = lib.mkEnableOption "Enables git with my personal config";
 
     userName = lib.mkOption {
@@ -25,12 +25,6 @@ in
       type = lib.types.nullOr lib.types.str;
       default = null;
       description = "User email to use. Must be set when Git is enabled.";
-    };
-
-    github = {
-      enable = lib.mkEnableOption "GitHub integrations" // {
-        default = true;
-      };
     };
 
     git-crypt.enable = lib.mkEnableOption "git-crypt" // {
@@ -54,18 +48,16 @@ in
       inherit (cfg) userName userEmail;
       enable = true;
       includes = [
-        { path = ../../dotfiles/git/config; }
+        { path = ./config; }
       ];
     };
 
     xdg.configFile = {
-      "git/gitignore".source = ../../dotfiles/git/gitignore;
-      "git/scripts/delete-branches-interactively".source =
-        ../../dotfiles/git/scripts/delete-branches-interactively;
+      "git/gitignore".source = ./gitignore;
+      "git/scripts/delete-branches-interactively".source = ./scripts/delete-branches-interactively;
     };
 
-    # Git server tools and integrations:
-    jpcenteno-home.development.github.enable = cfg.github.enable;
+    jpcenteno-home.development.git.github.enable = lib.mkDefault true;
 
     home.packages = [
       (lib.mkIf cfg.git-crypt.enable pkgs.git-crypt)
