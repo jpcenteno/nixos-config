@@ -6,6 +6,12 @@
 }:
 let
   cfg = config.jpcenteno-home.development.git;
+
+  pre-commit = pkgs.writeShellApplication {
+    name = "jpcenteno-pre-commit-hook";
+    runtimeInputs = [ pkgs.gum ];
+    text = builtins.readFile ./hooks/pre-commit-hook.sh;
+  };
 in
 {
   imports = [
@@ -50,6 +56,8 @@ in
       includes = [
         { path = ./config; }
       ];
+
+      hooks.pre-commit = lib.getExe pre-commit;
     };
 
     xdg.configFile = {
