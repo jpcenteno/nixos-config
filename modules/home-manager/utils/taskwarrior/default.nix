@@ -6,6 +6,15 @@
 }:
 let
   cfg = config.jpcenteno-home.utils.taskwarrior;
+
+  statusbar-widget = pkgs.writeShellApplication {
+    name = "taskwarrior-statusbar-widget";
+    runtimeInputs = with pkgs; [
+      gnugrep
+      taskwarrior3
+    ];
+    text = builtins.readFile ./statusbar-widget.sh;
+  };
 in
 {
   options.jpcenteno-home.utils.taskwarrior = {
@@ -18,6 +27,7 @@ in
     programs = {
       taskwarrior = {
         enable = true;
+        package = pkgs.taskwarrior3;
         colorTheme = "dark-16";
         config = {
           # Set INBOX as the default project to capture new tasks.
@@ -38,7 +48,7 @@ in
 
           report = {
             # Exclude tasks in the inbox (project:INBOX) from the `next` report.
-            next.filter = "status:pending -WAITING limit:page project.not:INBOX";
+            next.filter = "status:pending -WAITING limit:page project.not:INBOX -BLOCKED";
 
             # List every task in the inbox.
             inbox = {
@@ -57,6 +67,16 @@ in
 
             waiting.filter = "+WAITING wait.before:7000years";
           };
+        };
+      };
+
+      waybar.settings.mainBar = {
+        modules-right = lib.mkBefore [ "custom/taskwarrior" ];
+        "custom/taskwarrior" = {
+          # FIXME move this module to the taskwarrior module.
+          interval = 30;
+          exec = "${lib.getExe statusbar-widget}";
+          format = "{}";
         };
       };
 

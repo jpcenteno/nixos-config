@@ -15,7 +15,7 @@ in
     ./clipboard/default.nix
     ./colors/default.nix
     ./file-compression.nix
-    ./taskwarrior.nix
+    ./taskwarrior/default.nix
     ./lf.nix
     ./yazi.nix
   ];
