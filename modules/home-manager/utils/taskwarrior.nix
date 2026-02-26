@@ -18,6 +18,7 @@ in
     programs = {
       taskwarrior = {
         enable = true;
+        package = pkgs.taskwarrior3;
         colorTheme = "dark-16";
         config = {
           # Set INBOX as the default project to capture new tasks.
