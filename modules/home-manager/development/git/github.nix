@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.jpcenteno-home.development.github;
+  cfg = config.jpcenteno-home.development.git.github;
 in
 {
-  options.jpcenteno-home.development.github = {
+  options.jpcenteno-home.development.git.github = {
     enable = lib.mkEnableOption "GitHub tools";
 
     preferSSH = lib.mkEnableOption "Redirect HTTPS connections to SSH" // {

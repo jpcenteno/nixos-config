@@ -5,8 +5,7 @@ in
 {
   imports = [
     ./delta.nix
-    # FIXME include these:
-    # ./github.nix
+    ./git/default.nix
     # ./nix-lsp.nix
     ./neovim.nix
   ];
@@ -18,6 +17,7 @@ in
   config = lib.mkIf cfg.enable {
     jpcenteno-home.development = {
       delta.enable = lib.mkDefault true;
+      git.enable = lib.mkDefault true;
       neovim.enable = lib.mkDefault true;
     };
   };
