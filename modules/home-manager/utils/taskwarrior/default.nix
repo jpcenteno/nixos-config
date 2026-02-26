@@ -9,7 +9,10 @@ let
 
   statusbar-widget = pkgs.writeShellApplication {
     name = "taskwarrior-statusbar-widget";
-    runtimeInputs = with pkgs; [ gnugrep taskwarrior3 ];
+    runtimeInputs = with pkgs; [
+      gnugrep
+      taskwarrior3
+    ];
     text = builtins.readFile ./statusbar-widget.sh;
   };
 in
