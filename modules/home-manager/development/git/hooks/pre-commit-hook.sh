@@ -17,7 +17,7 @@ confirm_commit_to_branch() {
         --show-output
 }
 
-CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+CURRENT_BRANCH="$(git branch --show-current)"
 if is_protected_branch; then
     if ! confirm_commit_to_branch; then
         exit 1
