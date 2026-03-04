@@ -27,7 +27,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Set the default color scheme.
-    colorScheme = nix-colors.colorSchemes.rose-pine-dawn;
+    colorScheme = nix-colors.colorSchemes.solarized-light;
 
     # These modules are enabled by default across all my home-manager configs:
     jpcenteno-home = {
