@@ -17,6 +17,10 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./modules/flake/formatting.nix
+      ];
+
       systems = import inputs.systems;
 
       perSystem = { pkgs, ... }: {
@@ -31,23 +35,15 @@
             self
             nixpkgs
             systems
-            treefmt-nix
             ;
           # Small tool to iterate over each systems
           eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
 
           system = "x86_64-linux";
           pkgs = nixpkgs.legacyPackages.${system};
-
-          # Eval the treefmt modules from ./treefmt.nix
-          treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
         in
         {
-          formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-
           checks = eachSystem (pkgs: {
-            format = treefmtEval.${pkgs.system}.config.build.check self;
-
             nil = pkgs.stdenv.mkDerivation {
               name = "linter";
               src = ./.;
