@@ -3,6 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -18,8 +19,7 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./modules/flake/checks.nix
-        ./modules/flake/formatting.nix
+        (inputs.import-tree ./modules/flake)
       ];
 
       systems = import inputs.systems;
