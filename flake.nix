@@ -19,6 +19,12 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
+      perSystem = { pkgs, ... }: {
+        devShells.default = pkgs.mkShell {
+            packages = with pkgs; [ nil ];
+          };
+      };
+
       flake =
         let
           inherit (inputs)
@@ -77,10 +83,6 @@
               installPhase = "mkdir $out"; # Will fail otherwise.
             };
           });
-
-          devShells.${system}.default = pkgs.mkShell {
-            packages = with pkgs; [ nil ];
-          };
 
           nixosModules = {
             default = import ./modules/nixos/default.nix;
