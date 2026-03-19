@@ -27,23 +27,8 @@
         devShells.default = pkgs.mkShell {
             packages = with pkgs; [ nil ];
           };
-      };
 
-      flake =
-        let
-          inherit (inputs)
-            self
-            nixpkgs
-            systems
-            ;
-          # Small tool to iterate over each systems
-          eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
-
-          system = "x86_64-linux";
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          checks = eachSystem (pkgs: {
+          checks= {
             nil = pkgs.stdenv.mkDerivation {
               name = "linter";
               src = ./.;
@@ -78,8 +63,23 @@
               '';
               installPhase = "mkdir $out"; # Will fail otherwise.
             };
-          });
+          };
+      };
 
+      flake =
+        let
+          inherit (inputs)
+            self
+            nixpkgs
+            systems
+            ;
+          # Small tool to iterate over each systems
+          eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
+
+          system = "x86_64-linux";
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
           nixosModules = {
             default = import ./modules/nixos/default.nix;
           };
