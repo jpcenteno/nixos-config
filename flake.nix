@@ -24,21 +24,22 @@
 
       systems = import inputs.systems;
 
-      perSystem = { pkgs, ... }: {
-        devShells.default = pkgs.mkShell {
+      perSystem =
+        { pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell {
             packages = with pkgs; [ nil ];
           };
-
-      };
+        };
 
       flake = {
-          nixosModules = {
-            default = import ./modules/nixos/default.nix;
-          };
-
-          homeManagerModules = {
-            default = import ./modules/home-manager;
-          };
+        nixosModules = {
+          default = import ./modules/nixos/default.nix;
         };
+
+        homeManagerModules = {
+          default = import ./modules/home-manager;
+        };
+      };
     };
 }
