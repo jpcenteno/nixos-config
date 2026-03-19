@@ -66,20 +66,7 @@
           };
       };
 
-      flake =
-        let
-          inherit (inputs)
-            self
-            nixpkgs
-            systems
-            ;
-          # Small tool to iterate over each systems
-          eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
-
-          system = "x86_64-linux";
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
+      flake = {
           nixosModules = {
             default = import ./modules/nixos/default.nix;
           };
