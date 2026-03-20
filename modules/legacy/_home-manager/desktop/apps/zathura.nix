@@ -20,7 +20,7 @@ in
     ];
 
     home.packages = [ pkgs.zathura ];
-    xdg.configFile."zathura/zathurarc".source = ../../../../dotfiles/zathura/zathurarc;
+    xdg.configFile."zathura/zathurarc".source = ./zathura/zathurarc;
 
     # NOTE 2024-10-15: Where to find desktop entries and their MIME types:
     #
