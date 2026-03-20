@@ -10,4 +10,3 @@ set keymap vi-insert
 "\C-u": unix-line-discard
 
 set editing-mode vi
-

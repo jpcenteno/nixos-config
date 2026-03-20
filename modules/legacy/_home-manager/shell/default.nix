@@ -45,7 +45,7 @@ in
 
     home = {
       # NOTE 2024-10-14: Not using `programs.readline` for simplicity.
-      file.".inputrc".source = ../../../dotfiles/readline/inputrc;
+      file.".inputrc".source = ./inputrc;
 
       # Enable Home-Manager module Bash integration.
       shell.enableBashIntegration = true;
