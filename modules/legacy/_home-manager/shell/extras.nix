@@ -52,7 +52,7 @@ in
 
         xdg.configFile."bat/config" = {
           inherit (cfg.bat) enable;
-          source = ../../../dotfiles/bat/config;
+          source = ./bat.config;
         };
       }
     ]
