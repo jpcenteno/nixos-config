@@ -17,7 +17,7 @@ in
 
     services.keyd = {
       enable = true;
-      keyboards.default.extraConfig = builtins.readFile ../../dotfiles/keyd/default.conf;
+      keyboards.default.extraConfig = builtins.readFile ./keyd/default.conf;
     };
 
     # Reload `keyd` config after `nixos-rebuild`.
