@@ -31,15 +31,5 @@
             packages = with pkgs; [ nil ];
           };
         };
-
-      flake = {
-        nixosModules = {
-          default = import ./modules/legacy/_nixos/default.nix;
-        };
-
-        homeManagerModules = {
-          default = import ./modules/legacy/_home-manager/default.nix;
-        };
-      };
     };
 }
