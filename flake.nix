@@ -34,11 +34,11 @@
 
       flake = {
         nixosModules = {
-          default = import ./modules/nixos/default.nix;
+          default = import ./modules/legacy/_nixos/default.nix;
         };
 
         homeManagerModules = {
-          default = import ./modules/home-manager;
+          default = import ./modules/legacy/_home-manager/default.nix;
         };
       };
     };
