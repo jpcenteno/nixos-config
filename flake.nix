@@ -19,7 +19,7 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        (inputs.import-tree ./modules/flake)
+        (inputs.import-tree ./modules)
       ];
 
       systems = import inputs.systems;
