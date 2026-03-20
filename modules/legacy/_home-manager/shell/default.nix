@@ -34,7 +34,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.bash = {
       enable = true; # Every other Bash-related option requires this to be set to `true`.
-      bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
+      bashrcExtra = builtins.readFile ./bashrc;
     };
 
     jpcenteno-home.shell = {
