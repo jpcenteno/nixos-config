@@ -34,7 +34,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.bash = {
       enable = true; # Every other Bash-related option requires this to be set to `true`.
-      bashrcExtra = builtins.readFile ../../../dotfiles/bash/bashrc;
+      bashrcExtra = builtins.readFile ./bashrc;
     };
 
     jpcenteno-home.shell = {
@@ -45,7 +45,7 @@ in
 
     home = {
       # NOTE 2024-10-14: Not using `programs.readline` for simplicity.
-      file.".inputrc".source = ../../../dotfiles/readline/inputrc;
+      file.".inputrc".source = ./inputrc;
 
       # Enable Home-Manager module Bash integration.
       shell.enableBashIntegration = true;

@@ -7,9 +7,7 @@
 let
   cfg = config.jpcenteno-home.hyprland;
 
-  import-env = pkgs.writeShellScriptBin "import-env" (
-    builtins.readFile ../../../dotfiles/hyprland/import_env.sh
-  );
+  import-env = pkgs.writeShellScriptBin "import-env" (builtins.readFile ./hyprland/import_env.sh);
 in
 {
   imports = [

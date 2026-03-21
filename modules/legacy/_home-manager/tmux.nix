@@ -17,6 +17,6 @@ in
       pkgs.tmux
       pkgs.smug
     ];
-    xdg.configFile."tmux/tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
+    xdg.configFile."tmux/tmux.conf".source = ./tmux/tmux.conf;
   };
 }
