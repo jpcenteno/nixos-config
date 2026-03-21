@@ -22,8 +22,6 @@
         (inputs.import-tree ./modules)
       ];
 
-      systems = import inputs.systems;
-
       perSystem =
         { pkgs, ... }:
         {
