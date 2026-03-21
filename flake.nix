@@ -21,13 +21,5 @@
       imports = [
         (inputs.import-tree ./modules)
       ];
-
-      perSystem =
-        { pkgs, ... }:
-        {
-          devShells.default = pkgs.mkShell {
-            packages = with pkgs; [ nil ];
-          };
-        };
     };
 }
