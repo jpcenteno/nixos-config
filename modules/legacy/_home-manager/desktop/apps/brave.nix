@@ -22,6 +22,10 @@ in
     programs.brave = {
       enable = true;
       package = lib.mkForce pkgs.brave;
+      commandLineArgs = lib.optionals pkgs.stdenv.isLinux [
+        "--ozone-platform=wayland"
+        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+      ];
       extensions = builtins.concatLists [
         (lib.optionals cfg.enableChromiumExtensions config.programs.chromium.extensions)
         [
