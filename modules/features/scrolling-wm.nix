@@ -24,6 +24,7 @@
 
                 wpctl = args: action "spawn" ([(lib.getExe' pkgs.wireplumber "wpctl")] ++ args);
                 wpctl-set-volume = volume: wpctl ["set-volume" "--limit" "1.0" "@DEFAULT_AUDIO_SINK@" volume ];
+brightness-action = lvl: action "spawn" [ (lib.getExe pkgs.brightnessctl) "set" lvl];
               in
               {
                 # Application launching:
@@ -86,6 +87,10 @@
                 "XF86AudioRaiseVolume" = wpctl-set-volume "5%+";
                 "XF86AudioLowerVolume" = wpctl-set-volume "5%-";
                 "Shift+XF86AudioLowerVolume" = wpctl-set-volume "0";
+
+                # Brightness
+                "XF86MonBrightnessUp" = brightness-action "+5%";
+                "XF86MonBrightnessDown" = brightness-action "5%-";
               };
           };
         };
