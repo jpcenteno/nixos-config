@@ -2,31 +2,25 @@
 # but I believe the first time it will build the packages without it.
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.scrolling-wm = {
+  flake.modules.homeManager.niri =
+    { pkgs, lib, ... }:
+    {
       imports = [
+        inputs.niri.homeModules.niri
       ];
-    };
 
-    homeManager.scrolling-wm =
-      { pkgs, lib, ... }:
-      {
-        imports = [
-          inputs.niri.homeModules.niri
-        ];
+      programs.niri = {
+        enable = true;
+        settings = {
+          binds =
+            let
+              action = name: param: { action = { ${name} = param; }; };
 
-        programs.niri = {
-          enable = true;
-          settings = {
-            binds =
-              let
-                action = name: param: { action = { ${name} = param; }; };
-
-                wpctl = args: action "spawn" ([(lib.getExe' pkgs.wireplumber "wpctl")] ++ args);
-                wpctl-set-volume = volume: wpctl ["set-volume" "--limit" "1.0" "@DEFAULT_AUDIO_SINK@" volume ];
-brightness-action = lvl: action "spawn" [ (lib.getExe pkgs.brightnessctl) "set" lvl];
-              in
-              {
+              wpctl = args: action "spawn" ([(lib.getExe' pkgs.wireplumber "wpctl")] ++ args);
+              wpctl-set-volume = volume: wpctl ["set-volume" "--limit" "1.0" "@DEFAULT_AUDIO_SINK@" volume ];
+              brightness-action = lvl: action "spawn" [ (lib.getExe pkgs.brightnessctl) "set" lvl];
+            in
+            {
                 # Application launching:
                 "Mod+Space" = action "spawn" [ (lib.getExe pkgs.wofi) "--show" "drun" ];
 
@@ -92,10 +86,9 @@ brightness-action = lvl: action "spawn" [ (lib.getExe pkgs.brightnessctl) "set" 
                 "XF86MonBrightnessUp" = brightness-action "+5%";
                 "XF86MonBrightnessDown" = brightness-action "5%-";
               };
+            };
           };
-        };
 
-        programs.waybar.settings.mainBar.modules-left = [ "niri/workspaces" ];
-      };
-  };
+          programs.waybar.settings.mainBar.modules-left = [ "niri/workspaces" ];
+        };
 }
