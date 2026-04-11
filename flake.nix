@@ -9,6 +9,8 @@
 
     systems.url = "github:nix-systems/default";
 
+    niri.url = "github:sodiboo/niri-flake";
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
