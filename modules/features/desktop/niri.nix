@@ -46,6 +46,11 @@
                 "drun"
               ];
 
+              # FIXME retrieve the command to execute from a configuration
+              # variable to decouple this module from the current terminal
+              # emulator in use.
+              "Mod+T" = action "spawn" [(lib.getExe pkgs.ghostty)];
+
               # Window focusing:
               "Mod+H" = action "focus-column-left" { };
               "Mod+J" = action "focus-workspace-down" { };
