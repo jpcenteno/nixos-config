@@ -1,11 +1,17 @@
 # NOTE: Importing the Niri module will add `niri.cachix.org` to the cache list,
 # but I believe the first time it will build the packages without it.
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   flake.modules.homeManager.niri =
-    { pkgs, lib, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       imports = [
+        self.modules.homeManager.terminal-emulator
         inputs.niri.homeModules.niri
       ];
 
@@ -45,6 +51,8 @@
                 "--show"
                 "drun"
               ];
+
+              "Mod+T" = action "spawn" config.terminal-emulator.command;
 
               # Window focusing:
               "Mod+H" = action "focus-column-left" { };
