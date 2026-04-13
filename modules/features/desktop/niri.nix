@@ -3,7 +3,12 @@
 { inputs, self, ... }:
 {
   flake.modules.homeManager.niri =
-    { config, lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       imports = [
         self.modules.homeManager.terminal-emulator
