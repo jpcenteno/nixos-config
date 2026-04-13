@@ -3,7 +3,7 @@
 { inputs, self, ... }:
 {
   flake.modules.homeManager.niri =
-    { pkgs, lib, ... }:
+    { config, lib, pkgs, ... }:
     {
       imports = [
         self.modules.homeManager.terminal-emulator
@@ -47,10 +47,7 @@
                 "drun"
               ];
 
-              # FIXME retrieve the command to execute from a configuration
-              # variable to decouple this module from the current terminal
-              # emulator in use.
-              "Mod+T" = action "spawn" [(lib.getExe pkgs.ghostty)];
+              "Mod+T" = action "spawn" config.terminal-emulator.command;
 
               # Window focusing:
               "Mod+H" = action "focus-column-left" { };
