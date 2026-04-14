@@ -14,7 +14,6 @@ in
     ./apps/default.nix
     ./waybar.nix
     ./hyprland/hypridle.nix
-    ./hyprland/hyprlock.nix
     ./hyprland/wofi.nix
     ./hyprland/hyprscrolling.nix
     ./fonts.nix
@@ -38,8 +37,6 @@ in
         fonts.enable = true;
         hyprland = {
           bindings.enable = true;
-          hypridle.enable = lib.mkDefault true;
-          hyprlock.enable = lib.mkDefault true;
           hyprscrolling.enable = lib.mkDefault true;
           wofi.enable = lib.mkDefault true;
         };
@@ -59,7 +56,7 @@ in
           "$mod, return, exec, $terminal"
           "$mod, d, exec, $menu"
           "$mod, space, exec, $menu"
-          "$mod, escape, exec, ${config.jpcenteno-home.desktop.hyprland.hyprlock.command}"
+          "$mod, escape, exec, ${lib.escapeShellArgs config.screen-locker.shellArgs}"
 
           # Cycle current workspace through the active monitors.
           "$mod&Shift&Control, h, movecurrentworkspacetomonitor, -1"

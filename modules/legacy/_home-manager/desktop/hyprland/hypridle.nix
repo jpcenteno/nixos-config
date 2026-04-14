@@ -23,8 +23,6 @@ in
   # systemd.user.startServices = "sd-switch";
   # ```
 
-  imports = [ ./hyprlock.nix ];
-
   options.jpcenteno-home.desktop.hyprland.hypridle = {
     enable = lib.mkEnableOption "Hypridle";
 
@@ -60,7 +58,7 @@ in
       enable = true;
       settings = {
         general = {
-          lock_cmd = config.jpcenteno-home.desktop.hyprland.hyprlock.command;
+          # lock_cmd = config.jpcenteno-home.desktop.hyprland.hyprlock.command; FIXME Use screen-locker.nix module.
           before_sleep_cmd = "${lockSessionCmd}"; # lock before suspend.
           after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
         };
