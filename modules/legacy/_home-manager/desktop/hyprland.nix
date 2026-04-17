@@ -13,7 +13,6 @@ in
   imports = [
     ./apps/default.nix
     ./waybar.nix
-    ./hyprland/hypridle.nix
     ./hyprland/wofi.nix
     ./hyprland/hyprscrolling.nix
     ./fonts.nix
