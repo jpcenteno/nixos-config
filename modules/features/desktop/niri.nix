@@ -55,6 +55,17 @@
 
               "Mod+T" = action "spawn" config.terminal-emulator.command;
 
+              # NOTE: The command `loginctl lock-session` will only issue a dbus
+              # event telling whoever is listening to lock the screen. Nothing
+              # will happen if no one is listening on the other side. I like
+              # this approach because it decouples the window manager
+              # configuration from the screen locker. Just don't forget to set
+              # it up (Hint: See idle-manager.nix).
+              "Mod+Escape" = action "spawn" [
+                (lib.getExe' pkgs.systemd "loginctl")
+                "lock-session"
+              ];
+
               # Window focusing:
               "Mod+H" = action "focus-column-left" { };
               "Mod+J" = action "focus-workspace-down" { };
