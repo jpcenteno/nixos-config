@@ -11,6 +11,7 @@
     }:
     {
       imports = [
+        self.modules.homeManager.screen-locker
         self.modules.homeManager.terminal-emulator
         inputs.niri.homeModules.niri
       ];
