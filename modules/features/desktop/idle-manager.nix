@@ -2,9 +2,8 @@
 let
   dim-screen-timeout = 55;
   lock-screen-timeout = dim-screen-timeout + 5;
-in
-# screen-off-timeout = lock-screen-timeout + 20;
-{
+  screen-off-timeout = lock-screen-timeout + 20;
+in {
   flake.modules.homeManager.idle-manager =
     {
       config,
@@ -17,6 +16,7 @@ in
     in
     {
       imports = [
+        # self.modules.homeManager.dpms # FIXME Why didn't it fail after I commented this?
         self.modules.homeManager.screen-locker
       ];
 
@@ -46,14 +46,11 @@ in
               on-timeout = "${lock-session-command}";
             }
 
-            # FIXME decouple whatever implementation is used to control DPMS from
-            # this module. This doesn't even work outside of Hyprland, which is
-            # unrelated to this module.
-            # {
-            #   timeout = screen-off-timeout;
-            #   on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-            #   on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-            # }
+            {
+              timeout = screen-off-timeout;
+              on-timeout = lib.escapeShellArgs config.dpms.powerOffAllMonitorsShellArgs;
+              on-resume = lib.escapeShellArgs config.dpms.powerOnAllMonitorsShellArgs;
+            }
           ];
         };
       };

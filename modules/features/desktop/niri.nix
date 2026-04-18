@@ -11,6 +11,7 @@
     }:
     {
       imports = [
+        self.modules.homeManager.dpms
         self.modules.homeManager.terminal-emulator
         inputs.niri.homeModules.niri
       ];
@@ -135,5 +136,12 @@
       };
 
       programs.waybar.settings.mainBar.modules-left = [ "niri/workspaces" ];
+
+      dpms = let
+        base = [ (lib.getExe pkgs.niri) "msg" "action" ];
+      in {
+        powerOffAllMonitorsShellArgs = base ++ [ "power-off-monitors" ];
+        powerOnAllMonitorsShellArgs = base ++ [ "power-on-monitors" ];
+      };
     };
 }
