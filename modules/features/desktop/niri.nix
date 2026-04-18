@@ -137,11 +137,17 @@
 
       programs.waybar.settings.mainBar.modules-left = [ "niri/workspaces" ];
 
-      dpms = let
-        base = [ (lib.getExe pkgs.niri) "msg" "action" ];
-      in {
-        powerOffAllMonitorsShellArgs = base ++ [ "power-off-monitors" ];
-        powerOnAllMonitorsShellArgs = base ++ [ "power-on-monitors" ];
-      };
+      dpms =
+        let
+          base = [
+            (lib.getExe pkgs.niri)
+            "msg"
+            "action"
+          ];
+        in
+        {
+          powerOffAllMonitorsShellArgs = base ++ [ "power-off-monitors" ];
+          powerOnAllMonitorsShellArgs = base ++ [ "power-on-monitors" ];
+        };
     };
 }

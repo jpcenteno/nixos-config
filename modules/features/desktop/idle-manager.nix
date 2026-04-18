@@ -3,7 +3,8 @@ let
   dim-screen-timeout = 55;
   lock-screen-timeout = dim-screen-timeout + 5;
   screen-off-timeout = lock-screen-timeout + 20;
-in {
+in
+{
   flake.modules.homeManager.idle-manager =
     {
       config,
