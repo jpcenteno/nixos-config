@@ -17,7 +17,6 @@ in
     in
     {
       imports = [
-        # self.modules.homeManager.dpms # FIXME Why didn't it fail after I commented this?
         self.modules.homeManager.screen-locker
       ];
 
