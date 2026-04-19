@@ -17,42 +17,60 @@ in
     in
     {
       imports = [
-        # self.modules.homeManager.dpms # FIXME Why didn't it fail after I commented this?
         self.modules.homeManager.screen-locker
       ];
 
-      config.services.hypridle = {
-        enable = true;
+      config = {
+        assertions = [
+          {
+            assertion =
+              config ? dpms
+              && config.dpms ? powerOffAllMonitorsShellArgs
+              && config.dpms ? powerOnAllMonitorsShellArgs;
 
-        settings = {
-          general = {
-            # Hypridle will listen for "lock session" events (like those issued by
-            # `loginctl lock-session`) and execute the `lock_cmd` command.
-            lock_cmd = lib.escapeShellArgs config.screen-locker.shellArgs;
+            message = ''
+              idle-manager requires `dpms` to be configured.
 
-            before_sleep_cmd = lock-session-command;
+              You need to import a module that defines:
+                - dpms.powerOffAllMonitorsShellArgs
+                - dpms.powerOnAllMonitorsShellArgs
+            '';
+          }
+        ];
+
+        services.hypridle = {
+          enable = true;
+
+          settings = {
+            general = {
+              # Hypridle will listen for "lock session" events (like those issued by
+              # `loginctl lock-session`) and execute the `lock_cmd` command.
+              lock_cmd = lib.escapeShellArgs config.screen-locker.shellArgs;
+
+              before_sleep_cmd = lock-session-command;
+            };
+
+            listener = [
+              {
+                timeout = dim-screen-timeout;
+                # FIXME decouple whatever implementation is used to control the
+                # brightness from this module.
+                on-timeout = "${lib.getExe pkgs.brightnessctl} --save set 10%";
+                on-resume = "${lib.getExe pkgs.brightnessctl} --restore";
+              }
+
+              {
+                timeout = lock-screen-timeout;
+                on-timeout = "${lock-session-command}";
+              }
+
+              {
+                timeout = screen-off-timeout;
+                on-timeout = lib.escapeShellArgs config.dpms.powerOffAllMonitorsShellArgs;
+                on-resume = lib.escapeShellArgs config.dpms.powerOnAllMonitorsShellArgs;
+              }
+            ];
           };
-
-          listener = [
-            {
-              timeout = dim-screen-timeout;
-              # FIXME decouple whatever implementation is used to control the
-              # brightness from this module.
-              on-timeout = "${lib.getExe pkgs.brightnessctl} --save set 10%";
-              on-resume = "${lib.getExe pkgs.brightnessctl} --restore";
-            }
-
-            {
-              timeout = lock-screen-timeout;
-              on-timeout = "${lock-session-command}";
-            }
-
-            {
-              timeout = screen-off-timeout;
-              on-timeout = lib.escapeShellArgs config.dpms.powerOffAllMonitorsShellArgs;
-              on-resume = lib.escapeShellArgs config.dpms.powerOnAllMonitorsShellArgs;
-            }
-          ];
         };
       };
     };
