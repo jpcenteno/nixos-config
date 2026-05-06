@@ -1,6 +1,11 @@
 {
   flake.modules.homeManager.wallpaper =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       systemd.user.services.swaybg = {
         Unit = {
@@ -10,7 +15,7 @@
         };
 
         Service = {
-          ExecStart = "${lib.getExe pkgs.swaybg} -i %h/images/wallpapers/wallpaper";
+          ExecStart = "${lib.getExe pkgs.swaybg} -i ${config.xdg.configHome}/wallpapers/wallpaper";
           Restart = "on-failure";
         };
 
