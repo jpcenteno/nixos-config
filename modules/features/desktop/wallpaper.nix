@@ -7,7 +7,7 @@
       ...
     }:
     let
-      wallpapersConfigHome = "${config.xdg.configHome}/wallpapers";
+      wallpapersConfigHome = "${config.xdg.configHome}/wallpaper";
     in
     {
       systemd.user.services.swaybg = {
@@ -18,7 +18,7 @@
         };
 
         Service = {
-          ExecStart = "${lib.getExe pkgs.swaybg} -i ${wallpapersConfigHome}/wallpaper";
+          ExecStart = "${lib.getExe pkgs.swaybg} -i ${wallpapersConfigHome}/current";
           Restart = "on-failure";
         };
 
