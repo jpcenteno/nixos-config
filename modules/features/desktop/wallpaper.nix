@@ -11,9 +11,9 @@
       wallpapersConfigHome = "${config.xdg.configHome}/wallpaper";
     in
     {
-      systemd.user.services.swaybg = {
+      systemd.user.services.wallpaper = {
         Unit = {
-          Description = "Set wallpaper with swaybg";
+          Description = "Renders desktop wallpaper";
           PartOf = [ target ];
           After = [ target ];
         };
@@ -28,7 +28,7 @@
         };
       };
 
-      systemd.user.paths.swaybg-wallpaper-watch = {
+      systemd.user.paths.wallpaper-file = {
         Unit = {
           Description = "Watch wallpaper file for changes";
           PartOf = [ target ]; # Ties lifecycle to `graphical-session`.
@@ -54,12 +54,12 @@
 
       systemd.user.services.refresh-wallpaper = {
         Unit = {
-          Description = "Restart swaybg when wallpaper file changes";
+          Description = "Refresh wallpaper service when wallpaper file changes";
         };
 
         Service = {
           Type = "oneshot";
-          ExecStart = "${lib.getExe' pkgs.systemd "systemctl"} --user restart swaybg.service";
+          ExecStart = "${lib.getExe' pkgs.systemd "systemctl"} --user restart wallpaper.service";
         };
       };
 
