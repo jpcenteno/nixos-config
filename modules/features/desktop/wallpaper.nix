@@ -1,3 +1,9 @@
+# This module implements a desktop wallpaper feature with auto-refresh.
+#
+# ## Usage
+#
+# To change wallpaper, modify the file with path
+# `${wallpapersConfigHome}/current`. Hint: Use a symlink to save space.
 {
   flake.modules.homeManager.wallpaper =
     {
