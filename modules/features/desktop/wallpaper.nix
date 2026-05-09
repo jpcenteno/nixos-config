@@ -9,7 +9,6 @@
     let
       target = "graphical-session.target";
       wallpapersConfigHome = "${config.xdg.configHome}/wallpaper";
-      currentWallpaperFilePath = "${wallpapersConfigHome}/current";
     in
     {
       systemd.user.services.swaybg = {
@@ -20,7 +19,7 @@
         };
 
         Service = {
-          ExecStart = "${lib.getExe pkgs.swaybg} -i ${currentWallpaperFilePath}";
+          ExecStart = "${lib.getExe pkgs.swaybg} -i ${wallpapersConfigHome}/current";
           Restart = "on-failure";
         };
 
@@ -37,7 +36,14 @@
         };
 
         Path = {
-          PathChanged = currentWallpaperFilePath; # Works both on file change and creation.
+          # NOTE: Prefer `PathChanged` over `PathModified` because it will only
+          # trigger after the file is closed. Using `PathModified` can led to
+          # bursts of unnecessary restarts.
+          # NOTE: I'm monitoring the directory here because symlink redirection
+          # didn't work when I monitored the file directly. This is intended as
+          # a single file directory, so there should be no problems unless I
+          # start piling more crap there.
+          PathChanged = wallpapersConfigHome;
           Unit = "refresh-wallpaper.service";
         };
 
