@@ -17,55 +17,59 @@
       wallpapersConfigHome = "${config.xdg.configHome}/wallpaper";
     in
     {
-      systemd.user.services.wallpaper = {
-        Unit = {
-          Description = "Renders desktop wallpaper";
-          PartOf = [ target ];
-          After = [ target ];
+      systemd.user = {
+        paths.wallpaper-file = {
+          Unit = {
+            Description = "Watch wallpaper file for changes";
+            PartOf = [ target ]; # Ties lifecycle to `graphical-session`.
+            After = [ target ]; # Defers start until `graphical-session` is active.
+          };
+
+          Path = {
+            # NOTE: Prefer `PathChanged` over `PathModified` because it will only
+            # trigger after the file is closed. Using `PathModified` can led to
+            # bursts of unnecessary restarts.
+            # NOTE: I'm monitoring the directory here because symlink redirection
+            # didn't work when I monitored the file directly. This is intended as
+            # a single file directory, so there should be no problems unless I
+            # start piling more crap there.
+            PathChanged = wallpapersConfigHome;
+            Unit = "refresh-wallpaper.service";
+          };
+
+          Install = {
+            WantedBy = [ target ];
+          };
         };
 
-        Service = {
-          ExecStart = "${lib.getExe pkgs.swaybg} -i ${wallpapersConfigHome}/current";
-          Restart = "on-failure";
-        };
+        services = {
+          wallpaper = {
+            Unit = {
+              Description = "Renders desktop wallpaper";
+              PartOf = [ target ];
+              After = [ target ];
+            };
 
-        Install = {
-          WantedBy = [ target ];
-        };
-      };
+            Service = {
+              ExecStart = "${lib.getExe pkgs.swaybg} -i ${wallpapersConfigHome}/current";
+              Restart = "on-failure";
+            };
 
-      systemd.user.paths.wallpaper-file = {
-        Unit = {
-          Description = "Watch wallpaper file for changes";
-          PartOf = [ target ]; # Ties lifecycle to `graphical-session`.
-          After = [ target ]; # Defers start until `graphical-session` is active.
-        };
+            Install = {
+              WantedBy = [ target ];
+            };
+          };
 
-        Path = {
-          # NOTE: Prefer `PathChanged` over `PathModified` because it will only
-          # trigger after the file is closed. Using `PathModified` can led to
-          # bursts of unnecessary restarts.
-          # NOTE: I'm monitoring the directory here because symlink redirection
-          # didn't work when I monitored the file directly. This is intended as
-          # a single file directory, so there should be no problems unless I
-          # start piling more crap there.
-          PathChanged = wallpapersConfigHome;
-          Unit = "refresh-wallpaper.service";
-        };
+          refresh-wallpaper = {
+            Unit = {
+              Description = "Refresh wallpaper service when wallpaper file changes";
+            };
 
-        Install = {
-          WantedBy = [ target ];
-        };
-      };
-
-      systemd.user.services.refresh-wallpaper = {
-        Unit = {
-          Description = "Refresh wallpaper service when wallpaper file changes";
-        };
-
-        Service = {
-          Type = "oneshot";
-          ExecStart = "${lib.getExe' pkgs.systemd "systemctl"} --user restart wallpaper.service";
+            Service = {
+              Type = "oneshot";
+              ExecStart = "${lib.getExe' pkgs.systemd "systemctl"} --user restart wallpaper.service";
+            };
+          };
         };
       };
 
