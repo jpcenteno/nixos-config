@@ -132,6 +132,8 @@
               "XF86MonBrightnessUp" = brightness-action "+5%";
               "XF86MonBrightnessDown" = brightness-action "5%-";
             };
+
+          xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
         };
       };
 
