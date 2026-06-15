@@ -13,6 +13,7 @@
       imports = [
         self.modules.homeManager.dpms
         self.modules.homeManager.terminal-emulator
+        self.modules.homeManager.xdg-portals
         inputs.niri.homeModules.niri
       ];
 
@@ -151,5 +152,17 @@
           powerOffAllMonitorsShellArgs = base ++ [ "power-off-monitors" ];
           powerOnAllMonitorsShellArgs = base ++ [ "power-on-monitors" ];
         };
+
+      # FIXME this could be factored out to the xdg-portals module or the
+      # xdg-portals module could be moved under this hierarchy, IDK.
+      xdg.portal = {
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+        ];
+        config.niri = {
+          default = [ "gtk" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        };
+      };
     };
 }
