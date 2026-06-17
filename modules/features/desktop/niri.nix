@@ -2,6 +2,12 @@
 # but I believe the first time it will build the packages without it.
 { inputs, self, ... }:
 {
+  flake.modules.nixos.niri = {
+    imports = [
+      inputs.niri.homeModules.niri
+    ];
+  };
+
   flake.modules.homeManager.niri =
     {
       config,
