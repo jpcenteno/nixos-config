@@ -12,6 +12,7 @@
     {
       config,
       lib,
+      options,
       pkgs,
       ...
     }:
@@ -25,6 +26,16 @@
 
       programs.niri = {
         enable = true;
+
+        # This fixes build errors due to too many open file descriptors.
+        # See: https://github.com/sodiboo/niri-flake/issues/1300
+        # Stolen from: https://github.com/tomrfitz/nix-config/commit/8e8f0e63ca56aad00a7be361a1b8dff72c024ca6#diff-206b9ce276ab5971a2489d75eb1b12999d4bf3843b7988cbe8d687cfde61dea0
+        package = options.programs.niri.package.default.overrideAttrs (old: {
+          preCheck = (old.preCheck or "") + ''
+            ulimit -n 4096
+          '';
+        });
+
         settings = {
           binds =
             let
