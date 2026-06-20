@@ -2,6 +2,15 @@
 # but I believe the first time it will build the packages without it.
 { inputs, self, ... }:
 {
+  flake.modules.nixos.niri = { lib, options, ... }: {
+    imports = [
+      inputs.niri.nixosModules.niri
+    ];
+
+    # The `niri-flake` cache provides Niri builds for `x86_64-linux`.
+    niri-flake.cache.enable = true;
+  };
+
   flake.modules.homeManager.niri =
     {
       config,
@@ -14,11 +23,9 @@
         self.modules.homeManager.dpms
         self.modules.homeManager.terminal-emulator
         self.modules.homeManager.xdg-portals
-        inputs.niri.homeModules.niri
       ];
 
       programs.niri = {
-        enable = true;
         settings = {
           binds =
             let
