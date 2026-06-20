@@ -9,18 +9,6 @@
 
     # The `niri-flake` cache provides Niri builds for `x86_64-linux`.
     niri-flake.cache.enable = true;
-
-    # This fixes a known `checkPhase` error when building Niri.
-    # See: https://github.com/sodiboo/niri-flake/issues/1300
-    # Stolen from: https://github.com/tomrfitz/nix-config/commit/8e8f0e63ca56aad00a7be361a1b8dff72c024ca6#diff-206b9ce276ab5971a2489d75eb1b12999d4bf3843b7988cbe8d687cfde61dea0
-    programs.niri = {
-      enable = true;
-      package = options.programs.niri.package.default.overrideAttrs (old: {
-        preCheck = (old.preCheck or "") + ''
-          ulimit -n 4096
-        '';
-      });
-    };
   };
 
   flake.modules.homeManager.niri =
