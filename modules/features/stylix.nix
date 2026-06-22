@@ -12,7 +12,13 @@ in
       };
     };
 
-    homeManager.${name} = {
+    homeManager.${name} = { pkgs, ... }: {
+      stylix.cursor = {
+        package = pkgs.apple-cursor;
+        name = "macOS";
+        size = 30;
+      };
+
       # TODO: Fix conflicts between Stylix and these modules, then remove the
       # corresponding lines:
       stylix.targets = {
