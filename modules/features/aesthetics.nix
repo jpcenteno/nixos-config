@@ -1,6 +1,15 @@
+# This module sets the base for a uniform look and feel across different
+# applications.
+#
+# Using the Stylix framework because it provides ready-made themes for several
+# applications. This saves me a lot of trouble and allows me to delete several
+# lines of code from this repo.
+#
+# I used `nix-colors` by GitHub user `Misterio77` in the past. Expect some older
+# modules to still require it.
 { inputs, ... }:
 let
-  name = "stylix";
+  name = "aesthetics";
 in
 {
   flake.modules = {
