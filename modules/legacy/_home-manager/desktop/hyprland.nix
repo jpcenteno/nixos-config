@@ -15,7 +15,6 @@ in
     ./waybar.nix
     ./hyprland/wofi.nix
     ./hyprland/hyprscrolling.nix
-    ./fonts.nix
     ./common/cursor.nix
   ];
 
@@ -33,7 +32,6 @@ in
       desktop = {
         apps.enable = lib.mkDefault true;
         common.cursor.enable = lib.mkDefault true;
-        fonts.enable = true;
         hyprland = {
           bindings.enable = true;
           hyprscrolling.enable = lib.mkDefault true;
