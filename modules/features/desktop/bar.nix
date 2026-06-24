@@ -133,6 +133,7 @@
               };
             };
           };
+
           style = with config.colorScheme.palette; ''
             * {
               font-family: monospace;
@@ -177,6 +178,8 @@
             }
           '';
         };
+
+        stylix.targets.waybar.enable = false;
       };
     };
 }
