@@ -21,6 +21,7 @@
     }:
     {
       imports = [
+        self.modules.homeManager.bar
         self.modules.homeManager.dpms
         self.modules.homeManager.terminal-emulator
         self.modules.homeManager.xdg-portals
