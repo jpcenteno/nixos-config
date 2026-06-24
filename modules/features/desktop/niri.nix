@@ -9,6 +9,7 @@
 
     # The `niri-flake` cache provides Niri builds for `x86_64-linux`.
     niri-flake.cache.enable = true;
+    programs.niri.enable = true;
   };
 
   flake.modules.homeManager.niri =
