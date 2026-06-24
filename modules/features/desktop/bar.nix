@@ -8,32 +8,12 @@
     }:
     let
       cfg = config.jpcenteno-home.waybar;
+      gapSize = "16";
+      fontSize = "16";
     in
     {
       options.jpcenteno-home.waybar = {
         enable = lib.mkEnableOption "Enable waybar";
-
-        gapSize = lib.mkOption {
-          type = lib.types.int;
-          default = 16;
-          description = "Gap size (In pixels)";
-          apply = toString;
-        };
-
-        fontSize = lib.mkOption {
-          type = lib.types.int;
-          default = 16;
-          description = "Font size (In pixels)";
-          apply = toString;
-        };
-
-        bluetooth = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-            description = "Enable the Bluetooth module";
-          };
-        };
       };
 
       config = lib.mkIf cfg.enable {
@@ -55,9 +35,7 @@
                   "temperature"
                   "cpu"
                   "network"
-                ]
-                (lib.optional cfg.bluetooth.enable "bluetooth")
-                [
+                  "bluetooth"
                   "pulseaudio"
                   "battery"
                   "custom/clock"
@@ -158,7 +136,7 @@
           style = with config.colorScheme.palette; ''
             * {
               font-family: monospace;
-              font-size: ${cfg.fontSize}px;
+              font-size: ${fontSize}px;
             }
 
             window#waybar {
@@ -170,8 +148,8 @@
             }
 
             /* Horizontally align waybar with window gaps. */
-            .modules-right { margin-right: ${cfg.gapSize}px; }
-            #workspaces { margin-left: ${cfg.gapSize}px; }
+            .modules-right { margin-right: ${gapSize}px; }
+            #workspaces { margin-left: ${gapSize}px; }
 
             .modules-right label,
             #workspaces button
