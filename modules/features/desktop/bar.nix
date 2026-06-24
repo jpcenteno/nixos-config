@@ -13,12 +13,6 @@
       options.jpcenteno-home.waybar = {
         enable = lib.mkEnableOption "Enable waybar";
 
-        package = lib.mkOption {
-          type = lib.types.package;
-          default = pkgs.waybar;
-          description = "Waybar package to use";
-        };
-
         gapSize = lib.mkOption {
           type = lib.types.int;
           default = 16;
@@ -49,7 +43,6 @@
         programs.waybar.systemd.enable = true;
 
         programs.waybar = {
-          inherit (cfg) package;
           enable = true;
           settings = {
             mainBar = {
