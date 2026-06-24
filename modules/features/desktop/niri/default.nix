@@ -146,6 +146,7 @@
         };
       };
 
+      jpcenteno-home.waybar.enable = true;
       programs.waybar.settings.mainBar.modules-left = [ "niri/workspaces" ];
 
       dpms =
