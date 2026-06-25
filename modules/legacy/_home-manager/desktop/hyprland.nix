@@ -12,7 +12,6 @@ in
 {
   imports = [
     ./apps/default.nix
-    ./waybar.nix
     ./hyprland/wofi.nix
     ./hyprland/hyprscrolling.nix
     ./common/cursor.nix
@@ -28,7 +27,6 @@ in
 
   config = lib.mkIf cfg.enable {
     jpcenteno-home = {
-      waybar.enable = true;
       desktop = {
         apps.enable = lib.mkDefault true;
         common.cursor.enable = lib.mkDefault true;

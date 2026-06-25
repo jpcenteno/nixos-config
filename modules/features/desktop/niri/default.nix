@@ -21,6 +21,7 @@
     }:
     {
       imports = [
+        self.modules.homeManager.bar
         self.modules.homeManager.dpms
         self.modules.homeManager.terminal-emulator
         self.modules.homeManager.xdg-portals
@@ -146,7 +147,6 @@
         };
       };
 
-      jpcenteno-home.waybar.enable = true;
       programs.waybar.settings.mainBar.modules-left = [ "niri/workspaces" ];
 
       dpms =
