@@ -16,7 +16,7 @@
         systemd.enable = true;
         settings = {
           mainBar = {
-            position = "top";
+            position = "bottom";
             modules-left = [ "hyprland/workspaces" ];
             modules-right = builtins.concatLists [
               [
