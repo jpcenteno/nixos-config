@@ -153,7 +153,7 @@
 
           label {
             padding: 0.2rem 0.5rem;
-            margin-bottom: 0.4rem;
+            margin-top: 0.4rem;
             border-radius: 8px;
             background-color: @base01; /* Alternate background. */
           }
