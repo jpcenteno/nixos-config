@@ -6,25 +6,26 @@
       pkgs,
       ...
     }:
-    let
-      gapSize = "16";
-      fontSize = "16";
-    in
     {
       programs.waybar = {
         enable = true;
         systemd.enable = true;
         settings = {
           mainBar = {
-            position = "bottom";
+            position = "top";
+            # NOTE: Setting `programs.waybar.settings.<bar>.layer = "top"`
+            # anchors the bar to the display instead of each individual
+            # workspace. This means that it will stay fixed at it's `position`
+            # during the workspace change animation.
+            layer = "top";
             modules-left = [ "hyprland/workspaces" ];
             modules-right = builtins.concatLists [
               [
-                "disk"
+                "cpu"
                 "memory"
                 "temperature"
-                "cpu"
                 "network"
+                "disk"
                 "bluetooth"
                 "pulseaudio"
                 "battery"
@@ -124,51 +125,74 @@
           };
         };
 
-        style = with config.colorScheme.palette; ''
-                  * {
-                  font-family: monospace;
-                  font-size: ${fontSize}px;
-                  }
+        # NOTE: Use the GUI debugger to To iterate faster on the CSS:
+        #
+        # 1. Stop the Waybar service: `systemctl stop --user waybar.service`.
+        # 2. Start the GUI debugger: `GTK_DEBUG=interactive waybar`.
+        #
+        # This will open a window with an object tree and a live CSS editor.
+        #
+        # NOTE: The Stylix module for Waybar provides definitions for the font
+        # size, family and all the @baseXX, colors regardles of the
+        # `stylix.targets.waybar.addCss` setting.
+        style = lib.mkAfter ''
+          * {
+            color: @base04; /* Alternate text */
+          }
 
-                  window#waybar {
-                  }
+          button {
+            /*
+              Buttons are used as a label container on the workspaces module.
+              I chose to reset their spacing to simplify the stylesheet
+              selectors. Margins and paddings are all defined for the contained
+              labels instead.
+            */
+            padding: 0;
+            margin: 0;
+          }
 
-                  window#waybar {
-                  background-color: rgba(1.0, 1.0, 1.0, 0.0);
-                  color: #${base04};
-                  }
+          label {
+            padding: 0.2rem 0.5rem;
+            margin-bottom: 0.4rem;
+            border-radius: 8px;
+            background-color: @base01; /* Alternate background. */
+          }
 
-                  /* Horizontally align waybar with window gaps. */
-                  .modules-right { margin-right: ${gapSize}px; }
-          #workspaces { margin-left: ${gapSize}px; }
+          .focused label,
+          .active label {
+            background-color: @base0D; /* Focused window border color. */
+            color: @base01;
+          }
 
-                  .modules-right label,
-          #workspaces button
-                  {
-                  background-color: #${base01};
-                  color: #${base04};
-                  padding: 0.4rem 1rem;
-                  margin-right: 0.5rem;
-                  border-radius: 0 0 0.5rem 0.5rem;
-                  }
+          .urgent label {
+            /* Default text color because we may need more contrast. */
+            background-color: @base09; /* Urgent color */
+            color: @base01;
+          }
 
-          #workspaces button.focused, #workspaces button.active {
-                  background-color: #${base09};
-                  color: #${base00};
-                  }
+          .modules-left button {
+            margin-right: 0.75rem;
+          }
 
-          #workspaces button.urgent {
-                  background-color: #${base08};
-                  color: #${base00};
-                  }
+          .modules-right label {
+            margin-left: 0.75rem;
+          }
 
-          #battery.warning, #battery.critical, #battery.discharging {
-                  background-color: #${base08};
-                  color: #${base00};
-                  }
+          .modules-left {
+            margin-left: 0.75rem;
+          }
+
+          .modules-right {
+            margin-right: 0.75rem;
+          }
         '';
       };
 
-      stylix.targets.waybar.enable = false;
+      # Setting this to false to avoid fighting the default style sheet.
+      #
+      # NOTE Stylix will add some CSS regardless of this setting. I have left
+      # another note above the `programs.waybar.style` setting detailing on this
+      # matter.
+      stylix.targets.waybar.addCss = false;
     };
 }
