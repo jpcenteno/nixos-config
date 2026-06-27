@@ -51,7 +51,6 @@ in
         # TODO: Fix conflicts between Stylix and these modules, then remove the
         # corresponding lines:
         targets = {
-          alacritty.enable = false;
           fzf.enable = false;
           ghostty.enable = false;
           hyprland.enable = false;

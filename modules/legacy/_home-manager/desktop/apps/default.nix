@@ -10,7 +10,6 @@ in
 {
   imports = [
     ./zathura.nix
-    ./../../alacritty.nix
     ./chromium.nix
     ./brave.nix
     ./imv.nix
@@ -46,7 +45,6 @@ in
   config = lib.mkIf cfg.enable {
     jpcenteno-home = {
       # Enables all the desktop applications allowing the user to opt-out.
-      alacritty.enable = lib.mkDefault true;
       desktop.apps = {
         zathura.enable = lib.mkDefault true;
         brave.enable = lib.mkDefault true;

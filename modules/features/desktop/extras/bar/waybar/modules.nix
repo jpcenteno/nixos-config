@@ -96,9 +96,17 @@
         disk = {
           format = "  {percentage_used}%";
         };
+        # TODO: Maybe move this module to wherever I declared the bluetooth
+        # config to prevent the BT module from rendering on computers where
+        # bluetooth is not available.
         bluetooth = {
           format-connected = " {num_connections}";
-          on-click = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.bluetuith}/bin/bluetuith";
+          # TODO: Declare a function at `terminal-emulator.nix` that abstracts
+          # the current terminal-emulator from this module.
+          # TODO: Declare a constant with the bluetooth manager command in the
+          # corresponding module to dissociate this module from bluetooth
+          # concerns.
+          on-click = "${lib.getExe pkgs.ghostty} --command=${lib.getExe pkgs.bluetuith}";
           tooltip-format = ''
             {controller_alias}	{controller_address}
 
