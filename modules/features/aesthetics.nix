@@ -52,7 +52,6 @@ in
         # corresponding lines:
         targets = {
           fzf.enable = false;
-          ghostty.enable = false;
           hyprland.enable = false;
           hyprlock.enable = false;
           neovim.enable = false;
