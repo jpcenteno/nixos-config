@@ -7,10 +7,12 @@ let
   };
 in
 {
-  flake.modules.homeManager.niri = {
+  flake.modules.homeManager.niri = { config, ... }: {
     programs.niri.settings = {
       # Ask applications not to apply client-side decorations.
       prefer-no-csd = true;
+
+      layout.background-color = config.lib.stylix.colors.withHashtag.base00;
 
       window-rules = [
         {
