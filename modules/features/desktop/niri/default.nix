@@ -55,24 +55,14 @@
                   lvl
                 ];
 
-              window-switcher = pkgs.writeShellApplication {
-                name = "niri-window-switcher";
+              switch-window = pkgs.writeShellApplication {
+                name = "niri-switch-window";
                 runtimeInputs = with pkgs; [
                   niri
                   jq
                   wofi
                 ];
-                text = ''
-                  set -euo pipefail
-
-                  FS="$(printf '\t')"
-
-                  windows="$( niri msg --json windows | jq -r '.[] | "\(.id)\t\(.title) (\(.app_id))"' )"
-                  i="$( echo "$windows" | cut -d "$FS" -f 2- | wofi --show dmenu --define=dmenu-print_line_num=true )"
-                  id="$( echo "$windows" | sed -n "$(( i + 1 ))p" | cut -d "$FS" -f 1 )"
-
-                  niri msg action focus-window --id "$id"
-                '';
+                text = builtins.readFile ./switch-window.sh;
               };
             in
             {
@@ -83,7 +73,7 @@
                 "drun"
               ];
 
-              "Mod+Tab" = action "spawn" [ (lib.getExe window-switcher) ];
+              "Mod+Tab" = action "spawn" [ (lib.getExe switch-window) ];
 
               "Mod+T" = action "spawn" config.terminal-emulator.command;
 
