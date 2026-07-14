@@ -54,6 +54,16 @@
                   "set"
                   lvl
                 ];
+
+              switch-window = pkgs.writeShellApplication {
+                name = "niri-switch-window";
+                runtimeInputs = with pkgs; [
+                  niri
+                  jq
+                  wofi
+                ];
+                text = builtins.readFile ./switch-window.sh;
+              };
             in
             {
               # Application launching:
@@ -62,6 +72,8 @@
                 "--show"
                 "drun"
               ];
+
+              "Mod+Tab" = action "spawn" [ (lib.getExe switch-window) ];
 
               "Mod+T" = action "spawn" config.terminal-emulator.command;
 

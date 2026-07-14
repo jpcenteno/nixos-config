@@ -56,7 +56,6 @@ in
           hyprlock.enable = false;
           neovim.enable = false;
           tmux.enable = false;
-          wofi.enable = false;
         };
       };
     };
