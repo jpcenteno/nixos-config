@@ -156,6 +156,8 @@
             };
 
           xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
+
+          input.touchpad.accel-speed = 0.5;
         };
       };
 
