@@ -8,7 +8,6 @@
     }:
     {
       programs.waybar.settings.mainBar = {
-        modules-left = [ "hyprland/workspaces" ];
         modules-right = builtins.concatLists [
           [
             "cpu"
