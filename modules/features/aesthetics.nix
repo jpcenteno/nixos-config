@@ -51,7 +51,6 @@ in
         # TODO: Fix conflicts between Stylix and these modules, then remove the
         # corresponding lines:
         targets = {
-          fzf.enable = false;
           hyprland.enable = false;
           hyprlock.enable = false;
           neovim.enable = false;
