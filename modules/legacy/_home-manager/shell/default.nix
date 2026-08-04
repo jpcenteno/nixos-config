@@ -18,7 +18,6 @@ in
   imports = [
     ./direnv.nix
     ./extras.nix
-    ./fzf.nix
   ];
 
   options.jpcenteno-home.shell = {
@@ -40,7 +39,6 @@ in
     jpcenteno-home.shell = {
       direnv.enable = lib.mkDefault true;
       extras.enable = lib.mkDefault true;
-      fzf.enable = lib.mkDefault true;
     };
 
     home = {
