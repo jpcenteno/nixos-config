@@ -6,6 +6,12 @@
         pkgs.smug
       ];
 
-      programs.tmux.enable = true;
+      programs.tmux = {
+        enable = true;
+        extraConfig = ''
+          set-option -g set-titles on
+          set-option -g set-titles-string "#S / #W"
+        '';
+      };
     };
 }
