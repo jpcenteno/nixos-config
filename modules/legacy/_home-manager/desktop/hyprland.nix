@@ -13,7 +13,6 @@ in
   imports = [
     ./apps/default.nix
     ./hyprland/wofi.nix
-    ./hyprland/hyprscrolling.nix
     ./common/cursor.nix
   ];
 
@@ -31,9 +30,6 @@ in
         apps.enable = lib.mkDefault true;
         common.cursor.enable = lib.mkDefault true;
         hyprland = {
-          bindings.enable = true;
-          hyprscrolling.enable = lib.mkDefault true;
-          wofi.enable = lib.mkDefault true;
         };
       };
     };
