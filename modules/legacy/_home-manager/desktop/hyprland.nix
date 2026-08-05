@@ -1,13 +1,10 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
   cfg = config.jpcenteno-home.hyprland;
-
-  import-env = pkgs.writeShellScriptBin "import-env" (builtins.readFile ./hyprland/import_env.sh);
 in
 {
   imports = [
@@ -22,15 +19,6 @@ in
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
-      settings = {
-        exec = [
-          # Update pre-existing Systemd and TMUX environment with relevant ENV
-          # vars set by the desktop environment. For Tmux, this does not affect
-          # pre-existing buffers.
-          "${import-env}/bin/import-env tmux"
-          "${import-env}/bin/import-env system"
-        ];
-      };
     };
   };
 }
