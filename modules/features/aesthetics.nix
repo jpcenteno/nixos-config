@@ -52,7 +52,6 @@ in
         # corresponding lines:
         targets = {
           hyprland.enable = false;
-          hyprlock.enable = false;
           neovim.enable = false;
         };
       };
