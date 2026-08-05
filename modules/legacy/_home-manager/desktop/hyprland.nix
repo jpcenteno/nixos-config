@@ -19,12 +19,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    jpcenteno-home = {
-      desktop = {
-        apps.enable = lib.mkDefault true;
-      };
-    };
-
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
