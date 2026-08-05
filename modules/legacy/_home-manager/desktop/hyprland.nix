@@ -12,7 +12,6 @@ in
 {
   imports = [
     ./apps/default.nix
-    ./hyprland/wofi.nix
     ./common/cursor.nix
   ];
 
@@ -29,8 +28,6 @@ in
       desktop = {
         apps.enable = lib.mkDefault true;
         common.cursor.enable = lib.mkDefault true;
-        hyprland = {
-        };
       };
     };
 
