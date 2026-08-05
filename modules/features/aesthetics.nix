@@ -17,7 +17,7 @@ in
       imports = [ inputs.stylix.nixosModules.stylix ];
       stylix = {
         enable = true;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest.yaml";
       };
     };
 
