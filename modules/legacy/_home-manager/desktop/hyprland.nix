@@ -33,12 +33,6 @@ in
       enable = true;
       systemd.enable = true;
       settings = {
-        decoration = {
-          inactive_opacity = "0.75";
-          dim_inactive = true; # Dim inactive windows.
-          dim_strength = 0.25;
-        };
-
         exec = [
           # Update pre-existing Systemd and TMUX environment with relevant ENV
           # vars set by the desktop environment. For Tmux, this does not affect
