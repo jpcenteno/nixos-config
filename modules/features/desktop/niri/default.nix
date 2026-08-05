@@ -161,6 +161,8 @@
         };
       };
 
+      home.packages = [ pkgs.wl-clipboard ];
+
       programs.waybar.settings.mainBar.modules-left = [ "niri/workspaces" ];
 
       dpms =

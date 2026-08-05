@@ -51,7 +51,6 @@ in
         # TODO: Fix conflicts between Stylix and these modules, then remove the
         # corresponding lines:
         targets = {
-          hyprland.enable = false;
           neovim.enable = false;
         };
       };

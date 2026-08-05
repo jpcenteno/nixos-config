@@ -19,6 +19,14 @@ in
           geometry-corner-radius = makeGeometryCornerRadius 8.0;
           clip-to-geometry = true;
         }
+        {
+          matches = [
+            {
+              is-active = false;
+            }
+          ];
+          opacity = 0.75;
+        }
       ];
     };
   };

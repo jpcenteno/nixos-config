@@ -10,7 +10,7 @@ in
 {
   imports = [
     ./shell/default.nix
-    ./desktop/hyprland.nix
+    ./desktop/apps/default.nix
     ./development/default.nix
     ./utils/default.nix
     ./system/default.nix
