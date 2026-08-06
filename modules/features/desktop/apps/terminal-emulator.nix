@@ -28,11 +28,24 @@
           enableBashIntegration = true;
         };
 
-        home.activation.reload-ghostty-config = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          if "${lib.getExe' pkgs.procps "pgrep"}" ghostty >/dev/null; then
-            run "${lib.getExe' pkgs.procps "pkill"}" -SIGUSR2 ghostty
-          fi
-        '';
+        # Reload Ghostty config whenever it changes.
+        #
+        # NOTE: the `onChange` script will run multiple times if more than one
+        # file changes at the same time, but this is harmless.
+        xdg.configFile =
+          let
+            # NOTE: `mkAfter` is in place to ensure the default syntax
+            # validation that Home Manager calls comes before actual evaluation.
+            onChange = lib.mkAfter ''
+              if "${lib.getExe' pkgs.procps "pgrep"}" ghostty >/dev/null; then
+                $DRY_RUN_CMD run "${lib.getExe' pkgs.procps "pkill"}" -SIGUSR2 ghostty
+              fi
+            '';
+            themeFiles = map (name: "ghostty/themes/${name}") (lib.attrNames config.programs.ghostty.themes);
+          in
+          lib.genAttrs ([ "ghostty/config" ] ++ themeFiles) (_: {
+            inherit onChange;
+          });
 
         stylix.fonts.sizes.terminal = 16;
       };
