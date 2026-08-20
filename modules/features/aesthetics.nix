@@ -47,12 +47,6 @@ in
             package = pkgs.ibm-plex;
           };
         };
-
-        # TODO: Fix conflicts between Stylix and these modules, then remove the
-        # corresponding lines:
-        targets = {
-          neovim.enable = false;
-        };
       };
     };
   };
