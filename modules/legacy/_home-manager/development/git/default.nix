@@ -14,10 +14,6 @@ let
   };
 in
 {
-  imports = [
-    ./github.nix
-  ];
-
   options.jpcenteno-home.development.git = {
     enable = lib.mkEnableOption "Enables git with my personal config";
 
@@ -64,8 +60,6 @@ in
       "git/gitignore".source = ./gitignore;
       "git/scripts/delete-branches-interactively".source = ./scripts/delete-branches-interactively;
     };
-
-    jpcenteno-home.development.git.github.enable = lib.mkDefault true;
 
     home.packages = [
       (lib.mkIf cfg.git-crypt.enable pkgs.git-crypt)
