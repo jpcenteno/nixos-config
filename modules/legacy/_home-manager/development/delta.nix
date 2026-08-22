@@ -44,6 +44,7 @@ in
 
       # NOTE: This depends on VCS being enabled (Not this module's concern).
       enableGitIntegration = true;
+      enableJujutsuIntegration = true;
 
       # The `[delta]` section of `~/.config/git/config`.
       options = {
