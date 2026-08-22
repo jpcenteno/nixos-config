@@ -39,7 +39,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.git.delta = {
+    programs.delta = {
       enable = true;
 
       # The `[delta]` section of `~/.config/git/config`.
