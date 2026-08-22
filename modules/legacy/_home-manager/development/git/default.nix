@@ -17,37 +17,28 @@ in
   options.jpcenteno-home.development.git = {
     enable = lib.mkEnableOption "Enables git with my personal config";
 
-    userName = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "User name to use. Must be set when Git is enabled.";
-    };
-
-    userEmail = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "User email to use. Must be set when Git is enabled.";
-    };
-
     git-crypt.enable = lib.mkEnableOption "git-crypt" // {
       default = true;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = builtins.isString cfg.userName;
-        message = "`jpcenteno-home.git.userName` must be set when Git is enabled.";
-      }
-      {
-        assertion = builtins.isString cfg.userEmail;
-        message = "`jpcenteno-home.git.userEmail` must be set when Git is enabled.";
-      }
-    ];
+    assertions =
+      let
+        hasGitUserSettingAssertion = attr: {
+          assertion =
+            config.programs.git.settings ? user
+            && config.programs.git.settings.user ? ${attr}
+            && null != config.programs.git.settings.user.${attr};
+          message = "Git: `programs.git.settings.user.${attr}` undefined!";
+        };
+      in
+      [
+        (hasGitUserSettingAssertion "name")
+        (hasGitUserSettingAssertion "email")
+      ];
 
     programs.git = {
-      inherit (cfg) userName userEmail;
       enable = true;
       includes = [
         { path = ./config; }
