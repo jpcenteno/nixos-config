@@ -16,7 +16,7 @@
       };
 
       # Redirect HTTPS connections to SSH.
-      programs.git.extraConfig.url = {
+      programs.git.settings.url = {
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
         };
