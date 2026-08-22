@@ -39,8 +39,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.git.delta = {
+    programs.delta = {
       enable = true;
+
+      # NOTE: This depends on VCS being enabled (Not this module's concern).
+      enableGitIntegration = true;
+      enableJujutsuIntegration = true;
 
       # The `[delta]` section of `~/.config/git/config`.
       options = {
