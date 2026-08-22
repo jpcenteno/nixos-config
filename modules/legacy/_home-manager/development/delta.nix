@@ -42,6 +42,9 @@ in
     programs.delta = {
       enable = true;
 
+      # NOTE: This depends on VCS being enabled (Not this module's concern).
+      enableGitIntegration = true;
+
       # The `[delta]` section of `~/.config/git/config`.
       options = {
         side-by-side = true;
