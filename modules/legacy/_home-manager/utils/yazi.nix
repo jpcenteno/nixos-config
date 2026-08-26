@@ -23,7 +23,7 @@ in
           prepend_previewers = [
             # Chrome extensions:
             {
-              name = "*.crx";
+              url = "*.crx";
               run = "archive";
             }
           ];

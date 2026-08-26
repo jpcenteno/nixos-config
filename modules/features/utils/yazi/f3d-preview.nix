@@ -19,7 +19,7 @@
       '';
 
       rule = {
-        name = "*.{3mf,obj,pts,ply,stl,step,stp}";
+        url = "*.{3mf,obj,pts,ply,stl,step,stp}";
         run = "f3d-preview";
       };
     in
