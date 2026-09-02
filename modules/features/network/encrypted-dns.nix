@@ -1,17 +1,10 @@
-{ config, lib, ... }:
 let
-  cfg = config.jpcenteno.nixos.system.encrypted-dns;
-
   cacheDirectory = "dnscrypt-proxy";
 in
 {
-  options.jpcenteno.nixos.system.encrypted-dns = {
-    enable = lib.mkEnableOption "Encrypted DNS proxy";
-  };
-
-  config = lib.mkIf cfg.enable {
+  flake.modules.nixos.encrypted-dns = { lib, ... }: {
     services.dnscrypt-proxy = {
-      enable = lib.mkForce true;
+      enable = true;
 
       # The service will source the configuration file directly from the Nix
       # store. You can check which file is being used by running
