@@ -1,6 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.jpcenteno.nixos.system.encrypted-dns;
+
+  cacheDirectory = "dnscrypt-proxy";
 in
 {
   options.jpcenteno.nixos.system.encrypted-dns = {
@@ -46,9 +48,16 @@ in
             "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
           ];
           minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
-          cache_file = "public-resolvers.md";
+          cache_file = "/var/cache/${cacheDirectory}/public-resolvers.md";
         };
       };
     };
+
+    # The NixOS module `dnscrypt-proxy.nix` assigns the service's
+    # `CacheDirectory`. Here, I'm taking ownership of it to prevent upstream
+    # changes from breaking the `public-resolvers.md` cache file configuration
+    # (Which could lead to `dnscrypt-proxy` failing to start if it's unable to
+    # fetch it from the declared URLs).
+    systemd.services.dnscrypt-proxy.serviceConfig.CacheDirectory = lib.mkForce cacheDirectory;
   };
 }
