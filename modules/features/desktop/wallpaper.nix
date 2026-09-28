@@ -51,7 +51,7 @@
             };
 
             Service = {
-              ExecStart = "${lib.getExe pkgs.swaybg} -i ${wallpapersConfigHome}/current";
+              ExecStart = "${lib.getExe pkgs.swaybg} --mode fill -i ${wallpapersConfigHome}/current";
               Restart = "on-failure";
             };
 
