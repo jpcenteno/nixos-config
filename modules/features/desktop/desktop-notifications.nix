@@ -26,6 +26,11 @@
     aesthetics = { config, lib, ... }: {
       # No need for the `isLinux` predicate here thanks to lazy evaluation.
       services.mako.settings = {
+        # TODO 2026-09-27: Unify border-radius across applications.
+        border-radius = 8;
+
+        outer-margin = "16";
+
         # The accepted format as per `man 5 mako` is a _Pango font description_ [2].
         #
         # NOTE 2026-09-27:
