@@ -47,6 +47,8 @@ in
             package = pkgs.ibm-plex;
           };
         };
+
+        opacity.popups = 0.8;
       };
     };
   };
