@@ -78,5 +78,21 @@
           $DRY_RUN_CMD mkdir -p ${wallpapersConfigHome}
         '';
       };
+
+      # These Niri settings belong within this module because they should only
+      # apply when the user requires the _wallpaper_ module.
+      programs.niri.settings = {
+        # Place the wallpaper within the background layer.
+        layer-rules = [
+          {
+            matches = [ { namespace = "^wallpaper$"; } ];
+            place-within-backdrop = true;
+          }
+        ];
+
+        # Override any background color to ensure proper display of the
+        # wallpaper image.
+        layout.background-color = lib.mkForce "transparent";
+      };
     };
 }
