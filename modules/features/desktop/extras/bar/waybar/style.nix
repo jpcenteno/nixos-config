@@ -33,6 +33,10 @@
           color: @base04; /* Alternate text */
         }
 
+        window#waybar {
+          background-color: transparent;
+        }
+
         button {
           /*
             Buttons are used as a label container on the workspaces module.
