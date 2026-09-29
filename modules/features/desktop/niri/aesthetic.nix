@@ -18,6 +18,9 @@ in
         {
           geometry-corner-radius = makeGeometryCornerRadius 8.0;
           clip-to-geometry = true;
+
+          # Setting this to true will break window transparency.
+          draw-border-with-background = false;
         }
         {
           matches = [
