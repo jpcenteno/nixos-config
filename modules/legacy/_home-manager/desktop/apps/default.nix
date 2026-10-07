@@ -16,10 +16,6 @@ in
     ./keepasxc.nix
     ./zen-browser.nix
     ./obsidian.nix
-
-    # FIXME 2024-12-07 Uncomment once I fix the issue with the activation script
-    # that sets the flatpack remotes.
-    # ./../common/flatpak.nix
   ];
 
   options.jpcenteno-home.desktop.apps = {
