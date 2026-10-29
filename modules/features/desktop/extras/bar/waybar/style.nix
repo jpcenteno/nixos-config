@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.bar = { lib, ... }: {
+  flake.modules.homeManager.bar = { config, lib, ... }: {
     # Setting this to false to avoid fighting the default style sheet.
     #
     # NOTE Stylix will add some CSS regardless of this setting. I have left
@@ -51,7 +51,7 @@
         label {
           padding: 0.2rem 0.5rem;
           margin-top: 0.4rem;
-          border-radius: 8px;
+          border-radius: ${toString config.jpcenteno.aesthetics.cornerRadius}px;
           background-color: @base01; /* Alternate background. */
         }
 

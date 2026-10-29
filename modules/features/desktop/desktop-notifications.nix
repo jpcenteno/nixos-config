@@ -26,8 +26,7 @@
     aesthetics = { config, lib, ... }: {
       # No need for the `isLinux` predicate here thanks to lazy evaluation.
       services.mako.settings = {
-        # TODO 2026-09-27: Unify border-radius across applications.
-        border-radius = 8;
+        border-radius = config.jpcenteno.aesthetics.cornerRadius;
 
         outer-margin = "16";
 
