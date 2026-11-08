@@ -13,8 +13,19 @@ let
 in
 {
   flake.modules = {
+    generic.${name} = { lib, ... }: {
+      options.jpcenteno.aesthetics.cornerRadius = lib.mkOption {
+        type = lib.types.int;
+        default = 8;
+      };
+    };
+
     nixos.${name} = { pkgs, ... }: {
-      imports = [ inputs.stylix.nixosModules.stylix ];
+      imports = [
+        inputs.self.modules.generic.${name}
+        inputs.stylix.nixosModules.stylix
+      ];
+
       stylix = {
         enable = true;
         base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest.yaml";
@@ -22,6 +33,10 @@ in
     };
 
     homeManager.${name} = { pkgs, ... }: {
+      imports = [
+        inputs.self.modules.generic.${name}
+      ];
+
       stylix = {
         cursor = {
           package = pkgs.apple-cursor;
