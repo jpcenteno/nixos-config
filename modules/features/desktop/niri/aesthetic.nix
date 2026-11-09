@@ -38,7 +38,18 @@
               is-active = false;
             }
           ];
-          opacity = 0.8;
+        }
+        {
+          # Prevent WinUnisoft windows from floating around.
+          # TODO : Create a module that installs WinUnisoft and move all the
+          # relevant configuration there.
+          matches = [
+            {
+              app-id = "^steam_proton$";
+              title = "WinUnisoft";
+            }
+          ];
+          open-floating = false;
         }
       ];
     };
