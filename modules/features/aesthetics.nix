@@ -50,8 +50,8 @@ in
             package = pkgs.noto-fonts-monochrome-emoji;
           };
           monospace = {
-            name = "Lilex Nerd Font";
-            package = pkgs.nerd-fonts.lilex;
+            name = "Commit Mono Nerd Font";
+            package = pkgs.nerd-fonts.commit-mono;
           };
           sansSerif = {
             name = "IBM Plex Sans";
