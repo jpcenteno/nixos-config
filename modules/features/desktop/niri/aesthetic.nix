@@ -4,7 +4,15 @@
       # Ask applications not to apply client-side decorations.
       prefer-no-csd = true;
 
-      layout.background-color = config.lib.stylix.colors.withHashtag.base00;
+      layout = {
+        background-color = config.lib.stylix.colors.withHashtag.base04;
+
+        border = {
+          active.color = config.lib.stylix.colors.withHashtag.base00;
+          inactive.color = config.lib.stylix.colors.withHashtag.base03;
+          urgent.color = config.lib.stylix.colors.withHashtag.base08;
+        };
+      };
 
       window-rules = [
         {
