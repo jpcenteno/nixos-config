@@ -30,57 +30,49 @@
       # `stylix.targets.waybar.addCss` setting.
       style = lib.mkAfter ''
         * {
-          color: @base04; /* Alternate text */
+          margin: 0;
+          padding: 0;
         }
 
-        window#waybar {
+        window {
           background-color: transparent;
         }
 
-        button {
-          /*
-            Buttons are used as a label container on the workspaces module.
-            I chose to reset their spacing to simplify the stylesheet
-            selectors. Margins and paddings are all defined for the contained
-            labels instead.
-          */
-          padding: 0;
+        window > box {
+          background-color: @base01;
           margin: 0;
+          padding: 0px 0px;
         }
 
         label {
-          padding: 0.2rem 0.5rem;
-          margin-top: 0.4rem;
-          border-radius: ${toString config.jpcenteno.aesthetics.cornerRadius}px;
-          background-color: @base01; /* Alternate background. */
+          background-color: @base01;
+          color: @base06;
+          padding: 0.4rem 0.7rem;
+          margin: 0;
         }
 
-        .focused label,
-        .active label {
-          background-color: @base0D; /* Focused window border color. */
-          color: @base01;
+        label:hover, button:hover {
+          background: @base02;
         }
 
-        .urgent label {
-          /* Default text color because we may need more contrast. */
-          background-color: @base09; /* Urgent color */
-          color: @base01;
+        .focused label, .active label {
+          background-color: @base02;
         }
 
-        .modules-left button {
-          margin-right: 0.75rem;
+        #battery.charging {
+          color: @base0B;
         }
 
-        .modules-right label {
-          margin-left: 0.75rem;
+        /* WARNING */
+        label.warning,
+        #battery.discharging
+        {
+          color: @base0A;
         }
 
-        .modules-left {
-          margin-left: 0.75rem;
-        }
-
-        .modules-right {
-          margin-right: 0.75rem;
+        label.urgent,
+        label.critical {
+          color: @base08;
         }
       '';
     };

@@ -18,14 +18,11 @@
             "bluetooth"
             "pulseaudio"
             "battery"
-            "custom/clock"
+            "clock"
           ]
         ];
-        "custom/clock" = {
-          # Reinventing the wheel here to avoid desynchronization issues I was
-          # having with `timedatectl`.
-          exec = "date '+%H:%M'";
-          format = " {}";
+        clock = {
+          format = "TIME\n{:%H:%M}";
           interval = 10;
         };
         battery = {
@@ -35,7 +32,7 @@
             "warning" = 30;
             "critical" = 15;
           };
-          format = "{icon}  {capacity}%";
+          format = "BAT\n{capacity}%";
           format-icons = [
             ""
             ""
@@ -43,11 +40,10 @@
             ""
             ""
           ];
-          format-charging = "󰂄 {capacity}%";
         };
         pulseaudio = {
-          format = "{icon}  {volume}%";
-          format-bluetooth = "{icon}  {volume}%";
+          format = "VOL\n{volume}%";
+          format-bluetooth = "VOL\n{volume}%";
           format-muted = "󰝟";
           format-icons = {
             default = [
@@ -58,10 +54,10 @@
           };
         };
         cpu = {
-          format = "  {}%";
+          format = "CPU\n{}%";
         };
         temperature = {
-          format = "{icon} {temperatureC}°C";
+          format = "TEMP\n{temperatureC}°C";
           format-icons = [
             ""
             ""
@@ -72,8 +68,8 @@
         };
         network = {
           interval = 10;
-          format-wifi = " ";
-          format-ethernet = "󰈀";
+          format-wifi = "WIFI";
+          format-ethernet = "ETH";
           tooltip-format-wifi = ''
              {essid}
             󱑻 {frequency} GHz
@@ -90,16 +86,24 @@
             ↑ {bandwidthUpBytes}'';
         };
         memory = {
-          format = "  {}%";
+          format = "MEM\n{avail:.1f} GiB";
+          states = {
+            warning = 50;
+            critical = 75;
+          };
         };
         disk = {
-          format = "  {percentage_used}%";
+          format = "DISK\n{percentage_used}%";
+          states = {
+            warning = 55;
+            critical = 75;
+          };
         };
         # TODO: Maybe move this module to wherever I declared the bluetooth
         # config to prevent the BT module from rendering on computers where
         # bluetooth is not available.
         bluetooth = {
-          format-connected = " {num_connections}";
+          format = "BT\n{num_connections}x";
           # TODO: Declare a function at `terminal-emulator.nix` that abstracts
           # the current terminal-emulator from this module.
           # TODO: Declare a constant with the bluetooth manager command in the
