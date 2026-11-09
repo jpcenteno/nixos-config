@@ -16,7 +16,7 @@ in
     generic.${name} = { lib, ... }: {
       options.jpcenteno.aesthetics.cornerRadius = lib.mkOption {
         type = lib.types.int;
-        default = 8;
+        default = 0;
       };
     };
 
