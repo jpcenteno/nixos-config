@@ -38,7 +38,6 @@
               is-active = false;
             }
           ];
-          opacity = 0.8;
         }
       ];
     };
